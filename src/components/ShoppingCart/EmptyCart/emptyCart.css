@@ -1,0 +1,23 @@
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  grid-column: 1 / -1;
+
+  border-radius: var(--r-lg);
+  background: var(--glass-strong);
+  border: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: blur(var(--blur));
+  box-shadow: var(--shadow-sm);
+}
+
+.empty-state .ic {
+  font-size: 3rem;
+  margin-bottom: 12px;
+  
+}
+
+.btn-primary{
+    text-decoration: none;
+    margin-top: 20px;
+}

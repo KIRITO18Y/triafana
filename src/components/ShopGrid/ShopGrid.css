@@ -1,0 +1,29 @@
+.shop-toolbar
+ {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 22px;
+    display: flex;
+}
+
+.shop-toolbar select {
+    padding: 10px 29px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--glass-strong);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    
+}
+
+.select option {
+    color: aquamarine;
+}
+
+.shop-toolbar select:focus{
+    outline: none;
+    border-color: var(--teal-aqua);
+    box-shadow: 0 0 0 3px rgba(72, 169, 179, .2);
+}

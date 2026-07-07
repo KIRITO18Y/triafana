@@ -1,0 +1,33 @@
+.summary {
+  position: sticky;
+  top: 92px;
+  border-radius: var(--r-lg);
+  padding: 28px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: blur(var(--blur));
+  box-shadow: var(--shadow);
+}
+
+.summary h3 {
+  font-size: 1.25rem;
+  margin-bottom: 18px;
+}
+
+.summary .line {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  color: var(--muted);
+}
+
+.summary .line.total {
+  border-top: 1px solid var(--line);
+  margin-top: 10px;
+  padding-top: 16px;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+}
