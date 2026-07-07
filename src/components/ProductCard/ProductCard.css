@@ -1,0 +1,143 @@
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+   gap: 5px;
+}
+
+.product-card {
+    width: 190px;
+    position: relative;
+    border-radius: var(--r);
+    overflow: hidden;
+    background: var(--glass-border);
+    border: 1px solid var(--glass-);
+    backdrop-filter: blur(var(--blur));
+    box-shadow: var(--shadow-sm);
+    transition: transform .2s ease, box-shadow .2s ease;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+}
+
+.product-image {
+    display: flex;
+    margin-bottom:12px;
+    justify-content: center;
+    width: 100%;
+    height: 200px;
+    border-radius: 12px 12px 0 0 ;
+    background: linear-gradient(160deg, #fff, var(--light));
+}
+
+.product-image img {
+    mix-blend-mode: multiply;
+    width: 100%;
+    min-height: 100%;
+    object-fit: contain;
+    align-items: center;
+    margin-left: 7px;
+    display: block;
+    
+}
+
+.product-info {
+    padding: 10px;
+    margin-bottom:12px ;
+}
+
+.category {
+    font-size: .8rem;
+    color: var(--teal-aqua);
+    font-weight: 700;
+    
+}
+
+.product-info h3 {
+    margin: 1px 0;
+    font-size: 1.0rem;
+    display: -webkit-box;
+     line-clamp: 2;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom:12px ;
+}
+
+.rating {
+    font-size: 12px;
+    display: flex;
+    gap: 8px;
+}
+
+.price {
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    
+}
+
+.price-oldPrice {
+    display: flex;
+   flex-direction: column;
+    align-items: center; 
+    
+}
+
+.span-price{
+  font-size: 19px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.span-oldPrice{
+  font-size: 16px;
+  color: rgb(139, 139, 139);
+  text-decoration: line-through;
+  
+}
+ .container-btn{
+    display: flex;
+    justify-content: end;
+ }
+
+
+.price-btn {
+    background: #0a666d;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.price-btn:hover {
+    background: var(--coral);
+}
+
+@media (max-width: 1080px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-card {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-visual {
+    display: none;
+  }
+}

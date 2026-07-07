@@ -1,0 +1,138 @@
+.tecnologyContainer {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.btn-primary {
+  background: var(--coral);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(255, 111, 97, .35);
+}
+
+.btn-primary:hover {
+  background: var(--coral-600);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(255, 111, 97, .42);
+}
+
+.btn-teal {
+  background: var(--teal);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(10, 102, 109, .28);
+}
+
+
+.btn-ghost:hover {
+  color: var(--coral);
+  transform: translateY(-2px);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-lg {
+  padding: 16px 30px;
+  font-size: 1rem;
+}
+
+.btn-sm {
+  padding: 9px 16px;
+  font-size: .85rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  margin-top: 14px;
+  font-size: .82rem;
+  font-weight: 600;
+  background: var(--glass-strong);
+  border: 1px solid var(--glass-border);
+  color: var(--teal);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: all .16s ease;
+  cursor: pointer;
+}
+
+.chip:hover {
+  color: var(--coral);
+}
+
+.chip[aria-pressed="true"],
+.chip.is-active {
+  background: var(--teal);
+  color: #fff;
+  border-color: transparent;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .03em;
+}
+
+.badge-coral {
+  background: var(--coral);
+  color: #fff;
+}
+
+.badge-cyan {
+  background: var(--cyan);
+  color: var(--teal);
+}
+
+.badge-cream {
+  background: var(--cream);
+  color: #7a5b2a;
+}
+
+.page-head {
+  padding-top: clamp(28px, 4vw, 44px);
+}
+
+.breadcrumb {
+  font-size: .85rem;
+  color: var(--muted);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.breadcrumb a:hover {
+  color: var(--teal);
+}
+
+.breadcrumb span {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.page-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  margin: 12px 0 6px;
+}
+
+.shop-layout {
+  display: grid;
+  grid-template-columns: 268px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+

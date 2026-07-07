@@ -1,0 +1,29 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  margin-top: 14px;
+  font-size: .82rem;
+  font-weight: 600;
+  background: var(--glass-strong);
+  border: 1px solid var(--glass-border);
+  color: var(--teal);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: all .16s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.chip:hover {
+  color: var(--coral);
+}
+
+.chip[aria-pressed="true"],
+.chip.is-active {
+  background: var(--teal);
+  color: #fff;
+  border-color: transparent;
+}
