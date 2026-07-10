@@ -31,3 +31,28 @@
   font-weight: 700;
   font-size: 1.3rem;
 }
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 13px 24px;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: .95rem;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+    white-space: nowrap;
+}
+
+
+.btn-ghost {
+    background: var(--glass-strong);
+    color: var(--teal);
+    border: 1px solid var(--glass-border);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    margin-top: 10px;
+    text-decoration: none;
+}

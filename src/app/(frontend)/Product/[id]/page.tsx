@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBox, faShieldHalved, faTruck } from '@fortawesome/free-solid-svg-icons'
 import { Product } from '@/payload-types'
 import AddToCartButton from '@/components/AddToCartButton'
+import Link from 'next/link'
+import ProductActions from '@/components/ProductActions/ProductActions'
 
 export default async function ProductDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -39,9 +41,6 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
       ],
     },
   })
-  const handleAddToCart = (product: Product) => {
-    handleAddToCart(product)
-  }
 
   const formatPrice = (prince: number) => {
     return `$${prince.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
@@ -99,15 +98,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
             </div>
 
             <div className="btn-container">
-              <AddToCartButton
-                product={{
-                  id: product.id,
-                  name: product.name,
-                  price: Number(product.price),
-                  image: typeof product.image === 'object' ? (product.image.url ?? '') : '',
-                }}
-              />
-              <button className="btn-buy">Comprar ahora</button>
+              <ProductActions product={product} />
             </div>
           </div>
 
