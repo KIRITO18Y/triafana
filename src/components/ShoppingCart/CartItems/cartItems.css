@@ -100,5 +100,5 @@
 }
 
 .qty button:hover{
-  background-color: #23c3ce;
+  background-color: var(--teal-aqua);
 }

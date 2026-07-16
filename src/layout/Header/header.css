@@ -1,21 +1,22 @@
 .container-header {
     position: sticky;
     top: 6px;
-    z-index:100;
-    transition:.3s ease;
+    z-index: 100;
+    transition: .3s ease;
     margin-top: 14px;
 }
 
 .header-scroll {
-    top:0;
-    padding-top:14px;
+    top: 0;
+    padding-top: 14px;
     margin-top: 14px;
 }
 
 .header-scroll .nav-shell {
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
-    
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+
 }
+
 .nav-shell {
     display: flex;
     align-items: center;
@@ -26,15 +27,15 @@
     border-radius: 999px;
     background: var(--glass-strong);
     border: 1px solid var(--glass-border);
-    }
-
-    
-.Logo{
-   width: 48px;
-  height: 48px; 
 }
 
-.title-link{
+
+.Logo {
+    width: 48px;
+    height: 48px;
+}
+
+.title-link {
     text-decoration: none;
 }
 
@@ -143,22 +144,30 @@
     color: var(--teal);
 }
 
-.icon-btn .count {
+.count {
     position: absolute;
-    top: 2px;
+    top: 1px;
     right: 2px;
-    min-width: 18px;
-    height: 18px;
-    padding: 0 4px;
+    width: 19px;
+    height: 19px;
+    padding: 0 4px 5px;
     background: var(--coral);
     color: #ffffff;
-    font-size: .68rem;
-    font-weight: 700;
-    border-radius: 999px;
-    display: grid;
-    place-items: center;
+
+    border-radius: 50%;
     border: 2px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center
 }
+
+.countToltal {
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    margin-top: 4px;
+}
+
 
 .avatar {
     width: 40px;

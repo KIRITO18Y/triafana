@@ -73,10 +73,14 @@ export const Header = () => {
 
           <Link href={'/cart'} className="icon-btn">
             <FontAwesomeIcon icon={faCartShopping} />
-            <span className="count">{totalItems}</span>
+            {totalItems > 0 && (
+              <div className="count">
+                <span className="countToltal">{totalItems}</span>
+              </div>
+            )}
           </Link>
 
-          <Link href={''} className="avatar">
+          <Link href={'/login'} className="avatar">
             TF
           </Link>
         </div>

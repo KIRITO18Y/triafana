@@ -49,7 +49,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
   return (
     <main>
       <nav className="nav-breadcrumb">
-        <a href="/">Inicio</a>/<span>Tecnología</span>
+        <a href="/">Inicio</a>/<a href="/clothes">{product.category}</a>/<span>{product.name}</span>
       </nav>
       <div className="container-detail">
         <div className="container-img">

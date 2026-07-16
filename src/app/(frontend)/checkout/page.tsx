@@ -38,8 +38,7 @@ const CheckoutPage = () => {
     <div className="checkout-container">
       <section className="page-head">
         <nav className="breadcrumb">
-          <a href="index.html">Inicio</a> / <a href="carrito.html">Carrito</a> /{' '}
-          <span>Checkout</span>
+          <a href="/">Inicio</a> / <a href="carrito.html">Carrito</a> / <span>Checkout</span>
         </nav>
         <h1 className="page-title">Finalizar compra</h1>
       </section>
@@ -246,7 +245,7 @@ const CheckoutPage = () => {
                     <div className="summycart-perdidos">
                       <h4>
                         {summyCart.name.length > 17
-                          ? `${summyCart.name.slice(0, 29)}...`
+                          ? `${summyCart.name.slice(0, 25)}...`
                           : summyCart.name}
                       </h4>
                       <div className="price-container">

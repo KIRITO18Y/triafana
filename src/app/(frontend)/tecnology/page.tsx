@@ -7,6 +7,9 @@ const TecnologyPage = () => {
   return (
     <div className="tecnologyContainer">
       <section className="page-head">
+        <nav className="breadcrumb">
+          <a href="/">Inicio</a>/<span>Tecnología</span>
+        </nav>
         <h1 className="page-title">Tecnología</h1>
         <p className="lead">Explora computadores, celulares, audio y accesorios.</p>
       </section>
