@@ -2,7 +2,16 @@ import './clothes.css'
 import CatalogMenu from '@/components/CategoryMenu/CatalogMenu'
 import Filters from '@/components/Filters/Filters'
 import { ShopGrid } from '@/components/ShopGrid/ShopGrid'
-const Clothespage = () => {
+
+type Props = {
+  searchParams: Promise<{
+    sort?: string
+  }>
+}
+
+export default async function Clothespage({ searchParams }: Props) {
+  const params = await searchParams
+
   return (
     <div className="clothesContainer">
       <section className="page-head">
@@ -18,11 +27,9 @@ const Clothespage = () => {
       <section className="shop-layout">
         <Filters />
         <div>
-          <ShopGrid category="ropa" />
+          <ShopGrid category="ropa" sort={params.sort} />
         </div>
       </section>
     </div>
   )
 }
-
-export default Clothespage
