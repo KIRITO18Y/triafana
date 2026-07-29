@@ -2,8 +2,6 @@
   width: 100%;
   max-width: var(--maxw);
   margin-inline: auto;
-  
-
 }
 
 .grid {
@@ -177,6 +175,19 @@ hero {
     box-shadow: var(--shadow-sm);
 }
 
+.info-card h3 {
+  font-family: var(--font-display);
+    color: var(--ink);
+    line-height: 1.12;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.info-card p{
+  color: var(--muted);
+    font-size: .9rem;
+}
+
 .info-card .ic {
     width: 48px;
     height: 48px;
@@ -198,6 +209,25 @@ hero {
 .services-list li {
     display: list-item;
     unicode-bidi: isolate;
+}
+
+.service-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: .74rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;   
+}
+
+.service-eyebrow::before {
+    content: "";
+    width: 22px;
+    height: 2px;
+    background: var(--coral);
+    border-radius: 2px;
 }
 
 /* ============================ PROMO BANNER ============================ */

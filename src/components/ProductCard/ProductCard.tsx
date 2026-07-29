@@ -39,7 +39,7 @@ export default function ProductCard({ product }: Props) {
                 : product.category?.toUpperCase() || 'GENERAL'}
         </span>
 
-        <h3>{product.name}</h3>
+        <h3 className="card-name">{product.name}</h3>
 
         <div className="rating">
           ⭐⭐⭐⭐⭐

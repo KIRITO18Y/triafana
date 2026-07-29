@@ -132,6 +132,20 @@ main {
   pointer-events: auto;
 }
 
+.trifana-toast {
+ color: var(--ink) !important;
+  font-family: var(--font-display);
+  font-weight: 700;
+  border-radius: 16px !important;
+  width: 420px !important;
+  min-width: 420px !important;
+  padding: 18px 24px !important;
+}
+
+/* Cambiar icono verde de success */
+.Toastify__toast-icon svg {
+  fill: var(--teal) !important;
+}
 /* ============================ RESPONSIVE ============================ */
 @media (max-width: 1080px) {
   .product-grid {

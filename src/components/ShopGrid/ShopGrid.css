@@ -9,14 +9,17 @@
 }
 
 .shop-toolbar select {
-    padding: 10px 29px;
+    padding: 10px 46px;
     border-radius: 999px;
     border: 1px solid var(--line);
     background: var(--glass-strong);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
-    
+    font-family: inherit;
+    font-size: 1rem;
 }
+
+
 
 .select option {
     color: aquamarine;

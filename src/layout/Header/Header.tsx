@@ -40,7 +40,7 @@ export const Header = () => {
         <Logo className="logo" width={40} height={40} />
 
         <Link href="/" className="title-link">
-          <h3 className="trifana-title">TRIFANA</h3>
+          <h3 className="trifana-title">TRIAFANA</h3>
         </Link>
 
         <nav className="main-nav">

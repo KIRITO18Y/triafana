@@ -47,8 +47,6 @@
     font-size: 1.02rem;
 }
 
-
-
 .main-nav {
     display: flex;
     align-items: center;
@@ -58,14 +56,12 @@
 
 .nav-link {
     font-family: var(--font-display);
-    font-weight: 600;
+    font-weight: 700;
     font-size: .9rem;
     color: var(--ink);
     padding: 8px 14px;
     border-radius: 999px;
     transition: all .15s ease;
-    text-decoration: none;
-    cursor: pointer;
 }
 
 

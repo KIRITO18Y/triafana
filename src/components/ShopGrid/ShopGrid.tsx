@@ -32,7 +32,6 @@ export async function ShopGrid({ category, sort }: Props) {
     <>
       <div className="shop-toolbar">
         <span>{products.totalDocs} Productos</span>
-
         <SortSelect />
       </div>
 

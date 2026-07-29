@@ -24,7 +24,7 @@ export default function SortSelect() {
         router.push(`${pathname}?${params.toString()}`)
       }}
     >
-      <option value="">Relevancia</option>
+      <option value="rel">Relevancia</option>
       <option value="asc">Precio mayor</option>
       <option value="desc">Precio menor </option>
     </select>
