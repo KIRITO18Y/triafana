@@ -4,6 +4,7 @@ import '../Header/header.css'
 import Link from 'next/link'
 import Logo from '../Logo/Logo'
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation' // <-- 1. Importamos la herramienta de Next.js
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
@@ -11,6 +12,8 @@ import { useCart } from '@/context/CartContext'
 
 export const Header = () => {
   const [scroll, setScroll] = useState(false)
+
+  const pathname = usePathname() // <-- 2. Guardamos la ruta actual en esta variable
 
   const { cart } = useCart()
   const totalItems = cart.reduce((total, item) => total + item.quantity, 0)
@@ -39,24 +42,32 @@ export const Header = () => {
         <Link href="/" className="title-link">
           <h3 className="trifana-title">TRIFANA</h3>
         </Link>
+
         <nav className="main-nav">
-          <Link href="/" className="nav-link">
+          {/* Si pathname es igual a '/', le agrega 'active', si no, lo deja normal */}
+          <Link href="/" className={`nav-link ${pathname === '/' ? 'active' : ''}`}>
             Inicio
           </Link>
 
-          <Link href="/tecnology" className="nav-link">
+          <Link
+            href="/tecnology"
+            className={`nav-link ${pathname === '/tecnology' ? 'active' : ''}`}
+          >
             Tecnologia
           </Link>
 
-          <Link href="/cosmeticsShop" className="nav-link">
+          <Link
+            href="/cosmeticsShop"
+            className={`nav-link ${pathname === '/cosmeticsShop' ? 'active' : ''}`}
+          >
             Cosmetiqueria
           </Link>
 
-          <Link href="/clothes" className="nav-link">
+          <Link href="/clothes" className={`nav-link ${pathname === '/clothes' ? 'active' : ''}`}>
             Ropa
           </Link>
 
-          <Link href="/Services" className="nav-link">
+          <Link href="/Services" className={`nav-link ${pathname === '/Services' ? 'active' : ''}`}>
             Servicios
           </Link>
         </nav>

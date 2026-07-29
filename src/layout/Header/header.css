@@ -68,6 +68,20 @@
     cursor: pointer;
 }
 
+
+.nav-link{
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-link.active {
+  color: var(--teal);
+  font-weight: bold;
+   border-radius: 999px;
+  background: rgba(10, 102, 109, .08);
+ 
+}
+
 .main-nav a:hover,
 .main-nav a.is-active {
     color: var(--teal);
@@ -187,3 +201,4 @@
 .nav-toggle {
     display: none;
 }
+

@@ -31,12 +31,19 @@ const CartContext = createContext<CartContextType | null>(null)
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([])
 
-  const addToCart = (product: Product) => {
+  const addToCart = (product: Product, quantity: number = 1) => {
     setCart((prev) => {
       const existing = prev.find((p) => p.id === product.id)
 
       if (existing) {
-        return prev.map((p) => (p.id === product.id ? { ...p, quantity: p.quantity + 1 } : p))
+        return prev.map((p) =>
+          p.id === product.id
+            ? {
+                ...p,
+                quantity: p.quantity + quantity,
+              }
+            : p,
+        )
       }
 
       return [
@@ -48,7 +55,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
           oldPrice: Number(product.oldPrice) || 0,
           image:
             typeof product.image === 'object' ? (product.image?.url ?? '') : (product.image ?? ''),
-          quantity: 1,
+          quantity,
         },
       ]
     })

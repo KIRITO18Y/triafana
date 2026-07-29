@@ -4,9 +4,6 @@ import config from '@/payload.config'
 import ProductCard from '@/components/ProductCard/ProductCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBox, faShieldHalved, faTruck } from '@fortawesome/free-solid-svg-icons'
-import { Product } from '@/payload-types'
-import AddToCartButton from '@/components/AddToCartButton'
-import Link from 'next/link'
 import ProductActions from '@/components/ProductActions/ProductActions'
 
 export default async function ProductDetail({ params }: { params: Promise<{ id: string }> }) {
@@ -64,44 +61,31 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
           />
         </div>
 
-        <section>
-          <div className="pdp-info">
-            <span className="product-category">{product.category}</span>
-            <h1>{product.name}</h1>
-            <div className=" ">
-              ⭐⭐⭐⭐⭐
-              <span>4.8</span>
-            </div>
-
-            <div className="price-detail">
-              <span className="detail-price">{formatPrice(Number(product.price) || 0)}</span>
-
-              {product.oldPrice && (
-                <span className="detail-oldprice">{formatPrice(Number(product.oldPrice))}</span>
-              )}
-            </div>
-
-            <div>
-              <p className="detail-trifana">
-                Producto de alta calidad seleccionado por TRIAFANA. Garantía oficial, envío rápido y
-                soporte postventa.
-              </p>
-            </div>
-
-            <div className="quantity-section">
-              <h2>Cantidad</h2>
-              <div className="quantity-container">
-                <button className="btn-quantity">-</button>
-                <span className="quantity">1</span>
-                <button className="btn-quantity">+</button>
-              </div>
-            </div>
-
-            <div className="btn-container">
-              <ProductActions product={product} />
-            </div>
+        <div className="pdp-info">
+          <span className="cat">{product.category}</span>
+          <h1 className="p-name"> {product.name}</h1>
+          <div className="detaill-cali">
+            <div className="deateial-estre">★★★★★</div>
+            <span> 4.8 · 128 reseñas</span>
           </div>
 
+          <div className="pdp-prince">
+            <span className="now">{formatPrice(Number(product.price) || 0)}</span>
+            {product.oldPrice && (
+              <span className="old">{formatPrice(Number(product.oldPrice))}</span>
+            )}
+          </div>
+
+          <div>
+            <p className="detail-trifana">
+              Producto de alta calidad seleccionado por TRIAFANA. Garantía oficial, envío rápido y
+              soporte postventa.
+            </p>
+          </div>
+
+          <div className="btn-container">
+            <ProductActions product={product} />
+          </div>
           <div className="text-detail">
             <div className="detail-shipping">
               <FontAwesomeIcon icon={faTruck} className="detail-icon" />
@@ -117,7 +101,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
               <span className="shipping-span">Devolución gratis en 30 días</span>
             </div>
           </div>
-        </section>
+        </div>
 
         <section className="description-section">
           <div className="detail-description">
