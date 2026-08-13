@@ -30,7 +30,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([])
 
   const addToCart = (product: Product, quantity: number = 1) => {
-    const shortName = product.name.length > 20 ? `${product.name.slice(0, 20)}...` : product.name
+    const shortName = product.name.length > 20 ? `${product.name.slice(0, 20)}` : product.name
 
     setCart((prev) => {
       const existing = prev.find((p) => p.id === product.id)
@@ -101,7 +101,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const product = cart.find((item) => item.id === id)
     setCart((prev) => prev.filter((item) => item.id !== id))
     if (product) {
-      const shortName = product.name.length > 20 ? `${product.name.slice(0, 18)}...` : product.name
+      const shortName = product.name.length > 18 ? `${product.name.slice(0, 18)}` : product.name
 
       toast.info(`"${shortName}" eliminado del carrito`, {
         toastId: 'remove-toast',

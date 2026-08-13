@@ -46,6 +46,28 @@
     
 }
 
+.link-favor{
+    position: absolute;
+    background-color: rgb(252, 252, 252);
+    width: 32px;
+    height: 32px;
+    margin-top: 10px;
+    margin-left: 140px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    transition: all .15s ease;
+    cursor: pointer;
+}
+
+.icon-fav{
+    color: var(--ink);
+}
+
+.icon-fav:hover{
+    color: red;
+}
+
 .product-info {
     padding: 10px;
     margin-bottom:12px ;
@@ -73,18 +95,24 @@
 }
 
 .rating {
-    font-size: 12px;
-    display: flex;
-    gap: 8px;
+     display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rating-estre{
+    font-size: 20px;
+    color: #f5a623;
+}
+.rating span{
+    font-size: 16px;
+    color: #888;
 }
 
 .price {
-    
     display: flex;
     justify-content: space-between;
-    align-items: center;
-
-    
+    align-items: center; 
 }
 
 .price-oldPrice {

@@ -59,7 +59,7 @@ const CheckoutPage = () => {
 
       <section>
         <div className="checkout-layout">
-          <form onSubmit="return false;">
+          <form onSubmit={(e) => e.preventDefault()}>
             <div className="form-card">
               <h3>
                 <span className="badge badge-cyan">1</span> Información de contacto
@@ -237,7 +237,7 @@ const CheckoutPage = () => {
                         src={
                           typeof summyCart.image === 'string'
                             ? summyCart.image
-                            : summyCart.image.url
+                            : summyCart.image?.url ?? ''
                         }
                         alt={summyCart.name}
                       />

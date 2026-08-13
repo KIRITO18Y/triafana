@@ -13,16 +13,12 @@ export default function LoginPage() {
           <a href="/" className="breadcrumb-link">
             Inicio
           </a>
-          /
-          <a href="/cart" className="breadcrumb-link">
-            Carrito
-          </a>
           / <span>Mi cuenta</span>
         </nav>
       </section>
       <div className="auth-wrap">
         <AuthAside isLogin={isLogin} />
-        <LoginForm isLogin={isLogin} setIsLogin={setIsLogin} />
+        <LoginForm {...({ isLogin, setIsLogin } as any)} />
       </div>
     </div>
   )

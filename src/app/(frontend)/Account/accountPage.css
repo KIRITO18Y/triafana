@@ -1,0 +1,7 @@
+.account-container{
+    width: 100%;
+    max-width: var(--maxw);
+    padding-bottom: 50px;
+    padding-inline: var(--gutter);
+    margin-inline: auto;
+}

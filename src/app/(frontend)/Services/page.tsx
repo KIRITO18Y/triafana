@@ -2,7 +2,7 @@ import './ServicesPage.css'
 
 const ServicesPage = () => {
   return (
-    <div>
+    <div className="service-contianer">
       <div className="services-header">
         <section className="page-head">
           <nav className="breadcrumb">

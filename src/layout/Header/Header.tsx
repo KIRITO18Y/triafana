@@ -4,7 +4,7 @@ import '../Header/header.css'
 import Link from 'next/link'
 import Logo from '../Logo/Logo'
 import { useEffect, useState } from 'react'
-import { usePathname } from 'next/navigation' // <-- 1. Importamos la herramienta de Next.js
+import { usePathname } from 'next/navigation'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
@@ -13,7 +13,7 @@ import { useCart } from '@/context/CartContext'
 export const Header = () => {
   const [scroll, setScroll] = useState(false)
 
-  const pathname = usePathname() // <-- 2. Guardamos la ruta actual en esta variable
+  const pathname = usePathname()
 
   const { cart } = useCart()
   const totalItems = cart.reduce((total, item) => total + item.quantity, 0)
@@ -44,7 +44,6 @@ export const Header = () => {
         </Link>
 
         <nav className="main-nav">
-          {/* Si pathname es igual a '/', le agrega 'active', si no, lo deja normal */}
           <Link href="/" className={`nav-link ${pathname === '/' ? 'active' : ''}`}>
             Inicio
           </Link>
