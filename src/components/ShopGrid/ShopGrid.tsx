@@ -1,7 +1,7 @@
 import './ShopGrid.css'
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import ProductCard from '@/components/ProductCard/ProductCard'
+import ProductCard from '@/app/(frontend)/Product/ProductCard/ProductCard'
 import SortSelect from '../SortSelect/SortSelect'
 
 type Props = {

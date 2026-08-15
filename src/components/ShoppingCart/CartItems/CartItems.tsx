@@ -1,8 +1,6 @@
 'use client'
-
 import './cartItems.css'
 import { useCart } from '@/context/CartContext'
-
 export type CartItem = {
   id: number
   name: string

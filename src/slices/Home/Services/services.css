@@ -7,7 +7,13 @@
   margin-bottom: 8%;
 }
 
-
+.section-head .link {
+    color: var(--teal);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
 .service-card {
   border-radius: var(--r-lg);
   padding: 32px;

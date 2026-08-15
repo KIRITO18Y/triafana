@@ -3,8 +3,11 @@ import type { CollectionConfig } from 'payload'
 export const Customers: CollectionConfig = {
   slug: 'customers',
 
-  auth: true, // activa login, registro y sesiones
+  auth: true,
 
+  access: {
+    create: () => true,
+  },
   admin: {
     useAsTitle: 'email',
   },

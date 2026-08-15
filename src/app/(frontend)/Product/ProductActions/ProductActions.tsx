@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useCart } from '@/context/CartContext'
 import { Product } from '@/payload-types'
-import AddToCartButton from '../AddToCartButton'
+import AddToCartButton from '../../../../components/AddToCartButton'
 
 type Props = {
   product: Product

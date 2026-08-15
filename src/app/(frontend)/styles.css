@@ -108,6 +108,8 @@ main {
   padding-block: clamp(48px, 7vw, 96px);
 }
 
+
+
 .site-header {
   position: sticky;
   top: 0;
@@ -142,11 +144,11 @@ main {
   padding: 18px 24px !important;
 }
 
-/* Cambiar icono verde de success */
+
 .Toastify__toast-icon svg {
   fill: var(--teal) !important;
 }
-/* ============================ RESPONSIVE ============================ */
+
 @media (max-width: 1080px) {
   .product-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -279,7 +281,7 @@ main {
   }
 }
 
-/* Reduce motion */
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;

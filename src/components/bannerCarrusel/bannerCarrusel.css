@@ -1,9 +1,7 @@
-/* CONTENEDOR GENERAL */
 .fullbleed {
     width: 100vw;
     margin-left: calc(50% - 50vw);
 }
-
 
 .hero-carousel {
     position: relative;
@@ -11,15 +9,11 @@
     height: clamp(420px, 45vw, 600px);
 }
 
-
-
 .hero-slides {
     display: flex;
     height: 100%;
     transition: transform .6s ease;
 }
-
-
 
 .hero-slide {
     min-width: 100%;
@@ -33,20 +27,14 @@
 }
 
 .hero-slide::before {
-
     content: "";
-
     position: absolute;
     inset: 0;
-
-
     background: linear-gradient(90deg,
             rgba(7, 42, 46, .92),
             rgba(7, 42, 46, .55),
             rgba(7, 42, 46, .1));
-
 }
-
 
 .slide-inner {
     position: relative;
@@ -58,12 +46,9 @@
 
 }
 
-
-
 .slide-copy {
     max-width: 570px;
 }
-
 
 .slide-tag {
     display: inline-flex;
@@ -79,7 +64,6 @@
 
 }
 
-
 .hero-slide h1 {
     font-size: clamp(2.5rem, 5vw, 4rem);
     line-height: 1.05;
@@ -88,14 +72,9 @@
     margin-bottom: 20px;
 }
 
-
-
 .accent {
     color: #63d9ff;
 }
-
-
-
 
 .hero-slide p {
     color: white;
@@ -106,16 +85,11 @@
     margin-bottom: 25px;
 }
 
-
-
-
 .price-flag {
     display:flex;
     margin-bottom:25px;
     gap:4px;
 }
-
-
 
 .price-flag span {
     color:white;
@@ -124,8 +98,6 @@
     line-height: 5.1;
 
 }
-
-
 
 .price-flag b {
     color:#63d9ff;
@@ -184,21 +156,32 @@
 
 }
 
-/* FLECHAS */
-
 .hero-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    border: none;
-    background: rgb(221, 221, 221);
-    color: #08747d;
-    font-size: 25px;
     z-index: 5;
+    width: 52px;
+    height: 52px;
+    border-radius: 999px;
+    background: var(--glass-strong);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+    display: grid;
+    place-items: center;
+    color: var(--teal);
+    transition: all .16s ease;
 }
+
+ .hero-arrow:hover{
+    color: #ff6f61;
+  background-color: white;
+  transform: translateY(-50%) scale(1.12);
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.15);
+ }
 
 .hero-arrow.prev {
     left: 25px;
@@ -208,21 +191,14 @@
 .hero-arrow.next {
     right: 25px;
 }
+
 .product-price {
-
     margin-top:15px;
-
     color:white;
-
     font-size:2rem;
-
     font-weight:800;
-
 }
 
-
-
-/* DOTS */
 .hero-dots {
     position: absolute;
     bottom: 20px;
@@ -231,8 +207,6 @@
     display: flex;
     gap: 10px;
 }
-
-
 
 .hero-dots button {
     width: 12px;

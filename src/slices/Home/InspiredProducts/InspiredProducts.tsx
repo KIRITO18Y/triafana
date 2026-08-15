@@ -7,9 +7,9 @@ export const InspiredProducts = () => {
         <div className="section-head">
           <div>
             <span className="eyebrow">Para ti</span>
-            <h2>Inspirado en lo último que viste</h2>
+            <h1>Inspirado en lo último que viste</h1>
           </div>
-          <a className="link" href="tienda.html">
+          <a className="link" href="/tecnology">
             Ver más →
           </a>
         </div>

@@ -1,12 +1,10 @@
 'use client'
-
 import './ProductCard.css'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
 import { useCart } from '@/context/CartContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
 type Props = {
   product: any
 }

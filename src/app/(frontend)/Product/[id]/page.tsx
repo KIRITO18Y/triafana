@@ -1,10 +1,10 @@
 import './ProductDetail.css'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
-import ProductCard from '@/components/ProductCard/ProductCard'
+import ProductCard from '../ProductCard/ProductCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBox, faShieldHalved, faTruck } from '@fortawesome/free-solid-svg-icons'
-import ProductActions from '@/components/ProductActions/ProductActions'
+import ProductActions from '@/app/(frontend)/Product/ProductActions/ProductActions'
 
 export default async function ProductDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params

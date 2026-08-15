@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
 import { useCart } from '@/context/CartContext'
+import AvatarLink from '../AvatarLink/AvatarLink'
 
 export const Header = () => {
   const [scroll, setScroll] = useState(false)
@@ -90,9 +91,7 @@ export const Header = () => {
             )}
           </Link>
 
-          <Link href={'/login'} className="avatar">
-            TF
-          </Link>
+          <AvatarLink />
         </div>
       </div>
     </div>

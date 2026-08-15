@@ -31,6 +31,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const addToCart = (product: Product, quantity: number = 1) => {
     const shortName = product.name.length > 20 ? `${product.name.slice(0, 20)}` : product.name
+    const normalizedImage: string =
+      typeof product.image === 'object' && product.image !== null
+        ? product.image?.url ?? ''
+        : typeof product.image === 'string'
+          ? product.image
+          : ''
 
     setCart((prev) => {
       const existing = prev.find((p) => p.id === product.id)
@@ -61,8 +67,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
           name: product.name,
           price: Number(product.price),
           oldPrice: Number(product.oldPrice) || 0,
-          image:
-            typeof product.image === 'object' ? (product.image?.url ?? '') : (product.image ?? ''),
+          image: normalizedImage,
           quantity,
         },
       ]

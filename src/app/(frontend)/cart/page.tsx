@@ -1,5 +1,5 @@
 'use client'
-import Link from 'next/link'
+
 import './cart.css'
 import { useCart } from '@/context/CartContext'
 import { CartItems } from '@/components/ShoppingCart/CartItems/CartItems'

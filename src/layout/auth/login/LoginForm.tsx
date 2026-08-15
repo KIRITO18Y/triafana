@@ -1,9 +1,15 @@
 'use client'
+
 import './loginForm.css'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export const LoginForm = () => {
+  const router = useRouter()
+
   const [isLogin, setIsLogin] = useState(true)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const [form, setForm] = useState({
     nombre: '',
@@ -17,24 +23,80 @@ export const LoginForm = () => {
       ...form,
       [e.target.name]: e.target.value,
     })
+
+    setError('')
   }
+
+  // =========================
+  // REGISTRAR USUARIO
+  // =========================
 
   const register = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    const res = await fetch('/api/customers/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(form),
-    })
+    try {
+      const res = await fetch('/api/customers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          nombre: form.nombre,
+          apellido: form.apellido,
+          email: form.email,
+          password: form.password,
+        }),
+      })
 
-    const data = await res.json()
+      const data = await res.json()
 
-    if (res.ok) {
-      alert('Cuenta creada correctamente 🎉')
+      console.log('RESPUESTA REGISTRO:', data)
 
+      if (!res.ok) {
+        throw new Error(data?.errors?.[0]?.message || data?.message || 'No se pudo crear la cuenta')
+      }
+
+      // Payload devuelve la sesión al crear el usuario
+      router.push('/account')
+      router.refresh()
+    } catch (error) {
+      console.error('ERROR REGISTRO:', error)
+
+      alert(error instanceof Error ? error.message : 'Ocurrió un error al crear la cuenta')
+    }
+  }
+
+  // =========================
+  // INICIAR SESIÓN
+  // =========================
+
+  const login = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    setLoading(true)
+    setError('')
+
+    try {
+      const res = await fetch('/api/customers/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          email: form.email,
+          password: form.password,
+        }),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        throw new Error(
+          data?.errors?.[0]?.message || data?.message || 'Correo o contraseña incorrectos',
+        )
+      }
       setForm({
         nombre: '',
         apellido: '',
@@ -42,9 +104,12 @@ export const LoginForm = () => {
         password: '',
       })
 
-      setIsLogin(true)
-    } else {
-      alert(data.errors?.[0]?.message || 'Ocurrió un error')
+      router.push('/account')
+      router.refresh()
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'Ocurrió un error al iniciar sesión')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -55,7 +120,10 @@ export const LoginForm = () => {
           <button
             type="button"
             className={isLogin ? 'is-active' : ''}
-            onClick={() => setIsLogin(true)}
+            onClick={() => {
+              setIsLogin(true)
+              setError('')
+            }}
           >
             Iniciar sesión
           </button>
@@ -63,22 +131,45 @@ export const LoginForm = () => {
           <button
             type="button"
             className={!isLogin ? 'is-active' : ''}
-            onClick={() => setIsLogin(false)}
+            onClick={() => {
+              setIsLogin(false)
+              setError('')
+            }}
           >
             Crear cuenta
           </button>
         </div>
 
+        {/* ERROR */}
+
+        {error && <div className="auth-error">{error}</div>}
+
         {isLogin ? (
-          <form>
+          <form onSubmit={login}>
             <div className="field">
               <label>Correo electrónico</label>
-              <input type="email" placeholder="Correo" />
+
+              <input
+                name="email"
+                type="email"
+                placeholder="Correo"
+                value={form.email}
+                onChange={handleChange}
+                required
+              />
             </div>
 
             <div className="field">
               <label>Contraseña</label>
-              <input type="password" placeholder="Contraseña" />
+
+              <input
+                name="password"
+                type="password"
+                placeholder="Contraseña"
+                value={form.password}
+                onChange={handleChange}
+                required
+              />
             </div>
 
             <div className="filter-check">
@@ -90,8 +181,8 @@ export const LoginForm = () => {
               <a href="#">¿Olvidaste tu contraseña?</a>
             </div>
 
-            <button type="submit" className="btn btn-primary btn-block btn-lg">
-              Iniciar sesión
+            <button type="submit" className="btn btn-primary btn-block btn-lg" disabled={loading}>
+              {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
             </button>
           </form>
         ) : (
@@ -99,6 +190,7 @@ export const LoginForm = () => {
             <div className="form-grid">
               <div className="field">
                 <label>Nombre</label>
+
                 <input
                   name="nombre"
                   type="text"
@@ -111,6 +203,7 @@ export const LoginForm = () => {
 
               <div className="field">
                 <label>Apellido</label>
+
                 <input
                   name="apellido"
                   type="text"
@@ -124,6 +217,7 @@ export const LoginForm = () => {
 
             <div className="field">
               <label>Correo electrónico</label>
+
               <input
                 name="email"
                 type="email"
@@ -136,12 +230,14 @@ export const LoginForm = () => {
 
             <div className="field">
               <label>Contraseña</label>
+
               <input
                 name="password"
                 type="password"
                 placeholder="Mínimo 8 caracteres"
                 value={form.password}
                 onChange={handleChange}
+                minLength={8}
                 required
               />
             </div>
@@ -151,8 +247,8 @@ export const LoginForm = () => {
               Acepto los términos y condiciones
             </label>
 
-            <button type="submit" className="btn btn-primary btn-block btn-lg">
-              Crear cuenta
+            <button type="submit" className="btn btn-primary btn-block btn-lg" disabled={loading}>
+              {loading ? 'Creando cuenta...' : 'Crear cuenta'}
             </button>
           </form>
         )}
