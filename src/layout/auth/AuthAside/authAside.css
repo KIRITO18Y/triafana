@@ -1,0 +1,70 @@
+.auth-aside {
+  position: relative;
+  padding: clamp(36px, 5vw, 60px);
+  background: linear-gradient(150deg, var(--teal), var(--teal-aqua));
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.auth-aside::after {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  right: -90px;
+  top: -90px;
+  background: radial-gradient(circle, rgba(128, 229, 255, .45), transparent 70%);
+}
+
+.auth-aside h2 {
+    color: #fff;
+    font-size: 2rem;
+    position: relative;
+}
+
+.auth-aside p {
+  opacity: .9;
+  margin-top: 12px;
+  position: relative;
+}
+
+.auth-aside ul.benefits {
+  margin-top: 26px;
+  position: relative;
+  display: grid;
+  gap: 14px;
+}
+
+.auth-aside .benefits li {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: .95rem;
+    color: #cdeef2;
+}
+
+.auth-aside .benefits .ck {
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .2);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: .74rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #cdeef2;
+}

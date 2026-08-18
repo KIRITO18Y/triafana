@@ -1,0 +1,20 @@
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: .92rem;
+}
+
+
+.nav-link:hover, .nav-link .is-active {
+    background: rgba(10, 102, 109, .08);
+    color: var(--teal);
+}
+
+.btn-icon{
+    color: black;
+}

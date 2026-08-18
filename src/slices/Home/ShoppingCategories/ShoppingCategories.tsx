@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import '../ShoppingCategories/shoppingCategories.css'
+import Link from 'next/link'
 
 export const ShoppingCategories = () => {
   return (

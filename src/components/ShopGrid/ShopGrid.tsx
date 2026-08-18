@@ -1,19 +1,24 @@
 import './ShopGrid.css'
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import ProductCard from '@/components/ProductCard/ProductCard'
+import ProductCard from '@/app/(frontend)/Product/ProductCard/ProductCard'
+import SortSelect from '../SortSelect/SortSelect'
 
 type Props = {
   category?: string
+  sort?: string
 }
 
-export async function ShopGrid({ category }: Props) {
+export async function ShopGrid({ category, sort }: Props) {
   const payload = await getPayload({
     config,
   })
 
   const products = await payload.find({
     collection: 'products',
+
+    sort: sort === 'asc' ? 'price' : sort === 'desc' ? '-price' : undefined,
+
     ...(category && {
       where: {
         category: {
@@ -27,13 +32,9 @@ export async function ShopGrid({ category }: Props) {
     <>
       <div className="shop-toolbar">
         <span>{products.totalDocs} Productos</span>
-        <select>
-          <option>Relevancia</option>
-          <option>Precio menor</option>
-          <option>Precio Mayor</option>
-          <option>Mejor Valorados</option>
-        </select>
+        <SortSelect />
       </div>
+
       <div className="product-grid">
         {products.docs.map((product) => (
           <ProductCard key={product.id} product={product} />

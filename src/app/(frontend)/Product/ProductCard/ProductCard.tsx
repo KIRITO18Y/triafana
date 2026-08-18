@@ -1,11 +1,10 @@
 'use client'
-
 import './ProductCard.css'
+import { faHeart } from '@fortawesome/free-regular-svg-icons'
 import { useCart } from '@/context/CartContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/navigation'
-
 type Props = {
   product: any
 }
@@ -22,9 +21,16 @@ export default function ProductCard({ product }: Props) {
     <div className="product-card" onClick={() => router.push(`/Product/${product.id}`)}>
       <div className="product-image">
         <img src={product.image?.url || '/placeholder.png'} alt={product.name} />
-
+        <button
+          type="button"
+          className="link-favor"
+          onClick={(e) => {
+            e.stopPropagation()
+          }}
+        >
+          <FontAwesomeIcon icon={faHeart} className="icon-fav" />
+        </button>
         {product.featured && <span className="badge">Destacado</span>}
-
         <button className="fav" onClick={(e) => e.stopPropagation()} />
       </div>
 
@@ -39,10 +45,10 @@ export default function ProductCard({ product }: Props) {
                 : product.category?.toUpperCase() || 'GENERAL'}
         </span>
 
-        <h3>{product.name}</h3>
+        <h3 className="card-name">{product.name}</h3>
 
         <div className="rating">
-          ⭐⭐⭐⭐⭐
+          <div className="rating-estre">★★★★★</div>
           <span>4.8</span>
         </div>
 
@@ -60,7 +66,6 @@ export default function ProductCard({ product }: Props) {
               className="price-btn"
               onClick={(e) => {
                 e.stopPropagation()
-
                 addToCart({
                   id: product.id,
                   name: product.name,

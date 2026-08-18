@@ -6,14 +6,14 @@ export const ServiceProducto = () => {
       <div className="section-head">
         <div>
           <span className="eyebrow">Servicios TRIAFANA</span>
-          <h2>Más que una tienda</h2>
+          <h1>Más que una tienda</h1>
         </div>
-        <a className="link" href="servicios.html">
+        <a className="link" href="/Services">
           Conocer servicios →
         </a>
       </div>
       <div className="grid cols-3">
-        <a href="servicios.html" className="service-card">
+        <a href="/Services" className="service-card">
           <div className="ic">
             <svg
               viewBox="0 0 24 24"
@@ -30,7 +30,7 @@ export const ServiceProducto = () => {
           <h3>Diseño Web</h3>
           <p>Sitios y tiendas a medida, rápidos y centrados en conversión.</p>
         </a>
-        <a href="servicios.html" className="service-card">
+        <a href="/Services" className="service-card">
           <div className="ic">
             <svg
               viewBox="0 0 24 24"
@@ -46,7 +46,7 @@ export const ServiceProducto = () => {
           <h3>Social Media</h3>
           <p>Gestión de redes y contenido que conecta con tu audiencia.</p>
         </a>
-        <a href="servicios.html" className="service-card">
+        <a href="/Services" className="service-card">
           <div className="ic">
             <svg
               viewBox="0 0 24 24"
