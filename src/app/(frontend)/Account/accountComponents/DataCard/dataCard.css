@@ -1,0 +1,94 @@
+.dataCard{
+    border-radius: var(--r-lg);
+    padding: 26px;
+    background-color: var(--glass-strong);
+    border: 1px solid var(--glass-borde);
+    -webkit-backdrop-filter: blur(var(--blur));
+    backdrop-filter: blur(var(--blur));
+    box-shadow: var(--shadow-sm);
+}
+
+.data-title {
+    font-family: var(--font-display);
+    color: var(--ink);
+    line-height: 1.12;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 15px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.field{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field label{
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.field input {
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--ink);
+    transition: all .15s ease;
+}
+
+.field input:focus{
+    outline: none;
+    border-color: var(--teal-aqua);
+    box-shadow: 0 0 0 3px rgba(72, 169, 179, .2);
+}
+
+
+.full-width-fields {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.full-width-fields .field {
+  width: 100%;
+}
+
+.full-width-fields input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 13px 24px;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: .95rem;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+    white-space: nowrap;
+}
+
+.btn-teal {
+    background: var(--teal);
+    color: #fff;
+}
+
+.btn-teal:hover{
+    background-color: #11959e;
+}
+

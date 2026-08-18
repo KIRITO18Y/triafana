@@ -1,6 +1,8 @@
 'use client'
+
 import './accountNav.css'
 import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
 import { faUser, faHeart } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -9,10 +11,10 @@ import {
   faCreditCard,
   faGear,
 } from '@fortawesome/free-solid-svg-icons'
-import { useRouter } from 'next/navigation'
 
 export const AcccountNav = () => {
   const router = useRouter()
+  const pathname = usePathname()
 
   const handleLogout = async () => {
     try {
@@ -22,10 +24,15 @@ export const AcccountNav = () => {
       })
 
       if (!res.ok) {
+        const data = await res.json().catch(() => null)
+
+        console.error('Error logout:', data)
+
         throw new Error('No se pudo cerrar la sesión')
       }
-      router.push('/login')
+
       router.refresh()
+      router.replace('/login')
     } catch (error) {
       console.error('Error al cerrar sesión:', error)
     }
@@ -33,33 +40,45 @@ export const AcccountNav = () => {
 
   return (
     <aside>
-      <Link href="/account" className="nav-link">
-        <FontAwesomeIcon icon={faArrowsToCircle} style={{ color: 'rgb(62, 63, 63)' }} />
+      <Link href="/account" className={`nav-link ${pathname === '/account' ? 'active' : ''}`}>
+        <FontAwesomeIcon icon={faArrowsToCircle} />
         Resumen
       </Link>
 
-      <Link href="/account/orders" className="nav-link">
-        <FontAwesomeIcon icon={faCreditCard} style={{ color: 'rgb(62, 63, 63)' }} />
+      <Link
+        href="/account/buysPage"
+        className={`nav-link ${pathname === '/account/buysPage' ? 'active' : ''}`}
+      >
+        <FontAwesomeIcon icon={faCreditCard} />
         Mis compras
       </Link>
 
-      <Link href="/account/favorites" className="nav-link">
-        <FontAwesomeIcon icon={faHeart} style={{ color: 'rgb(62, 63, 63)' }} />
+      <Link
+        href="/account/favorites"
+        className={`nav-link ${pathname === '/account/favorites' ? 'active' : ''}`}
+      >
+        <FontAwesomeIcon icon={faHeart} />
         Favoritos
       </Link>
 
-      <Link href="/account/profile" className="nav-link">
-        <FontAwesomeIcon icon={faUser} style={{ color: 'rgb(62, 63, 63)' }} />
+      <Link
+        href="/account/dataPage"
+        className={`nav-link ${pathname === '/account/dataPage' ? 'active' : ''}`}
+      >
+        <FontAwesomeIcon icon={faUser} />
         Mis datos
       </Link>
 
-      <Link href="/account/preferences" className="nav-link">
-        <FontAwesomeIcon icon={faGear} style={{ color: 'rgb(62, 63, 63)' }} />
+      <Link
+        href="/account/preferences"
+        className={`nav-link ${pathname === '/account/preferences' ? 'active' : ''}`}
+      >
+        <FontAwesomeIcon icon={faGear} />
         Preferencias
       </Link>
 
       <button type="button" className="nav-link" style={{ color: 'red' }} onClick={handleLogout}>
-        <FontAwesomeIcon icon={faArrowRightFromBracket} style={{ color: 'rgb(62, 63, 63)' }} />
+        <FontAwesomeIcon icon={faArrowRightFromBracket} className="btn-icon" />
         Cerrar sesión
       </button>
     </aside>

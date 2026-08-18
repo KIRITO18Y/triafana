@@ -4,7 +4,7 @@ export const InspiredProducts = () => {
   return (
     <>
       <div className="inspiredProducts">
-        <div className="section-head">
+        <div className="products-head">
           <div>
             <span className="eyebrow">Para ti</span>
             <h1>Inspirado en lo último que viste</h1>
@@ -13,7 +13,7 @@ export const InspiredProducts = () => {
             Ver más →
           </a>
         </div>
-        <div className="product-grid" id="grid-inspirado"></div>
+        <div className="product-grid"></div>
       </div>
     </>
   )
