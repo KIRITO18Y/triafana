@@ -5,7 +5,7 @@ import BannerCarrusel from '@/components/bannerCarrusel/BannerCarrrusel'
 import { TrustStrip } from '@/slices/Home/TrustStrip/TrustStrip'
 import { ShoppingCategories } from '@/slices/Home/ShoppingCategories/ShoppingCategories'
 import { InspiredProducts } from '@/slices/Home/InspiredProducts/InspiredProducts'
-import { ServiceProducto } from '@/slices/Home/Services/Services'
+import { ServicesTriafana } from '@/slices/Home/ServicesTriafana/Services'
 
 export default async function Home() {
   const payload = await getPayload({
@@ -23,7 +23,7 @@ export default async function Home() {
       <TrustStrip />
       <ShoppingCategories />
       <InspiredProducts />
-      <ServiceProducto />
+      <ServicesTriafana />
     </div>
   )
 }

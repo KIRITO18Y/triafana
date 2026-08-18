@@ -1,5 +1,4 @@
 import './accountPage.css'
-import Link from 'next/link'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { headers } from 'next/headers'
@@ -29,14 +28,16 @@ export default async function AccountLayout({ children }: { children: React.Reac
   return (
     <div className="account-container">
       <section className="page-head">
-        <nav className="breadcrumb">
-          <Link href="/">Inicio</Link> / <span>Mi cuenta</span>
+        <nav className="account-breadcrumb">
+          <a href="/" className="account-a">
+            Inicio
+          </a>
+          / <span>Mi cuenta</span>
         </nav>
       </section>
 
       <div className="page-head">
         <h1 className="page-title">Hola, {nombre} 👋</h1>
-
         <p className="lead">Gestiona tus compras, datos y preferencias.</p>
       </div>
 

@@ -1,4 +1,4 @@
-.nav-link {
+.account-nv {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -7,14 +7,46 @@
     color: var(--ink);
     font-weight: 600;
     font-size: .92rem;
+    text-decoration: none;
 }
 
 
-.nav-link:hover, .nav-link .is-active {
+.account-nv:hover, .account-nv .is-active {
     background: rgba(10, 102, 109, .08);
     color: var(--teal);
+    text-decoration: none;
 }
 
 .btn-icon{
     color: black;
 }
+
+.account-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: .92rem;
+
+  text-decoration: none;
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background .15s ease,
+    color .15s ease;
+}
+
+.account-btn:hover {
+  background: rgba(10, 102, 109, .08);
+  color: var(--teal);
+}
+

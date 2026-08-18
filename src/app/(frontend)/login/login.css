@@ -1,10 +1,11 @@
-.login-container  {
+.login-container {
     width: 100%;
     max-width: var(--maxw);
     padding-bottom: 50px;
     padding-inline: var(--gutter);
     margin-inline: auto;
 }
+
 .auth-wrap {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -13,5 +14,28 @@
     overflow: hidden;
     box-shadow: var(--shadow-lg);
     border: 1px solid var(--glass-border);
+    min-height: 560px;
+    align-items: stretch;
 }
 
+.nv-login {
+    font-size: .85rem;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.nv-login span{
+    font-weight: 600;
+    color: var(--shadow-lg);
+}
+
+.login-link {
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.login-link:hover {
+    color: var(--teal);
+}

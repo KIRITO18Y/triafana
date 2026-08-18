@@ -7,13 +7,43 @@
   margin-bottom: 8%;
 }
 
-.section-head .link {
-    color: var(--teal);
+.serviceLink{
+  color: var(--teal);
     font-weight: 600;
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    text-decoration: none;
+} 
+
+.serviceLink:hover{
+  color: var(--coral);
 }
+
+.eyebrow-service{
+   display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: .74rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--teal);
+}
+
+.eyebrow-service::before{
+   content: "";
+    width: 22px;
+    height: 2px;
+    background: var(--coral);
+    border-radius: 2px;
+}
+
+.title-services{
+  font-size: clamp(1.6rem, 3.4vw, 2.5rem);
+}
+
 .service-card {
   border-radius: var(--r-lg);
   padding: 32px;

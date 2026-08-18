@@ -57,7 +57,7 @@
 }
 
 
-.eyebrow {
+.eyebrow-store {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -67,4 +67,12 @@
     letter-spacing: .16em;
     text-transform: uppercase;
     color: #cdeef2;
+}
+
+.eyebrow-store::before{
+  content: "";
+    width: 22px;
+    height: 2px;
+    background: var(--coral);
+    border-radius: 2px;
 }

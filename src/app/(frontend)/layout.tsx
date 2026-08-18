@@ -1,13 +1,14 @@
 import './styles.css'
+import type { Metadata } from 'next'
+import React from 'react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import React from 'react'
 import { Header } from '@/layout/Header/Header'
 import { Footer } from '@/layout/Footer/Footer'
 import ScrollToTop from '@/components/ScrollToTop'
 import { CartProvider } from '@/context/CartContext'
 
-export const metadata = {
+export const metadata: Metadata = {
   description: 'A blank template using Payload in a Next.js app.',
   title: 'TRIAFANA Store',
 }

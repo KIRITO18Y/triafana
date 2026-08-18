@@ -9,10 +9,8 @@ type Props = {
 export default function AuthAside({ isLogin }: Props) {
   return (
     <div className="auth-aside">
-      <span className="eyebrow">TRIAFANA Store</span>
-
+      <span className="eyebrow-store">TRIAFANA Store</span>
       <h2>{isLogin ? 'Bienvenido de vuelta' : 'Únete a TRIAFANA Store'}</h2>
-
       <p>
         {isLogin
           ? 'Inicia sesión para ver tus compras, favoritos y preferencias.'

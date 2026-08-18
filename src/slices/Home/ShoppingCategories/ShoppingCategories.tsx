@@ -6,8 +6,8 @@ export const ShoppingCategories = () => {
     <div className="shoppingCategories-container">
       <div className="section-head">
         <div>
-          <span className="eyebrow">Categorías</span>
-          <h2>Compra por categoría</h2>
+          <span className="eyebrow-category">Categorías</span>
+          <h2 className="shoppingCategories-title">Compra por categoría</h2>
         </div>
         <a className="link" href="/store">
           Ver todo →

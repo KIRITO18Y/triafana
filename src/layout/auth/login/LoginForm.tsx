@@ -27,10 +27,6 @@ export const LoginForm = () => {
     setError('')
   }
 
-  // =========================
-  // REGISTRAR USUARIO
-  // =========================
-
   const register = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -56,8 +52,6 @@ export const LoginForm = () => {
       if (!res.ok) {
         throw new Error(data?.errors?.[0]?.message || data?.message || 'No se pudo crear la cuenta')
       }
-
-      // Payload devuelve la sesión al crear el usuario
       router.push('/account')
       router.refresh()
     } catch (error) {
@@ -66,10 +60,6 @@ export const LoginForm = () => {
       alert(error instanceof Error ? error.message : 'Ocurrió un error al crear la cuenta')
     }
   }
-
-  // =========================
-  // INICIAR SESIÓN
-  // =========================
 
   const login = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -139,8 +129,6 @@ export const LoginForm = () => {
             Crear cuenta
           </button>
         </div>
-
-        {/* ERROR */}
 
         {error && <div className="auth-error">{error}</div>}
 
@@ -217,7 +205,6 @@ export const LoginForm = () => {
 
             <div className="field">
               <label>Correo electrónico</label>
-
               <input
                 name="email"
                 type="email"
@@ -244,7 +231,7 @@ export const LoginForm = () => {
 
             <label className="filter-opt">
               <input type="checkbox" required />
-              Acepto los términos y condiciones
+              Acepto los términos y la política de privacidad
             </label>
 
             <button type="submit" className="btn btn-primary btn-block btn-lg" disabled={loading}>

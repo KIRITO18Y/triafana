@@ -9,7 +9,7 @@
 
 
 
-.eyebrow {
+.eyebrow-category {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -21,7 +21,7 @@
   color: var(--teal);
 }
 
-.eyebrow::before {
+.eyebrow-category::before {
   content: "";
   width: 22px;
   height: 2px;
@@ -38,7 +38,7 @@
   flex-wrap: wrap;
 }
 
-.section-head h2 {
+.shoppingCategories-title {
   font-size: clamp(1.6rem, 3.4vw, 2.5rem);
 }
 

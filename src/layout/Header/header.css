@@ -1,3 +1,11 @@
+.header {
+  width: 100%;
+  height: 82px;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
 .container-header {
     position: sticky;
     top: 6px;
@@ -13,10 +21,9 @@
 }
 
 .header-scroll .nav-shell {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
-
+    box-shadow: 0 12px 35px rgba(0, 0, 0, .16);
+    transform: translateY(0);
 }
-
 .nav-shell {
     display: flex;
     align-items: center;
@@ -29,17 +36,21 @@
     border: 1px solid var(--glass-border);
 }
 
-
 .Logo {
     width: 48px;
     height: 48px;
 }
 
 .title-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
     text-decoration: none;
 }
 
-.trifana-title {
+
+.title-link b {
     font-family: var(--font-display);
     font-weight: 800;
     letter-spacing: .14em;
@@ -78,8 +89,8 @@
  
 }
 
-.main-nav a:hover,
-.main-nav a.is-active {
+.nav a:hover,
+.nav a.is-active {
     color: var(--teal);
     background: rgba(10, 102, 109, .08);
 }

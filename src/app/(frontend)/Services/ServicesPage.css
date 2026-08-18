@@ -3,12 +3,76 @@
   max-width: var(--maxw);
   margin-inline: auto;
   padding-inline: var(--gutter);
+  margin-bottom: 20px;
 }
 
 .services-header{
-     width: 100%;
+  width: 100%;
   max-width: var(--maxw);
   margin-inline: auto;
+}
+
+.service-card {
+  border-radius: var(--r-lg);
+  padding: 32px;
+  text-align: left;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: blur(var(--blur));
+  box-shadow: var(--shadow);
+  transition: transform .2s ease;
+
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+}
+
+.service-card .ic {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 18px;
+  background: linear-gradient(135deg, var(--cyan), var(--teal-aqua));
+  color: var(--teal);
+}
+
+.service-card .ic svg {
+  width: 28px;
+  height: 28px;
+}
+
+.service-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+.service-card p {
+  color: var(--muted);
+  font-size: .94rem;
+}
+
+.eyebrowService {
+    display: inline-flex;
+    align-items: center;
+    color: var(--teal);
+    gap: 8px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: .74rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;   
+}
+
+.eyebrowService::before {
+    content: "";
+    width: 22px;
+    height: 2px;
+    background: var(--coral);
+    border-radius: 2px;
 }
 
 .hero {
@@ -26,7 +90,6 @@
   border: 1px solid var(--glass-border);
   box-shadow: var(--shadow-lg);
   display: grid;
-
   gap: 40px;
   align-items: center;
 }
@@ -46,6 +109,9 @@
   position: relative;
   z-index: 1;
 }
+
+
+
 
 .hero-copy h1 {
   font-size: clamp(2.1rem, 5vw, 3.5rem);
@@ -97,54 +163,14 @@
   border-radius: var(--r);
 }
 
-
-.service-card {
-  border-radius: var(--r-lg);
-  padding: 32px;
-  text-align: left;
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  -webkit-backdrop-filter: blur(var(--blur));
-  backdrop-filter: blur(var(--blur));
-  box-shadow: var(--shadow);
-  transition: transform .2s ease;
-
-}
-
-.service-card:hover {
-  transform: translateY(-6px);
-}
-
-.service-card .ic {
-  width: 56px;
-  height: 56px;
-  border-radius: 16px;
-  display: grid;
-  place-items: center;
-  margin-bottom: 18px;
-  background: linear-gradient(135deg, var(--cyan), var(--teal-aqua));
-  color: var(--teal);
-}
-
-.service-card .ic svg {
-  width: 28px;
-  height: 28px;
-}
-
-.service-card h3 {
-  font-size: 1.3rem;
-  margin-bottom: 8px;
-}
-
-.service-card p {
-  color: var(--muted);
-  font-size: .94rem;
-}
-
 hero {
   padding-top: clamp(28px, 5vw, 56px);
 }
 
+
+.section{
+    padding-block: clamp(48px, 7vw, 6px);
+}
 
 .info-card {
     border-radius: var(--r-lg);
@@ -179,6 +205,7 @@ hero {
     color: var(--teal);
     margin-bottom: 14px;
 }
+
 .services-list{
     margin-top: 16px;
     display: grid;
@@ -193,26 +220,6 @@ hero {
     unicode-bidi: isolate;
 }
 
-.service-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: .74rem;
-    letter-spacing: .16em;
-    text-transform: uppercase;   
-}
-
-.service-eyebrow::before {
-    content: "";
-    width: 22px;
-    height: 2px;
-    background: var(--coral);
-    border-radius: 2px;
-}
-
-/* ============================ PROMO BANNER ============================ */
 .promo {
   position: relative;
   overflow: hidden;
@@ -234,6 +241,28 @@ hero {
   right: -60px;
   bottom: -120px;
   background: radial-gradient(circle, rgba(255, 111, 97, .5), transparent 70%);
+}
+
+.promo-eyebrow{
+    display: inline-flex;
+    align-items: center;
+    color: var(--cyan);
+    gap: 8px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: .74rem;
+    letter-spacing: .16em;
+     opacity: 1.9;
+    text-transform: uppercase; 
+}
+
+
+.promo-eyebrow::before {
+    content: "";
+    width: 22px;
+    height: 2px;
+    background: var(--coral);
+    border-radius: 2px;
 }
 
 .promo h2 {

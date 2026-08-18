@@ -6,8 +6,8 @@ export const InspiredProducts = () => {
       <div className="inspiredProducts">
         <div className="products-head">
           <div>
-            <span className="eyebrow">Para ti</span>
-            <h1>Inspirado en lo último que viste</h1>
+            <span className="eyebro-inpir">Para ti</span>
+            <h1 className="inspireP-title">Inspirado en lo último que viste</h1>
           </div>
           <a className="link" href="/tecnology">
             Ver más →
