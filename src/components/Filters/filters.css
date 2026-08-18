@@ -7,6 +7,7 @@
 }
 
 .filters h3 {
+  color: black;
   margin-bottom: 20px;
 }
 
@@ -97,6 +98,7 @@
     transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
     white-space: nowrap;
 }
+
 button {
     font-family: inherit;
     cursor: pointer;

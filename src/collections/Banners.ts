@@ -29,14 +29,12 @@ export const Banners: CollectionConfig = {
       type: 'textarea',
     },
 
-    // Texto pequeño
     {
       name: 'offerTitle',
       type: 'text',
       defaultValue: 'Hasta',
     },
 
-    // Texto grande
     {
       name: 'offerValue',
       type: 'text',
@@ -78,7 +76,6 @@ export const Banners: CollectionConfig = {
       type: 'text',
     },
 
-    // Segundo botón opcional
     {
       name: 'secondButtonText',
       type: 'text',

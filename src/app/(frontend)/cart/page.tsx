@@ -1,5 +1,5 @@
 'use client'
-import Link from 'next/link'
+
 import './cart.css'
 import { useCart } from '@/context/CartContext'
 import { CartItems } from '@/components/ShoppingCart/CartItems/CartItems'
@@ -12,8 +12,8 @@ const Cart = () => {
   return (
     <main>
       <section className="page-head">
-        <nav className="breadcrumb">
-          <Link href="/">Inicio</Link> / <span>Carrito</span>
+        <nav className="nav-cart">
+          <a href="/">Inicio</a> / <span>Carrito</span>
         </nav>
 
         <h1 className="page-title">Tu carrito</h1>

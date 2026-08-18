@@ -84,21 +84,15 @@
     height: 44px;
 }
 
-.qty button
- {
+
+
+.qtybutton {
     width: 42px;
     height: 44px;
     font-size: 1.2rem;
     color: var(--teal);
 }
 
-.qty button {
-    width: 42px;
-    height: 44px;
-    font-size: 1.2rem;
-    color: var(--teal);
-}
-
-.qty button:hover{
-  background-color: #23c3ce;
+.qtybutton:hover{
+  background: var(--light);
 }

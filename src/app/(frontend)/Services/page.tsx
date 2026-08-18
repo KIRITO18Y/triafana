@@ -2,7 +2,7 @@ import './ServicesPage.css'
 
 const ServicesPage = () => {
   return (
-    <div>
+    <div className="service-contianer">
       <div className="services-header">
         <section className="page-head">
           <nav className="breadcrumb">
@@ -143,7 +143,7 @@ const ServicesPage = () => {
         <section className="section-promo">
           <div className="promo">
             <div>
-              <span className="eyebrow">¿Listo para crecer?</span>
+              <span className="service-eyebrow">¿Listo para crecer?</span>
               <h2>Cuéntanos tu proyecto</h2>
               <p>
                 Agenda una asesoría gratuita y diseñemos juntos la mejor estrategia para tu marca.

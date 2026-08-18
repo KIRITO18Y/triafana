@@ -63,10 +63,12 @@ export type SupportedTimezones =
 
 export interface Config {
   auth: {
+    customers: CustomerAuthOperations;
     users: UserAuthOperations;
   };
   blocks: {};
   collections: {
+    customers: Customer;
     users: User;
     banners: Banner;
     media: Media;
@@ -78,6 +80,7 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
+    customers: CustomersSelect<false> | CustomersSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     banners: BannersSelect<false> | BannersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -97,10 +100,28 @@ export interface Config {
   widgets: {
     collections: CollectionsWidget;
   };
-  user: User;
+  user: Customer | User;
   jobs: {
     tasks: unknown;
     workflows: unknown;
+  };
+}
+export interface CustomerAuthOperations {
+  forgotPassword: {
+    email: string;
+    password: string;
+  };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
   };
 }
 export interface UserAuthOperations {
@@ -120,6 +141,34 @@ export interface UserAuthOperations {
     email: string;
     password: string;
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "customers".
+ */
+export interface Customer {
+  id: number;
+  nombre: string;
+  apellido: string;
+  telefono?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+  collection: 'customers';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -228,6 +277,10 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
+        relationTo: 'customers';
+        value: number | Customer;
+      } | null)
+    | ({
         relationTo: 'users';
         value: number | User;
       } | null)
@@ -244,10 +297,15 @@ export interface PayloadLockedDocument {
         value: number | Product;
       } | null);
   globalSlug?: string | null;
-  user: {
-    relationTo: 'users';
-    value: number | User;
-  };
+  user:
+    | {
+        relationTo: 'customers';
+        value: number | Customer;
+      }
+    | {
+        relationTo: 'users';
+        value: number | User;
+      };
   updatedAt: string;
   createdAt: string;
 }
@@ -257,10 +315,15 @@ export interface PayloadLockedDocument {
  */
 export interface PayloadPreference {
   id: number;
-  user: {
-    relationTo: 'users';
-    value: number | User;
-  };
+  user:
+    | {
+        relationTo: 'customers';
+        value: number | Customer;
+      }
+    | {
+        relationTo: 'users';
+        value: number | User;
+      };
   key?: string | null;
   value?:
     | {
@@ -284,6 +347,31 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "customers_select".
+ */
+export interface CustomersSelect<T extends boolean = true> {
+  nombre?: T;
+  apellido?: T;
+  telefono?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

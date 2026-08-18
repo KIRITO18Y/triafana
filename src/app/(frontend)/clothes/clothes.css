@@ -84,10 +84,17 @@
   gap: 8px;
   align-items: center;
   flex-wrap: wrap;
+  
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: var(--teal);
+
 }
 
 .breadcrumb a:hover {
-  color: var(--teal);
+  color: var(--coral);
 }
 
 .breadcrumb span {

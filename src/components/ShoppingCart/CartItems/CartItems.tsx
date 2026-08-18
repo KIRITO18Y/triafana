@@ -1,8 +1,6 @@
 'use client'
-
 import './cartItems.css'
 import { useCart } from '@/context/CartContext'
-
 export type CartItem = {
   id: number
   name: string
@@ -24,16 +22,17 @@ export const CartItems = () => {
           <div className="thumb">
             <img src={typeof item.image === 'string' ? item.image : (item.image?.url ?? '')} />
           </div>
+
           <div>
             <span className="cat">tecnologia</span>
             <h4>{item.name}</h4>
             <div className="qty">
-              <button type="button" onClick={() => decreaseQuantity(item.id)}>
+              <button className="qtybutton" type="button" onClick={() => decreaseQuantity(item.id)}>
                 −
               </button>
 
-              <input type="text" value={item.quantity} aria-label="Cantidad" className="" />
-              <button type="button" onClick={() => increaseQuantity(item.id)}>
+              <input type="text" value={item.quantity} aria-label="Cantidad" />
+              <button className="qtybutton" type="button" onClick={() => increaseQuantity(item.id)}>
                 +
               </button>
             </div>

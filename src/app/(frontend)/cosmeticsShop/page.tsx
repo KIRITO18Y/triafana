@@ -2,8 +2,17 @@ import './cosmeticsShop.css'
 import Filters from '@/components/Filters/Filters'
 import { ShopGrid } from '@/components/ShopGrid/ShopGrid'
 import CatalogMenu from '@/components/CategoryMenu/CatalogMenu'
+import { promises } from 'dns'
 
-const CosmeticsShoppage = () => {
+type Props = {
+  searchParams: Promise<{
+    sort?: string
+  }>
+}
+
+export default async function CosmeticsShoppage({ searchParams }: Props) {
+  const params = await searchParams
+
   return (
     <div className="CosmeticsContainer">
       <section className="page-head">
@@ -20,11 +29,9 @@ const CosmeticsShoppage = () => {
       <section className="shop-layout">
         <Filters />
         <div>
-          <ShopGrid category="cosmetiqueria" />
+          <ShopGrid category="cosmetiqueria" sort={params.sort} />
         </div>
       </section>
     </div>
   )
 }
-
-export default CosmeticsShoppage

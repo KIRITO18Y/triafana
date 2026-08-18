@@ -1,0 +1,147 @@
+.auth-form {
+  padding: clamp(32px, 5vw, 56px);
+  background: var(--glass-strong);
+  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: blur(var(--blur));
+}
+
+.login-head {
+  padding-top: clamp(28px, 4vw, 44px);
+  margin-bottom: 40px;
+}
+
+.breadcrumb {
+  font-size: .85rem;
+  color: var(--muted);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--teal);
+}
+
+.breadcrumb span {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.breadcrumb-link{
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 6px;
+  background: var(--light);
+  padding: 5px;
+  border-radius: 999px;
+  margin-bottom: 26px;
+}
+
+.auth-tabs button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.auth-tabs button.is-active {
+  background: #fff;
+  color: var(--teal);
+  box-shadow: var(--shadow-sm);
+}
+
+.auth-form .field {
+  margin-bottom: 16px;
+}
+
+.auth-form .field {
+    margin-bottom: 16px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field input, 
+.field select, 
+.field textarea {
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--ink);
+    transition: all .15s ease;
+}
+
+input, select, textarea {
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.filter-check{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.filter-opt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    font-size: .92rem;
+    color: var(--muted);
+    cursor: pointer;
+}
+
+.filter-opt input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--teal);
+}
+
+.filter-check a {
+  font-size: .88rem;
+  color: var(--teal);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.p-conexion{
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+  color: #b6b6b6;
+}
+
+.auth-aside .benefits li {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: .95rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}

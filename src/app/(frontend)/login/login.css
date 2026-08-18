@@ -1,0 +1,17 @@
+.login-container  {
+    width: 100%;
+    max-width: var(--maxw);
+    padding-bottom: 50px;
+    padding-inline: var(--gutter);
+    margin-inline: auto;
+}
+.auth-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--glass-border);
+}
+
