@@ -1,3 +1,10 @@
+.ProductDetaill {
+    width: 100%;
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}
+
 .nav-breadcrumb {
     display: flex;
     gap: 5px;
@@ -29,31 +36,34 @@
 }
 
 .container-img {
+    width: 100%;
     aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
     border-radius: var(--r-lg);
-    display: grid;
-    place-items: center;
-    font-size: 7rem;
     background: linear-gradient(160deg, #fff, var(--light));
     border: 1px solid var(--glass-border);
     box-shadow: var(--shadow);
-
 }
 
 .detail-img {
-    padding: 20px;
-    width: 470px;
-    height: 420px;
-    mix-blend-mode: multiply;
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    border-radius: 20px;
 }
 
 
 .pdp-info {
     display: flex;
     width: 100%;
-    height: auto;
     flex-direction: column;
-
+    min-width: 0;
 }
 
 .cat {
@@ -243,6 +253,7 @@ h3 {
 }
 
 
+
 .detail-eyebrow {
     display: inline-flex;
     align-items: center;
@@ -269,7 +280,85 @@ h3 {
 }
 
 
+.detaill-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 100%;
+    margin-top: 25px;
+}
+
+
 .no-products {
     font-size: 13px;
     color: #888;
+}
+
+@media (max-width: 900px) {
+
+    .container-detail {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .container-img {
+        width: 100%;
+        max-width: 650px;
+        margin: 0 auto;
+    }
+
+    .pdp-info {
+        width: 100%;
+    }
+
+    .description-section {
+        grid-column: auto;
+    }
+
+    .cols-3 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .nav-breadcrumb {
+        padding: 25px 0;
+        margin-bottom: 10px;
+    }
+
+    .container-detail {
+        gap: 25px;
+    }
+
+    .container-img {
+        border-radius: var(--r);
+    }
+
+    .detail-img {
+        border-radius: var(--r);
+    }
+
+    .btn-container {
+        flex-direction: column;
+    }
+
+    .btn-cart,
+    .btn-buy {
+        width: 100%;
+        text-align: center;
+    }
+
+    .detail-description {
+        padding: 20px;
+    }
+
+    .cols-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .detaill-grid{
+        grid-template-columns: 1fr;
+
+    }
 }

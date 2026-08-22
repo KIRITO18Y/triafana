@@ -46,6 +46,27 @@
 
 }
 
+.btn-glass-strong {
+    background: var(--glass-strong);
+    color: var(--teal);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+
+  
+}
+
+.btn-glass-strong:hover {
+    color: var(--coral);
+    transform: translateY(-3px);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
 .slide-copy {
     max-width: 570px;
 }

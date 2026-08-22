@@ -39,15 +39,16 @@ export const Banners: CollectionConfig = {
       name: 'offerValue',
       type: 'text',
     },
+
     {
       name: 'price',
       type: 'text',
     },
 
+    // PRIMER BOTÓN
     {
       name: 'buttonStyle',
       type: 'select',
-
       options: [
         {
           label: 'Coral',
@@ -59,10 +60,9 @@ export const Banners: CollectionConfig = {
         },
         {
           label: 'Blanco',
-          value: 'btn-ghost',
+          value: 'btn-glass',
         },
       ],
-
       defaultValue: 'btn-primary',
     },
 
@@ -76,6 +76,7 @@ export const Banners: CollectionConfig = {
       type: 'text',
     },
 
+    // SEGUNDO BOTÓN
     {
       name: 'secondButtonText',
       type: 'text',
@@ -84,6 +85,26 @@ export const Banners: CollectionConfig = {
     {
       name: 'secondButtonLink',
       type: 'text',
+    },
+
+    {
+      name: 'secondButtonStyle',
+      type: 'select',
+      options: [
+        {
+          label: 'Coral',
+          value: 'btn-primary',
+        },
+        {
+          label: 'Teal',
+          value: 'btn-teal',
+        },
+        {
+          label: 'Cristal',
+          value: 'btn-glass-strong',
+        },
+      ],
+      defaultValue: 'btn-glass-strong',
     },
 
     {

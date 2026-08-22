@@ -170,6 +170,8 @@ body::after {
     overflow-x: auto;
   }
 
+  
+
   .promo {
     grid-template-columns: 1fr;
   }

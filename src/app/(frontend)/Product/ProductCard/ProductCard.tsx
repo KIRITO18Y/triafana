@@ -1,10 +1,14 @@
 'use client'
 import './ProductCard.css'
-import { faHeart } from '@fortawesome/free-regular-svg-icons'
+import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons'
+import { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+
 import { useCart } from '@/context/CartContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+
 type Props = {
   product: any
 }
@@ -13,25 +17,39 @@ export default function ProductCard({ product }: Props) {
   const { addToCart } = useCart()
   const router = useRouter()
 
+  const [isFavorite, setIsFavorite] = useState(false)
+
   const formatPrice = (price: number) => {
     return `$${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+  }
+
+  const toggleFavorite = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
+    setIsFavorite((prev) => !prev)
   }
 
   return (
     <div className="product-card" onClick={() => router.push(`/Product/${product.id}`)}>
       <div className="product-image">
-        <img src={product.image?.url || '/placeholder.png'} alt={product.name} />
-        <button
-          type="button"
-          className="link-favor"
-          onClick={(e) => {
-            e.stopPropagation()
-          }}
-        >
-          <FontAwesomeIcon icon={faHeart} className="icon-fav" />
-        </button>
+        <img
+          src={product.image?.url || '/placeholder.png'}
+          alt={product.name || 'Producto'}
+          className="img-prd"
+        />
         {product.featured && <span className="badge">Destacado</span>}
-        <button className="fav" onClick={(e) => e.stopPropagation()} />
+        <div className="btn-fav">
+          <button
+            type="button"
+            className={`link-favor ${isFavorite ? 'is-favorite' : ''}`}
+            onClick={toggleFavorite}
+            aria-label={isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'}
+          >
+            <FontAwesomeIcon
+              icon={isFavorite ? faHeartSolid : faHeartRegular}
+              className="icon-fav"
+            />
+          </button>
+        </div>
       </div>
 
       <div className="product-info">
@@ -66,6 +84,7 @@ export default function ProductCard({ product }: Props) {
               className="price-btn"
               onClick={(e) => {
                 e.stopPropagation()
+
                 addToCart({
                   id: product.id,
                   name: product.name,
@@ -73,6 +92,7 @@ export default function ProductCard({ product }: Props) {
                   image: product.image?.url || '',
                 })
               }}
+              aria-label="Agregar al carrito"
             >
               <FontAwesomeIcon icon={faPlus} />
             </button>

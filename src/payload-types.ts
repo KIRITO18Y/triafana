@@ -73,6 +73,7 @@ export interface Config {
     banners: Banner;
     media: Media;
     products: Product;
+    subcategories: Subcategory;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -85,6 +86,7 @@ export interface Config {
     banners: BannersSelect<false> | BannersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
+    subcategories: SubcategoriesSelect<false> | SubcategoriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -208,11 +210,12 @@ export interface Banner {
   offerTitle?: string | null;
   offerValue?: string | null;
   price?: string | null;
-  buttonStyle?: ('btn-primary' | 'btn-teal' | 'btn-ghost') | null;
+  buttonStyle?: ('btn-primary' | 'btn-teal' | 'btn-glass') | null;
   buttonText?: string | null;
   buttonLink?: string | null;
   secondButtonText?: string | null;
   secondButtonLink?: string | null;
+  secondButtonStyle?: ('btn-primary' | 'btn-teal' | 'btn-glass-strong') | null;
   image: number | Media;
   updatedAt: string;
   createdAt: string;
@@ -245,10 +248,23 @@ export interface Product {
   name: string;
   price: string;
   category: 'tecnologia' | 'cosmetiqueria' | 'ropa';
+  subcategory: number | Subcategory;
   image: number | Media;
   discount?: number | null;
   oldPrice?: string | null;
   featured?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subcategories".
+ */
+export interface Subcategory {
+  id: number;
+  name: string;
+  slug: string;
+  category: 'tecnologia' | 'cosmetiqueria' | 'ropa';
   updatedAt: string;
   createdAt: string;
 }
@@ -295,6 +311,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'products';
         value: number | Product;
+      } | null)
+    | ({
+        relationTo: 'subcategories';
+        value: number | Subcategory;
       } | null);
   globalSlug?: string | null;
   user:
@@ -412,6 +432,7 @@ export interface BannersSelect<T extends boolean = true> {
   buttonLink?: T;
   secondButtonText?: T;
   secondButtonLink?: T;
+  secondButtonStyle?: T;
   image?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -442,10 +463,22 @@ export interface ProductsSelect<T extends boolean = true> {
   name?: T;
   price?: T;
   category?: T;
+  subcategory?: T;
   image?: T;
   discount?: T;
   oldPrice?: T;
   featured?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subcategories_select".
+ */
+export interface SubcategoriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  category?: T;
   updatedAt?: T;
   createdAt?: T;
 }

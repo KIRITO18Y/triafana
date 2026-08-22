@@ -1,3 +1,5 @@
+import './bannerCarrusel.css'
+
 type Props = {
   data: any
 }
@@ -27,7 +29,10 @@ export const Slide = ({ data }: Props) => {
               {data.buttonText}
             </a>
             {data.secondButtonText && (
-              <a href={data.secondButtonLink || '#'} className="btn btn-ghost">
+              <a
+                href={data.secondButtonLink || '#'}
+                className={`btn ${data.secondButtonStyle || 'btn-glass-strong'}`}
+              >
                 {data.secondButtonText}
               </a>
             )}

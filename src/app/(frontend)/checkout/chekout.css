@@ -47,8 +47,8 @@
   width: 28px;
   height: 28px;
   border-radius: 999px;
-  background: #e5e7eb; /* Gris */
-  color: #6b7280;      /* Gris oscuro */
+  background: #e5e7eb; 
+  color: #6b7280;      
   display: grid;
   place-items: center;
   font-size: .82rem;
@@ -77,6 +77,31 @@
 
 .step:last-child::after {
   display: none;
+}
+
+
+.checkoutBadge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .03em;
+}
+
+.badge-coral {
+  background: var(--coral);
+  color: #fff;
+}
+
+.badge-cyan {
+  background: var(--cyan);
+  color: var(--teal);
+}
+
+.badge-cream {
+  background: var(--cream);
+  color: #7a5b2a;
 }
 
 .form-card {

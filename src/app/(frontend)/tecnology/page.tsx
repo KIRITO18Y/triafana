@@ -27,9 +27,8 @@ export default async function TecnologyPage({ searchParams }: Props) {
         <CatalogMenu active="tecnologia" />
       </div>
 
-      <section className="shop-layout">
+      <section className="tecnology-shop">
         <Filters />
-
         <div>
           <ShopGrid category="tecnologia" sort={params.sort} />
         </div>

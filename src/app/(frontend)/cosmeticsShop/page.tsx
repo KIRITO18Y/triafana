@@ -26,6 +26,7 @@ export default async function CosmeticsShoppage({ searchParams }: Props) {
       <div className="chip-row">
         <CatalogMenu active={'cosmetiqueria'} />
       </div>
+
       <section className="Cosmetics-shop">
         <Filters />
         <div>
