@@ -17,11 +17,13 @@
 .nav-breadcrumb a {
     color: inherit;
     text-decoration: none;
+    text-transform: capitalize;
 }
 
 .nav-breadcrumb a:hover{
     color: var(--teal);
 }
+
 
 .nav-breadcrumb span {
     color: var(--ink);
@@ -66,10 +68,11 @@
     min-width: 0;
 }
 
-.cat {
+.name-category {
     font-size: 20px;
     font-weight: 700;
     color: var(--teal-aqua);
+    text-transform: uppercase;
 }
 
 .p-name {

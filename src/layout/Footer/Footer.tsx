@@ -62,12 +62,9 @@ export const Footer = () => {
 
         <div>
           <h4>Recibe ofertas</h4>
-
           <p>Suscríbete y entérate de promociones y lanzamientos.</p>
-
           <form className="newsletter">
             <input type="email" placeholder="tu@correo.com" aria-label="Correo" />
-
             <button className="btn btn-primary btn-sm" type="submit">
               Unirme
             </button>

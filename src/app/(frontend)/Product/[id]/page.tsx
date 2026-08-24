@@ -63,7 +63,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
         </div>
 
         <div className="pdp-info">
-          <span className="cat">{product.category}</span>
+          <span className="name-category">{product.category}</span>
           <h1 className="p-name"> {product.name}</h1>
           <div className="detaill-cali">
             <div className="deateial-estre">★★★★★</div>
@@ -87,6 +87,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
           <div className="btn-container">
             <ProductActions product={product} />
           </div>
+
           <div className="text-detail">
             <div className="detail-shipping">
               <FontAwesomeIcon icon={faTruck} className="detail-icon" />
