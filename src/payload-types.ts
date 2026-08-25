@@ -150,9 +150,9 @@ export interface UserAuthOperations {
  */
 export interface Customer {
   id: number;
-  nombre: string;
-  apellido: string;
-  telefono?: string | null;
+  firstName: string;
+  lastName: string;
+  phone?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -373,9 +373,9 @@ export interface PayloadMigration {
  * via the `definition` "customers_select".
  */
 export interface CustomersSelect<T extends boolean = true> {
-  nombre?: T;
-  apellido?: T;
-  telefono?: T;
+  firstName?: T;
+  lastName?: T;
+  phone?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

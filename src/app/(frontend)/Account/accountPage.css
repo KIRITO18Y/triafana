@@ -14,7 +14,6 @@
   flex-wrap: wrap;
 }
 
-
 .account-a{
      text-decoration: none;
     color: var(--muted);
@@ -36,6 +35,21 @@
     max-width: 56ch;
 }
 
+.page-head{
+    padding-top: clamp(28px, 4vw, 44px);
+}
+
+.accountPage-title{
+    display: block;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+    text-transform: capitalize;
+    text-transform: uppercase;
+
+}
+
 .account-layout{
     display: grid;
     grid-template-columns: 260px 1fr;
@@ -53,3 +67,4 @@
     backdrop-filter: blur(var(--blur));
     box-shadow: var(--shadow-sm);
 }
+

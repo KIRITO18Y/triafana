@@ -19,11 +19,12 @@ export default async function AccountLayout({ children }: { children: React.Reac
   }
 
   const customer = user as typeof user & {
-    nombre?: string
-    apellido?: string
+    firstName?: string
+    lastName?: string
+    phone?: string
   }
 
-  const nombre = customer.nombre || customer.email
+  const nombre = customer.firstName || ''
 
   return (
     <div className="account-container">
@@ -37,7 +38,7 @@ export default async function AccountLayout({ children }: { children: React.Reac
       </section>
 
       <div className="page-head">
-        <h1 className="page-title">Hola, {nombre} 👋</h1>
+        <h1 className="accountPage-title ">Hola, {nombre}👋</h1>
         <p className="lead">Gestiona tus compras, datos y preferencias.</p>
       </div>
 
