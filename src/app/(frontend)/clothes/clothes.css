@@ -107,10 +107,12 @@
   margin: 12px 0 6px;
 }
 
-.shop-layout {
+.clothes-shop {
   display: grid;
   grid-template-columns: 268px 1fr;
   gap: 28px;
+   padding-top: clamp(10px, 4vw, 44px);
+  margin-bottom: 20px;
   align-items: start;
 }
 

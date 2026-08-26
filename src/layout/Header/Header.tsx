@@ -36,62 +36,67 @@ export const Header = () => {
   }, [])
 
   return (
-    <div className={`container-header ${scroll ? 'header-scroll' : ''}`}>
-      <div className="nav-shell">
-        <Logo className="logo" width={40} height={40} />
+    <div className="container-header">
+      <div className={`header ${scroll ? 'header-scroll' : ''}`}>
+        <div className="nav-shell">
+          <Logo className="logo" width={40} height={40} />
 
-        <Link href="/" className="title-link">
-          <h3 className="trifana-title">TRIAFANA</h3>
-        </Link>
-
-        <nav className="main-nav">
-          <Link href="/" className={`nav-link ${pathname === '/' ? 'active' : ''}`}>
-            Inicio
+          <Link href="/" className="title-link">
+            <b>TRIAFANA</b>
           </Link>
 
-          <Link
-            href="/tecnology"
-            className={`nav-link ${pathname === '/tecnology' ? 'active' : ''}`}
-          >
-            Tecnologia
-          </Link>
+          <nav className="nav">
+            <Link href="/" className={`nav-link ${pathname === '/' ? 'active' : ''}`}>
+              Inicio
+            </Link>
 
-          <Link
-            href="/cosmeticsShop"
-            className={`nav-link ${pathname === '/cosmeticsShop' ? 'active' : ''}`}
-          >
-            Cosmetiqueria
-          </Link>
+            <Link
+              href="/tecnology"
+              className={`nav-link ${pathname === '/tecnology' ? 'active' : ''}`}
+            >
+              Tecnologia
+            </Link>
 
-          <Link href="/clothes" className={`nav-link ${pathname === '/clothes' ? 'active' : ''}`}>
-            Ropa
-          </Link>
+            <Link
+              href="/cosmeticsShop"
+              className={`nav-link ${pathname === '/cosmeticsShop' ? 'active' : ''}`}
+            >
+              Cosmetiqueria
+            </Link>
 
-          <Link href="/Services" className={`nav-link ${pathname === '/Services' ? 'active' : ''}`}>
-            Servicios
-          </Link>
-        </nav>
+            <Link href="/clothes" className={`nav-link ${pathname === '/clothes' ? 'active' : ''}`}>
+              Ropa
+            </Link>
 
-        <form className="nav-search">
-          <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
-          <input type="text" placeholder="Buscar productos, marcas" />
-        </form>
+            <Link
+              href="/Services"
+              className={`nav-link ${pathname === '/Services' ? 'active' : ''}`}
+            >
+              Servicios
+            </Link>
+          </nav>
 
-        <div className="nav-actions">
-          <Link href={''} className="icon-btn">
-            <FontAwesomeIcon icon={faHeart} />
-          </Link>
+          <form className="nav-search">
+            <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
+            <input type="text" placeholder="Buscar productos, marcas" />
+          </form>
 
-          <Link href={'/cart'} className="icon-btn">
-            <FontAwesomeIcon icon={faCartShopping} />
-            {totalItems > 0 && (
-              <div className="count">
-                <span className="countToltal">{totalItems}</span>
-              </div>
-            )}
-          </Link>
+          <div className="nav-actions">
+            <Link href={''} className="icon-btn">
+              <FontAwesomeIcon icon={faHeart} />
+            </Link>
 
-          <AvatarLink />
+            <Link href={'/cart'} className="icon-btn">
+              <FontAwesomeIcon icon={faCartShopping} />
+              {totalItems > 0 && (
+                <div className="count">
+                  <span className="countToltal">{totalItems}</span>
+                </div>
+              )}
+            </Link>
+
+            <AvatarLink />
+          </div>
         </div>
       </div>
     </div>

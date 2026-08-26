@@ -26,23 +26,28 @@ export const Products: CollectionConfig = {
       name: 'category',
       type: 'select',
       required: true,
-
       options: [
         {
           label: 'Tecnología',
           value: 'tecnologia',
         },
-
         {
           label: 'Cosmetiquería',
           value: 'cosmetiqueria',
         },
-
         {
           label: 'Ropa',
           value: 'ropa',
         },
       ],
+    },
+
+    {
+      name: 'subcategory',
+      type: 'relationship',
+      relationTo: 'subcategories',
+      required: true,
+      label: 'Subcategoría',
     },
 
     {

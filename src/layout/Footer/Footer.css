@@ -50,9 +50,6 @@
   max-width: 34ch;
 }
 
-
-
-
 .newsletter {
   display: flex;
   gap: 8px;
@@ -66,6 +63,13 @@
   border: 1px solid var(--line);
   background: #fff;
 }
+
+.newsletter input:focus{
+  outline: none;
+  border-color: var(--teal-aqua);
+  box-shadow: 0 0 0 3px rgba(72, 169, 179, .2);
+}
+
 
 .footer-bottom {
   max-width: var(--maxw);

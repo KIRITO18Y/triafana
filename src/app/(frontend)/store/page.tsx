@@ -27,7 +27,7 @@ export default async function StorePage({ searchParams }: Props) {
         <CatalogMenu active="todo" />
       </div>
 
-      <section className="shop-layout">
+      <section className="store-shop">
         <Filters />
 
         <div>

@@ -44,9 +44,10 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
   }
 
   return (
-    <main>
+    <div className="ProductDetaill">
       <nav className="nav-breadcrumb">
-        <a href="/">Inicio</a>/<a href="/clothes">{product.category}</a>/<span>{product.name}</span>
+        <a href="/">Inicio</a>/<a href="/tecnology">{product.category}</a>/
+        <span>{product.name}</span>
       </nav>
       <div className="container-detail">
         <div className="container-img">
@@ -62,7 +63,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
         </div>
 
         <div className="pdp-info">
-          <span className="cat">{product.category}</span>
+          <span className="name-category">{product.category}</span>
           <h1 className="p-name"> {product.name}</h1>
           <div className="detaill-cali">
             <div className="deateial-estre">★★★★★</div>
@@ -86,6 +87,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
           <div className="btn-container">
             <ProductActions product={product} />
           </div>
+
           <div className="text-detail">
             <div className="detail-shipping">
               <FontAwesomeIcon icon={faTruck} className="detail-icon" />
@@ -129,26 +131,25 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
             </div>
           </div>
         </section>
-
-        <section className="section-related">
-          <div className="section-related-header">
-            <div>
-              <span className="detail-eyebrow">También te puede gustar</span>
-              <h2>Productos relacionados</h2>
-            </div>
-            <div></div>
-          </div>
-          <div className="product-grid">
-            {relatedProducts.docs.length > 0 ? (
-              relatedProducts.docs.map((relatedProduct) => (
-                <ProductCard key={relatedProduct.id} product={relatedProduct} />
-              ))
-            ) : (
-              <p className="no-products">No hay productos relacionados.</p>
-            )}
-          </div>
-        </section>
       </div>
-    </main>
+      <section className="section-related">
+        <div className="section-related-header">
+          <div>
+            <span className="detail-eyebrow">También te puede gustar</span>
+            <h2>Productos relacionados</h2>
+          </div>
+          <div></div>
+        </div>
+        <div className="detaill-grid">
+          {relatedProducts.docs.length > 0 ? (
+            relatedProducts.docs.map((relatedProduct) => (
+              <ProductCard key={relatedProduct.id} product={relatedProduct} />
+            ))
+          ) : (
+            <p className="no-products">No hay productos relacionados.</p>
+          )}
+        </div>
+      </section>
+    </div>
   )
 }

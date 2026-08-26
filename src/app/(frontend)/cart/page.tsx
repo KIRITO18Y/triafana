@@ -1,5 +1,4 @@
 'use client'
-
 import './cart.css'
 import { useCart } from '@/context/CartContext'
 import { CartItems } from '@/components/ShoppingCart/CartItems/CartItems'
@@ -10,12 +9,11 @@ const Cart = () => {
   const { cart } = useCart()
 
   return (
-    <main>
+    <div className="cart-container">
       <section className="page-head">
         <nav className="nav-cart">
           <a href="/">Inicio</a> / <span>Carrito</span>
         </nav>
-
         <h1 className="page-title">Tu carrito</h1>
       </section>
 
@@ -31,7 +29,7 @@ const Cart = () => {
           )}
         </div>
       </section>
-    </main>
+    </div>
   )
 }
 

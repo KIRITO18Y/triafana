@@ -40,14 +40,14 @@ export const AcccountNav = () => {
 
   return (
     <aside>
-      <Link href="/account" className={`nav-link ${pathname === '/account' ? 'active' : ''}`}>
+      <Link href="/account" className={`account-nv ${pathname === '/account' ? 'active' : ''}`}>
         <FontAwesomeIcon icon={faArrowsToCircle} />
         Resumen
       </Link>
 
       <Link
         href="/account/buysPage"
-        className={`nav-link ${pathname === '/account/buysPage' ? 'active' : ''}`}
+        className={`account-nv ${pathname === '/account/buysPage' ? 'active' : ''}`}
       >
         <FontAwesomeIcon icon={faCreditCard} />
         Mis compras
@@ -55,7 +55,7 @@ export const AcccountNav = () => {
 
       <Link
         href="/account/favorites"
-        className={`nav-link ${pathname === '/account/favorites' ? 'active' : ''}`}
+        className={`account-nv ${pathname === '/account/favorites' ? 'active' : ''}`}
       >
         <FontAwesomeIcon icon={faHeart} />
         Favoritos
@@ -63,7 +63,7 @@ export const AcccountNav = () => {
 
       <Link
         href="/account/dataPage"
-        className={`nav-link ${pathname === '/account/dataPage' ? 'active' : ''}`}
+        className={`account-nv ${pathname === '/account/dataPage' ? 'active' : ''}`}
       >
         <FontAwesomeIcon icon={faUser} />
         Mis datos
@@ -71,13 +71,13 @@ export const AcccountNav = () => {
 
       <Link
         href="/account/preferences"
-        className={`nav-link ${pathname === '/account/preferences' ? 'active' : ''}`}
+        className={`account-nv ${pathname === '/account/preferences' ? 'active' : ''}`}
       >
         <FontAwesomeIcon icon={faGear} />
         Preferencias
       </Link>
 
-      <button type="button" className="nav-link" style={{ color: 'red' }} onClick={handleLogout}>
+      <button className="account-btn" style={{ color: 'red' }} onClick={handleLogout}>
         <FontAwesomeIcon icon={faArrowRightFromBracket} className="btn-icon" />
         Cerrar sesión
       </button>

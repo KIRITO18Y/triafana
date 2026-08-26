@@ -12,9 +12,10 @@ export const LoginForm = () => {
   const [error, setError] = useState('')
 
   const [form, setForm] = useState({
-    nombre: '',
-    apellido: '',
+    firstName: '',
+    lastName: '',
     email: '',
+    phone: '',
     password: '',
   })
 
@@ -27,12 +28,11 @@ export const LoginForm = () => {
     setError('')
   }
 
-  // =========================
-  // REGISTRAR USUARIO
-  // =========================
-
   const register = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    setLoading(true)
+    setError('')
 
     try {
       const res = await fetch('/api/customers', {
@@ -42,9 +42,10 @@ export const LoginForm = () => {
         },
         credentials: 'include',
         body: JSON.stringify({
-          nombre: form.nombre,
-          apellido: form.apellido,
+          firstName: form.firstName,
+          lastName: form.lastName,
           email: form.email,
+          phone: form.phone,
           password: form.password,
         }),
       })
@@ -57,19 +58,18 @@ export const LoginForm = () => {
         throw new Error(data?.errors?.[0]?.message || data?.message || 'No se pudo crear la cuenta')
       }
 
-      // Payload devuelve la sesión al crear el usuario
+      window.dispatchEvent(new Event('auth-change'))
+
       router.push('/account')
       router.refresh()
     } catch (error) {
       console.error('ERROR REGISTRO:', error)
 
-      alert(error instanceof Error ? error.message : 'Ocurrió un error al crear la cuenta')
+      setError(error instanceof Error ? error.message : 'Ocurrió un error al crear la cuenta')
+    } finally {
+      setLoading(false)
     }
   }
-
-  // =========================
-  // INICIAR SESIÓN
-  // =========================
 
   const login = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -97,12 +97,16 @@ export const LoginForm = () => {
           data?.errors?.[0]?.message || data?.message || 'Correo o contraseña incorrectos',
         )
       }
+
       setForm({
-        nombre: '',
-        apellido: '',
+        firstName: '',
+        lastName: '',
         email: '',
+        phone: '',
         password: '',
       })
+
+      window.dispatchEvent(new Event('auth-change'))
 
       router.push('/account')
       router.refresh()
@@ -139,8 +143,6 @@ export const LoginForm = () => {
             Crear cuenta
           </button>
         </div>
-
-        {/* ERROR */}
 
         {error && <div className="auth-error">{error}</div>}
 
@@ -192,10 +194,10 @@ export const LoginForm = () => {
                 <label>Nombre</label>
 
                 <input
-                  name="nombre"
+                  name="firstName"
                   type="text"
                   placeholder="Nombre"
-                  value={form.nombre}
+                  value={form.firstName}
                   onChange={handleChange}
                   required
                 />
@@ -205,10 +207,10 @@ export const LoginForm = () => {
                 <label>Apellido</label>
 
                 <input
-                  name="apellido"
+                  name="lastName"
                   type="text"
                   placeholder="Apellido"
-                  value={form.apellido}
+                  value={form.lastName}
                   onChange={handleChange}
                   required
                 />
@@ -217,7 +219,6 @@ export const LoginForm = () => {
 
             <div className="field">
               <label>Correo electrónico</label>
-
               <input
                 name="email"
                 type="email"
@@ -225,6 +226,18 @@ export const LoginForm = () => {
                 value={form.email}
                 onChange={handleChange}
                 required
+              />
+            </div>
+
+            <div className="field">
+              <label>Teléfono</label>
+
+              <input
+                name="phone"
+                type="tel"
+                placeholder="Teléfono"
+                value={form.phone}
+                onChange={handleChange}
               />
             </div>
 
@@ -244,7 +257,7 @@ export const LoginForm = () => {
 
             <label className="filter-opt">
               <input type="checkbox" required />
-              Acepto los términos y condiciones
+              Acepto los términos y la política de privacidad
             </label>
 
             <button type="submit" className="btn btn-primary btn-block btn-lg" disabled={loading}>

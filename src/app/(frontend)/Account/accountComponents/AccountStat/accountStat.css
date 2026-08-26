@@ -1,0 +1,29 @@
+
+.stat-tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 26px;
+}
+
+.stat-tile {
+    border-radius: var(--r);
+    padding: 22px;
+    background: var(--glass-strong);
+    border: 1px solid var(--glass-border);
+    -webkit-backdrop-filter: blur(var(--blur));
+    backdrop-filter: blur(var(--blur));
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-tile strong {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--teal);
+    display: block;
+}
+
+.stat-tile span {
+    color: var(--muted);
+    font-size: .85rem;
+}

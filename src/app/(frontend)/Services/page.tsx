@@ -1,4 +1,7 @@
 import './ServicesPage.css'
+import Link from 'next/link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBullhorn, faChartLine, faLaptopCode } from '@fortawesome/free-solid-svg-icons'
 
 const ServicesPage = () => {
   return (
@@ -6,23 +9,24 @@ const ServicesPage = () => {
       <div className="services-header">
         <section className="page-head">
           <nav className="breadcrumb">
-            <a href="/">Inicio</a>/<span>Servicios</span>
+            <Link href="/">Inicio</Link> / <span>Servicios</span>
           </nav>
         </section>
 
         <section className="hero">
           <div className="hero-card">
             <div className="hero-copy">
-              <span className="eyebrow">Servicios TRIAFANA</span>
+              <span className="eyebrowService">Servicios TRIAFANA</span>
               <h1>Impulsamos tu marca, no solo vendemos productos</h1>
               <p className="lead">
                 Combinamos diseño, contenido y datos para hacer crecer tu negocio digital. Medimos
                 resultados con Google Analytics.
               </p>
               <div className="hero-actions">
-                <a href="contacto.html" className="btn btn-primary btn-lg">
+                <Link href="/contacto" className="btn btn-primary btn-lg">
                   Solicitar cotización
-                </a>
+                </Link>
+
                 <a href="#servicios" className="btn btn-ghost btn-lg">
                   Ver servicios
                 </a>
@@ -35,17 +39,7 @@ const ServicesPage = () => {
           <div className="grid cols-3">
             <div className="service-card">
               <div className="ic">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <rect x="2" y="3" width="20" height="14" rx="2" />
-                  <path d="M8 21h8M12 17v4" />
-                </svg>
+                <FontAwesomeIcon icon={faLaptopCode} />
               </div>
               <h3>Diseño Web</h3>
               <p>
@@ -58,43 +52,27 @@ const ServicesPage = () => {
                 <li>✓ Panel de administración</li>
               </ul>
             </div>
+
             <div className="service-card">
               <div className="ic">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M3 11l18-7-7 18-2.5-7.5L3 11z" />
-                </svg>
+                <FontAwesomeIcon icon={faBullhorn} />
               </div>
               <h3>Social Media</h3>
               <p>
                 Gestión de redes, calendario de contenido y comunidad para conectar con tu
                 audiencia.
               </p>
+
               <ul className="services-list">
                 <li>✓ Estrategia de contenido</li>
                 <li>✓ Diseño de piezas</li>
                 <li>✓ Reportes mensuales</li>
               </ul>
             </div>
+
             <div className="service-card">
               <div className="ic">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M3 3v18h18" />
-                  <path d="M7 14l3-4 3 3 5-7" />
-                </svg>
+                <FontAwesomeIcon icon={faChartLine} />
               </div>
               <h3>Marketing</h3>
               <p>
@@ -112,26 +90,30 @@ const ServicesPage = () => {
         <section className="section">
           <div className="section-head">
             <div>
-              <span className="eyebrow">Cómo trabajamos</span>
+              <span className="eyebrowService">Cómo trabajamos</span>
               <h2>Un proceso claro y medible</h2>
             </div>
           </div>
+
           <div className="grid cols-4">
             <div className="info-card">
               <div className="ic">1</div>
               <h3>Diagnóstico</h3>
               <p>Entendemos tu marca, metas y audiencia.</p>
             </div>
+
             <div className="info-card">
               <div className="ic">2</div>
               <h3>Estrategia</h3>
               <p>Definimos plan, canales y KPIs.</p>
             </div>
+
             <div className="info-card">
               <div className="ic">3</div>
               <h3>Ejecución</h3>
               <p>Diseñamos, construimos y publicamos.</p>
             </div>
+
             <div className="info-card">
               <div className="ic">4</div>
               <h3>Medición</h3>
@@ -143,15 +125,15 @@ const ServicesPage = () => {
         <section className="section-promo">
           <div className="promo">
             <div>
-              <span className="service-eyebrow">¿Listo para crecer?</span>
+              <span className="promo-eyebrow">¿Listo para crecer?</span>
               <h2>Cuéntanos tu proyecto</h2>
               <p>
                 Agenda una asesoría gratuita y diseñemos juntos la mejor estrategia para tu marca.
               </p>
               <div className="actions">
-                <a href="contacto.html" className="btn btn-primary btn-lg">
+                <Link href="/contacto" className="btn btn-primary btn-lg">
                   Contactar ahora
-                </a>
+                </Link>
               </div>
             </div>
             <div className="icon-promo">🚀</div>

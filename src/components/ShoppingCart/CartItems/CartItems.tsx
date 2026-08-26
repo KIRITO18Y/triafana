@@ -31,7 +31,7 @@ export const CartItems = () => {
                 −
               </button>
 
-              <input type="text" value={item.quantity} aria-label="Cantidad" />
+              <input type="text" value={item.quantity} aria-label="Cantidad" readOnly />
               <button className="qtybutton" type="button" onClick={() => increaseQuantity(item.id)}>
                 +
               </button>

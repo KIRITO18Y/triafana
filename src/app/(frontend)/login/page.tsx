@@ -9,8 +9,8 @@ export default function LoginPage() {
   return (
     <div className="login-container">
       <section className="login-head">
-        <nav className="breadcrumb">
-          <a href="/" className="breadcrumb-link">
+        <nav className="nv-login">
+          <a href="/" className="login-link">
             Inicio
           </a>
           / <span>Mi cuenta</span>

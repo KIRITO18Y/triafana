@@ -84,9 +84,19 @@
     transition: all .15s ease;
 }
 
+
+
 input, select, textarea {
     font-family: inherit;
     font-size: 1rem;
+}
+
+
+
+.field input:focus {
+    outline: none;
+  border-color: var(--teal-aqua);
+  box-shadow: 0 0 0 3px rgba(72, 169, 179, .2);
 }
 
 .filter-check{
@@ -103,13 +113,16 @@ input, select, textarea {
     padding: 6px 0;
     font-size: .92rem;
     color: var(--muted);
-    cursor: pointer;
+    cursor: pointer; 
+    margin: 10px;
 }
 
 .filter-opt input {
     width: 18px;
     height: 18px;
     accent-color: var(--teal);
+
+   
 }
 
 .filter-check a {
@@ -117,6 +130,10 @@ input, select, textarea {
   color: var(--teal);
   font-weight: 600;
   text-decoration: none;
+}
+
+.filter-check a:hover{
+  color: var(--coral);
 }
 
 .p-conexion{
@@ -137,7 +154,6 @@ input, select, textarea {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
-  margin-bottom: 16px;
 }
 
 @media (max-width: 768px) {

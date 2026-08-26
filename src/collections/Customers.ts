@@ -14,17 +14,24 @@ export const Customers: CollectionConfig = {
 
   fields: [
     {
-      name: 'nombre',
+      name: 'firstName',
       type: 'text',
       required: true,
     },
     {
-      name: 'apellido',
+      name: 'lastName',
       type: 'text',
       required: true,
     },
+
     {
-      name: 'telefono',
+      name: 'email',
+      type: 'text',
+      required: true,
+    },
+
+    {
+      name: 'phone',
       type: 'text',
     },
   ],

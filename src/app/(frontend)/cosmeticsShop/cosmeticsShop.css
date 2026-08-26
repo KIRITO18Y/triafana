@@ -53,31 +53,6 @@ width: 100%;
   font-size: .85rem;
 }
 
-.badge {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: .72rem;
-  font-weight: 700;
-  letter-spacing: .03em;
-}
-
-.badge-coral {
-  background: var(--coral);
-  color: #fff;
-}
-
-.badge-cyan {
-  background: var(--cyan);
-  color: var(--teal);
-}
-
-.badge-cream {
-  background: var(--cream);
-  color: #7a5b2a;
-}
-
-
 .breadcrumb {
   font-size: .85rem;
   color: var(--muted);
@@ -101,11 +76,12 @@ width: 100%;
   margin: 12px 0 6px;
 }
 
-.shop-layout {
+.Cosmetics-shop {
   display: grid;
   grid-template-columns: 268px 1fr;
   gap: 28px;
    padding-top: clamp(10px, 4vw, 44px);
-  
+  margin-bottom: 20px;
+  align-items: start;
 }
 

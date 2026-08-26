@@ -1,11 +1,14 @@
 'use client'
+
 import './chekout.css'
 import { useCart } from '@/context/CartContext'
 import { useState } from 'react'
 
 const CheckoutPage = () => {
   const { cart } = useCart()
-  const subtotal = cart.reduce((tolal, item) => tolal + item.price * item.quantity, 0)
+
+  const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0)
+
   const [form, setForm] = useState({
     nombre: '',
     apellido: '',
@@ -14,6 +17,8 @@ const CheckoutPage = () => {
     direccion: '',
     ciudad: '',
     departamento: '',
+    codigoPostal: '',
+    indicaciones: '',
     tarjeta: '',
     nombreTarjeta: '',
     vencimiento: '',
@@ -34,12 +39,14 @@ const CheckoutPage = () => {
       [e.target.name]: e.target.value,
     })
   }
+
   return (
     <div className="checkout-container">
       <section className="page-head">
         <nav className="breadcrumb">
-          <a href="/">Inicio</a> / <a href="carrito.html">Carrito</a> / <span>Checkout</span>
+          <a href="/">Inicio</a> / <a href="/cart">Carrito</a> / <span>Checkout</span>
         </nav>
+
         <h1 className="page-title">Finalizar compra</h1>
       </section>
 
@@ -60,13 +67,17 @@ const CheckoutPage = () => {
       <section>
         <div className="checkout-layout">
           <form onSubmit={(e) => e.preventDefault()}>
+            {/* INFORMACIÓN DE CONTACTO */}
             <div className="form-card">
               <h3>
-                <span className="badge badge-cyan">1</span> Información de contacto
+                <span className="checkoutBadge badge-cyan">1</span>
+                Información de contacto
               </h3>
+
               <div className="form-grid">
                 <div className="field">
                   <label>Nombre</label>
+
                   <input
                     type="text"
                     name="nombre"
@@ -76,8 +87,10 @@ const CheckoutPage = () => {
                     required
                   />
                 </div>
+
                 <div className="field">
                   <label>Apellido</label>
+
                   <input
                     type="text"
                     name="apellido"
@@ -87,8 +100,10 @@ const CheckoutPage = () => {
                     required
                   />
                 </div>
+
                 <div className="field full">
                   <label>Correo electrónico</label>
+
                   <input
                     type="email"
                     name="correo"
@@ -98,27 +113,33 @@ const CheckoutPage = () => {
                     required
                   />
                 </div>
+
                 <div className="field full">
                   <label>Teléfono</label>
+
                   <input
                     type="tel"
                     name="telefono"
                     value={form.telefono}
                     onChange={handleChange}
-                    placeholder="Telefono"
+                    placeholder="Teléfono"
                     required
                   />
                 </div>
               </div>
             </div>
 
+            {/* DIRECCIÓN DE ENVÍO */}
             <div className="form-card">
               <h3>
-                <span className="badge badge-cyan">2</span> Dirección de envío
+                <span className="checkoutBadge badge-cyan">2</span>
+                Dirección de envío
               </h3>
+
               <div className="form-grid">
                 <div className="field full">
                   <label>Dirección</label>
+
                   <input
                     type="text"
                     name="direccion"
@@ -128,8 +149,10 @@ const CheckoutPage = () => {
                     required
                   />
                 </div>
+
                 <div className="field">
                   <label>Ciudad</label>
+
                   <input
                     type="text"
                     name="ciudad"
@@ -139,47 +162,80 @@ const CheckoutPage = () => {
                     required
                   />
                 </div>
+
                 <div className="field">
                   <label>Departamento</label>
-                  <select name="departamento" value={form.departamento} onChange={handleChange}>
+
+                  <select
+                    name="departamento"
+                    value={form.departamento}
+                    onChange={handleChange}
+                    required
+                  >
                     <option value="">Seleccione...</option>
-                    <option>Cundinamarca</option>
-                    <option>Antioquia</option>
-                    <option>Valle del Cauca</option>
-                    <option>Atlántico</option>
-                    <option>Santander</option>
+                    <option value="Cundinamarca">Cundinamarca</option>
+                    <option value="Antioquia">Antioquia</option>
+                    <option value="Valle del Cauca">Valle del Cauca</option>
+                    <option value="Atlántico">Atlántico</option>
+                    <option value="Santander">Santander</option>
                   </select>
                 </div>
+
                 <div className="field">
                   <label>Código postal</label>
-                  <input type="text" placeholder="110111" />
+
+                  <input
+                    type="text"
+                    name="codigoPostal"
+                    value={form.codigoPostal}
+                    onChange={handleChange}
+                    placeholder="110111"
+                  />
                 </div>
+
                 <div className="field">
                   <label>Indicaciones (opcional)</label>
-                  <input type="text" placeholder="Apto, torre…" />
+
+                  <input
+                    type="text"
+                    name="indicaciones"
+                    value={form.indicaciones}
+                    onChange={handleChange}
+                    placeholder="Apto, torre…"
+                  />
                 </div>
               </div>
             </div>
 
+            {/* MÉTODO DE PAGO */}
             <div className="form-card">
               <h3>
-                <span className="badge badge-cyan">3</span> Método de pago
+                <span className="checkoutBadge badge-cyan">3</span>
+                Método de pago
               </h3>
+
               <div className="pay-methods">
                 <div className="pay-opt is-active" data-pay="card">
-                  <span className="ic">💳</span>Tarjeta
+                  <span className="ic">💳</span>
+                  Tarjeta
                 </div>
+
                 <div className="pay-opt" data-pay="pse">
-                  <span className="ic">🏦</span>PSE
+                  <span className="ic">🏦</span>
+                  PSE
                 </div>
+
                 <div className="pay-opt" data-pay="cod">
-                  <span className="ic">📦</span>Contraentrega
+                  <span className="ic">📦</span>
+                  Contraentrega
                 </div>
               </div>
+
               <div id="card-fields">
                 <div className="form-grid">
                   <div className="field full">
                     <label>Número de tarjeta</label>
+
                     <input
                       type="text"
                       name="tarjeta"
@@ -189,8 +245,10 @@ const CheckoutPage = () => {
                       inputMode="numeric"
                     />
                   </div>
+
                   <div className="field full">
                     <label>Nombre en la tarjeta</label>
+
                     <input
                       type="text"
                       name="nombreTarjeta"
@@ -199,16 +257,34 @@ const CheckoutPage = () => {
                       placeholder="Nombre"
                     />
                   </div>
+
                   <div className="field">
                     <label>Vencimiento</label>
-                    <input type="text" placeholder="MM/AA" />
+
+                    <input
+                      type="text"
+                      name="vencimiento"
+                      value={form.vencimiento}
+                      onChange={handleChange}
+                      placeholder="MM/AA"
+                    />
                   </div>
+
                   <div className="field">
                     <label>CVV</label>
-                    <input type="text" placeholder="123" inputMode="numeric" />
+
+                    <input
+                      type="text"
+                      name="cvv"
+                      value={form.cvv}
+                      onChange={handleChange}
+                      placeholder="123"
+                      inputMode="numeric"
+                    />
                   </div>
                 </div>
               </div>
+
               <p className="datas">
                 <svg
                   viewBox="0 0 24 24"
@@ -216,9 +292,10 @@ const CheckoutPage = () => {
                   height="18"
                   fill="none"
                   stroke="var(--teal)"
-                  stroke-width="2"
+                  strokeWidth="2"
                 >
                   <rect x="3" y="11" width="18" height="11" rx="2" />
+
                   <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                 </svg>
                 Tus datos están protegidos con cifrado SSL. Pasarela de pagos integrada.
@@ -228,6 +305,7 @@ const CheckoutPage = () => {
 
           <aside className="summary">
             <h3>Tu pedido</h3>
+
             <div>
               {cart.map((summyCart) => (
                 <div key={summyCart.id} className="summycart-infor">
@@ -237,17 +315,19 @@ const CheckoutPage = () => {
                         src={
                           typeof summyCart.image === 'string'
                             ? summyCart.image
-                            : summyCart.image?.url ?? ''
+                            : (summyCart.image?.url ?? '')
                         }
                         alt={summyCart.name}
                       />
                     </div>
+
                     <div className="summycart-perdidos">
                       <h4>
                         {summyCart.name.length > 17
                           ? `${summyCart.name.slice(0, 25)}...`
                           : summyCart.name}
                       </h4>
+
                       <div className="price-container">
                         <span>x{summyCart.quantity}</span>$
                         {(summyCart.price * summyCart.quantity).toLocaleString('es-CO')}
@@ -256,20 +336,26 @@ const CheckoutPage = () => {
                   </div>
                 </div>
               ))}
+
               <div className="line">
                 <span>Subtotal</span>
+
                 <span>${subtotal.toLocaleString('es-CO')}</span>
               </div>
+
               <div className="line">
                 <span>Envío</span>
+
                 <span id="c-ship">Gratis</span>
               </div>
+
               <div className="line total">
                 <span>Total</span>
+
                 <span id="c-total">${subtotal.toLocaleString('es-CO')}</span>
               </div>
 
-              <button className="btn btn-primary btn-block btn-lg" id="pay-btn">
+              <button type="button" className="btn btn-primary btn-block btn-lg" id="pay-btn">
                 Pagar ahora
               </button>
 
