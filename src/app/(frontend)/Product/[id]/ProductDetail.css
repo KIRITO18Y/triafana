@@ -44,7 +44,6 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-
     border-radius: var(--r-lg);
     background: linear-gradient(160deg, #fff, var(--light));
     border: 1px solid var(--glass-border);
@@ -101,7 +100,7 @@
 .old {
     color: var(--muted);
     text-decoration: line-through;
-    ;
+    font-weight: 600;
 }
 
 

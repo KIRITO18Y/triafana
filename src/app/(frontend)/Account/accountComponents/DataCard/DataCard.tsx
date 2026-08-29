@@ -30,7 +30,6 @@ export const DataCard = async () => {
   return (
     <div className="dataCard">
       <h3 className="data-title">Mis datos</h3>
-
       <div className="form-grid">
         <div className="field">
           <label>Nombre</label>

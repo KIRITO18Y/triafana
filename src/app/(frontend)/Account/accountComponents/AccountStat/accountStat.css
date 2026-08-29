@@ -4,6 +4,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 18px;
     margin-bottom: 26px;
+    
 }
 
 .stat-tile {
@@ -13,7 +14,9 @@
     border: 1px solid var(--glass-border);
     -webkit-backdrop-filter: blur(var(--blur));
     backdrop-filter: blur(var(--blur));
-    box-shadow: var(--shadow-sm);
+    text-align: center;
+      box-shadow:
+    var(--shadow-sm), 0 10px 30px rgba(0, 200, 180, 0.18);
 }
 
 .stat-tile strong {
