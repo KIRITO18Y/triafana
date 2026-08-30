@@ -69,7 +69,7 @@ export const Header = () => {
             </Link>
 
             <Link
-              href="/Services"
+              href="/services"
               className={`nav-link ${pathname === '/Services' ? 'active' : ''}`}
             >
               Servicios

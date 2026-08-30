@@ -12,7 +12,6 @@ const ServicesPage = () => {
             <Link href="/">Inicio</Link> / <span>Servicios</span>
           </nav>
         </section>
-
         <section className="hero">
           <div className="hero-card">
             <div className="hero-copy">
@@ -34,7 +33,6 @@ const ServicesPage = () => {
             </div>
           </div>
         </section>
-
         <section className="section">
           <div className="grid cols-3">
             <div className="service-card">
@@ -131,7 +129,7 @@ const ServicesPage = () => {
                 Agenda una asesoría gratuita y diseñemos juntos la mejor estrategia para tu marca.
               </p>
               <div className="actions">
-                <Link href="/contacto" className="btn btn-primary btn-lg">
+                <Link href="/contact" className="btn btn-primary btn-lg">
                   Contactar ahora
                 </Link>
               </div>
