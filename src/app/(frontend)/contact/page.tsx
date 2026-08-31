@@ -44,7 +44,7 @@ export default function Contact() {
           </div>
           <div className="info-grid">
             <div className="info-card">
-              <div className="ic">
+              <div className="contact-ic">
                 <FontAwesomeIcon icon={faEnvelope} className="contact-icon" />
               </div>
               <h3 className="card-h3">Correo</h3>
@@ -55,7 +55,7 @@ export default function Contact() {
             </div>
 
             <div className="info-card">
-              <div className="ic">
+              <div className="contact-ic">
                 <FontAwesomeIcon icon={faPhone} className="contact-icon" />
               </div>
               <h3 className="card-h3">Teléfono / WhatsApp</h3>
@@ -65,7 +65,7 @@ export default function Contact() {
               </p>
             </div>
             <div className="info-card">
-              <div className="ic">
+              <div className="contact-ic">
                 <FontAwesomeIcon icon={faLocationDot} className="contact-icon" />
               </div>
               <h3 className="card-h3">Correo</h3>

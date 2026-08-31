@@ -55,7 +55,7 @@ export const AcccountNav = () => {
 
       <Link
         href="/account/favoritesPage"
-        className={`account-nv ${pathname === '/account/favorites' ? 'active' : ''}`}
+        className={`account-nv ${pathname === '/account/favoritesPage' ? 'active' : ''}`}
       >
         <FontAwesomeIcon icon={faHeart} />
         Favoritos

@@ -7,9 +7,12 @@ const ServicesPage = () => {
   return (
     <div className="service-contianer">
       <div className="services-header">
-        <section className="page-head">
-          <nav className="breadcrumb">
-            <Link href="/">Inicio</Link> / <span>Servicios</span>
+        <section className="service-head">
+          <nav className="service-breadcrumb">
+            <a className="service-a" href="/">
+              Inicio{' '}
+            </a>
+            / <span>Servicios</span>
           </nav>
         </section>
         <section className="hero">
@@ -22,7 +25,7 @@ const ServicesPage = () => {
                 resultados con Google Analytics.
               </p>
               <div className="hero-actions">
-                <Link href="/contacto" className="btn btn-primary btn-lg">
+                <Link href="/contact" className="btn btn-primary btn-lg">
                   Solicitar cotización
                 </Link>
 
@@ -34,9 +37,9 @@ const ServicesPage = () => {
           </div>
         </section>
         <section className="section">
-          <div className="grid cols-3">
+          <div className="service-grid service-cols-3">
             <div className="service-card">
-              <div className="ic">
+              <div className="service-ic">
                 <FontAwesomeIcon icon={faLaptopCode} />
               </div>
               <h3>Diseño Web</h3>
@@ -52,7 +55,7 @@ const ServicesPage = () => {
             </div>
 
             <div className="service-card">
-              <div className="ic">
+              <div className="service-ic">
                 <FontAwesomeIcon icon={faBullhorn} />
               </div>
               <h3>Social Media</h3>
@@ -69,7 +72,7 @@ const ServicesPage = () => {
             </div>
 
             <div className="service-card">
-              <div className="ic">
+              <div className="service-ic">
                 <FontAwesomeIcon icon={faChartLine} />
               </div>
               <h3>Marketing</h3>
@@ -95,25 +98,25 @@ const ServicesPage = () => {
 
           <div className="grid cols-4">
             <div className="info-card">
-              <div className="ic">1</div>
+              <div className="info-ic">1</div>
               <h3>Diagnóstico</h3>
               <p>Entendemos tu marca, metas y audiencia.</p>
             </div>
 
             <div className="info-card">
-              <div className="ic">2</div>
+              <div className="info-ic">2</div>
               <h3>Estrategia</h3>
               <p>Definimos plan, canales y KPIs.</p>
             </div>
 
             <div className="info-card">
-              <div className="ic">3</div>
+              <div className="info-ic">3</div>
               <h3>Ejecución</h3>
               <p>Diseñamos, construimos y publicamos.</p>
             </div>
 
             <div className="info-card">
-              <div className="ic">4</div>
+              <div className="info-ic">4</div>
               <h3>Medición</h3>
               <p>Optimizamos con datos reales.</p>
             </div>

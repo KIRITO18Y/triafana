@@ -1,4 +1,4 @@
-.service-contianer{
+.service-contianer {
   width: 100%;
   max-width: var(--maxw);
   margin-inline: auto;
@@ -6,10 +6,39 @@
   margin-bottom: 20px;
 }
 
-.services-header{
+.services-header {
   width: 100%;
   max-width: var(--maxw);
   margin-inline: auto;
+}
+
+
+.service-head {
+  padding-top: clamp(28px, 4vw, 44px);
+}
+
+
+.service-breadcrumb {
+  font-size: .85rem;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.service-a {
+  text-decoration: none;
+  color: var(--muted);
+}
+
+.service-a:hover{
+  color: var(--teal);
+}
+
+
+.service-breadcrumb span {
+  color: var(--ink);
+  font-weight: 600;
 }
 
 .service-card {
@@ -29,7 +58,7 @@
   transform: translateY(-6px);
 }
 
-.service-card .ic {
+.service-card .service-ic {
   width: 56px;
   height: 56px;
   border-radius: 16px;
@@ -56,28 +85,37 @@
 }
 
 .eyebrowService {
-    display: inline-flex;
-    align-items: center;
-    color: var(--teal);
-    gap: 8px;
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: .74rem;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    
+  display: inline-flex;
+  align-items: center;
+  color: var(--teal);
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: .74rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+
 }
 
 .eyebrowService::before {
-    content: "";
-    width: 22px;
-    height: 2px;
-    background: var(--coral);
-    border-radius: 2px;
+  content: "";
+  width: 22px;
+  height: 2px;
+  background: var(--coral);
+  border-radius: 2px;
 }
 
 .hero {
   padding-top: clamp(28px, 5vw, 56px);
+}
+
+.service-grid{
+   display: grid;
+    gap: 24px;
+}
+
+.service-cols-3{
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .hero-card {
@@ -115,10 +153,10 @@
   font-size: clamp(2.1rem, 5vw, 3.5rem);
   margin: 16px 0 18px;
   font-family: var(--font-display);
-    color: var(--ink);
-    line-height: 1.12;
-    font-weight: 700;
-    letter-spacing: -0.01em;
+  color: var(--ink);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .hero-actions {
@@ -166,56 +204,56 @@ hero {
 }
 
 
-.section{
-    padding-block: clamp(48px, 7vw, 6px);
+.section {
+  padding-block: clamp(48px, 7vw, 6px);
 }
 
 .info-card {
-    border-radius: var(--r-lg);
-    padding: 26px;
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    -webkit-backdrop-filter: blur(var(--blur));
-    backdrop-filter: blur(var(--blur));
-    box-shadow: var(--shadow-sm);
+  border-radius: var(--r-lg);
+  padding: 26px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: blur(var(--blur));
+  box-shadow: var(--shadow-sm);
 }
 
 .info-card h3 {
   font-family: var(--font-display);
-    color: var(--ink);
-    line-height: 1.12;
-    font-weight: 700;
-    letter-spacing: -0.01em;
+  color: var(--ink);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
-.info-card p{
+.info-card p {
   color: var(--muted);
-    font-size: .9rem;
+  font-size: .9rem;
 }
 
-.info-card .ic {
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
-    background: var(--light);
-    display: grid;
-    place-items: center;
-    color: var(--teal);
-    margin-bottom: 14px;
+.info-card .info-ic {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--light);
+  display: grid;
+  place-items: center;
+  color: var(--teal);
+  margin-bottom: 14px;
 }
 
-.services-list{
-    margin-top: 16px;
-    display: grid;
-    gap: 8px;
-    color: var(--muted);
-    font-size: .9rem;
-    
+.services-list {
+  margin-top: 16px;
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: .9rem;
+
 }
 
 .services-list li {
-    display: list-item;
-    unicode-bidi: isolate;
+  display: list-item;
+  unicode-bidi: isolate;
 }
 
 .promo {
@@ -241,26 +279,26 @@ hero {
   background: radial-gradient(circle, rgba(255, 111, 97, .5), transparent 70%);
 }
 
-.promo-eyebrow{
-    display: inline-flex;
-    align-items: center;
-    color: var(--cyan);
-    gap: 8px;
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: .74rem;
-    letter-spacing: .16em;
-     opacity: 1.9;
-    text-transform: uppercase; 
+.promo-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  color: var(--cyan);
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: .74rem;
+  letter-spacing: .16em;
+  opacity: 1.9;
+  text-transform: uppercase;
 }
 
 
 .promo-eyebrow::before {
-    content: "";
-    width: 22px;
-    height: 2px;
-    background: var(--coral);
-    border-radius: 2px;
+  content: "";
+  width: 22px;
+  height: 2px;
+  background: var(--coral);
+  border-radius: 2px;
 }
 
 .promo h2 {
@@ -290,12 +328,9 @@ hero {
   border-color: rgba(255, 255, 255, .4);
 }
 
-.icon-promo{
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    font-size: clamp(4rem, 12vw, 8rem);
+.icon-promo {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  font-size: clamp(4rem, 12vw, 8rem);
 }
-
-
-

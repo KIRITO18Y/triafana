@@ -84,11 +84,11 @@
 }
 
 .btn-teal {
-    background: var(--teal);
+    background: #11959e;
     color: #fff;
 }
 
 .btn-teal:hover{
-    background-color: #11959e;
+    background-color: var(--teal);
 }
 

@@ -17,7 +17,6 @@ type Props = {
 export default function ProductCard({ product }: Props) {
   const { addToCart } = useCart()
   const router = useRouter()
-
   const [isFavorite, setIsFavorite] = useState(false)
   const [loadingFavorite, setLoadingFavorite] = useState(false)
   const shortName = product.name.length > 20 ? `${product.name.slice(0, 20)}...` : product.name
@@ -175,7 +174,13 @@ export default function ProductCard({ product }: Props) {
           className="img-prd"
         />
 
-        {product.featured && <span className="badge">Destacado</span>}
+        <div>
+          {product.discount ? (
+            <span className="product-descount">{product.discount}%</span>
+          ) : product.featured ? (
+            <span className="badge">Destacado</span>
+          ) : null}
+        </div>
 
         <div className="btn-fav">
           <button
@@ -205,7 +210,6 @@ export default function ProductCard({ product }: Props) {
         </span>
 
         <h3 className="card-name">{product.name}</h3>
-
         <div className="rating">
           <div className="rating-estre">★★★★★</div>
           <span>4.8</span>

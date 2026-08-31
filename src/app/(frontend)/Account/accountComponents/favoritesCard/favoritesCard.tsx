@@ -2,6 +2,7 @@
 import './favoritesCard.css'
 import { useCallback, useEffect, useState } from 'react'
 import ProductCard from '@/app/(frontend)/Product/ProductCard/ProductCard'
+import { usePathname } from 'next/navigation'
 
 type Favorite = {
   id: number

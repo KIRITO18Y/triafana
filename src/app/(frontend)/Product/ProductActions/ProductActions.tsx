@@ -40,7 +40,8 @@ export default function ProductActions({ product }: Props) {
             </button>
           </div>
         </div>
-        <div className="product-actions-group">
+
+        <div className="btn-actions">
           <AddToCartButton product={product} quantity={quantity} />
           <button className="btn-buy" onClick={handleBuyNow}>
             Comprar ahora

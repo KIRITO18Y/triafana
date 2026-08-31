@@ -20,11 +20,11 @@
 
 .contact-breadcrumb a {
     text-decoration: none;
-    color: var(--teal);
+    color: var(--muted);
 }
 
 .contact-breadcrumb a:hover {
-    color: var(--coral);
+    color: var(--teal);
 }
 
 .contact-breadcrumb span {
@@ -115,7 +115,6 @@ input, select, textarea {
     font-size: 1rem;
 }
 
-
 .btn {
     display: inline-flex;
     align-items: center;
@@ -131,7 +130,6 @@ input, select, textarea {
     border: none;
     cursor: pointer;
     margin-top: 28px;
-
 }
 
 .contact-btn {
@@ -177,7 +175,7 @@ input, select, textarea {
     letter-spacing: -0.01em;
 }
 
-.info-card .ic {
+.info-card .contact-ic {
     width: 48px;
     height: 48px;
     border-radius: 14px;

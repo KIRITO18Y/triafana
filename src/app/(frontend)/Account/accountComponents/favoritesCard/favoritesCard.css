@@ -3,6 +3,7 @@
 }
 
 .favorites-title {
+  color: var(--link);
   margin-bottom: 24px;
 }
 

@@ -151,38 +151,6 @@
     color: var(--teal);
 }
 
-.btn-cart {
-    background: var(--coral);
-    border-radius: 50px;
-    padding: 17px 25px;
-    font-size: 16px;
-    color: #fff;
-    font-weight: 700;
-    box-shadow: 0 10px 24px rgba(255, 111, 97, .35);
-}
-
-.btn-cart:hover {
-    background: var(--coral-600);
-    transform: translateY(-2px);
-    box-shadow: 0 14px 30px rgba(255, 111, 97, .42);
-}
-
-.btn-buy {
-    padding: 17px 25px;
-    border-radius: 50px;
-    background: var(--teal);
-    font-size: 16px;
-    color: #fff;
-    font-weight: 700;
-    box-shadow: 0 10px 24px rgba(10, 102, 109, .28);
-}
-
-.btn-buy:hover {
-    background: #0a767f;
-    transform: translateY(-2px);
-}
-
-
 .description-section {
     grid-column: 1 / -1;
     width: 100%;
@@ -210,6 +178,24 @@
     display: flex;
 }
 
+.detaill-descount{
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: var(--coral);
+    color: white;
+    font-size: 12px;
+    font-weight: 700
+}
+
+.detaill-badge{
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: var(--teal-aqua);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+}
+
 .detail-shipping span {
     font-size: 16px;
     color: #888888;
@@ -222,15 +208,15 @@
     margin-bottom: 20px;
 }
 
+.grid {
+    display: grid;
+    gap: 24px;
+}
 
 .cols-3 {
     grid-template-columns: repeat(3, 1fr);
 }
 
-.grid {
-    display: grid;
-    gap: 24px;
-}
 
 h3 {
     font-family: var(--font-display);

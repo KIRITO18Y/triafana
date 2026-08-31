@@ -22,13 +22,15 @@ export default function Filters({ category }: FiltersProps) {
   const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>(appliedSubcategories)
 
   useEffect(() => {
-    if (!category) {
-      setSubcategories([])
-      return
-    }
     const loadSubcategories = async () => {
       try {
-        const res = await fetch(`/api/subcategories?where[category][equals]=${category}`, {
+        let url = '/api/subcategories?limit=100'
+
+        if (category) {
+          url = `/api/subcategories?where[category][equals]=${category}&limit=100`
+        }
+
+        const res = await fetch(url, {
           cache: 'no-store',
         })
 
@@ -37,6 +39,9 @@ export default function Filters({ category }: FiltersProps) {
         }
 
         const data = await res.json()
+
+        console.log('SUBCATEGORÍAS:', data.docs)
+
         setSubcategories(data.docs)
       } catch (error) {
         console.error('Error:', error)

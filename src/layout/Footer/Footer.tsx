@@ -64,7 +64,12 @@ export const Footer = () => {
           <h4>Recibe ofertas</h4>
           <p>Suscríbete y entérate de promociones y lanzamientos.</p>
           <form className="newsletter">
-            <input type="email" placeholder="tu@correo.com" aria-label="Correo" />
+            <input
+              className="footer-input"
+              type="email"
+              placeholder="tu@correo.com"
+              aria-label="Correo"
+            />
             <button className="btn btn-primary btn-sm" type="submit">
               Unirme
             </button>
@@ -74,7 +79,6 @@ export const Footer = () => {
 
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} TRIAFANA Store · Hecho con PayloadCMS</span>
-
         <span>Términos · Privacidad · Política de cookies</span>
       </div>
     </div>
