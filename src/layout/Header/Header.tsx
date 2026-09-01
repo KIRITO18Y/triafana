@@ -6,13 +6,14 @@ import Logo from '../Logo/Logo'
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faCartShopping, faMagnifyingGlass, faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
 import { useCart } from '@/context/CartContext'
 import AvatarLink from '../AvatarLink/AvatarLink'
 
 export const Header = () => {
   const [scroll, setScroll] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const pathname = usePathname()
 
@@ -35,6 +36,14 @@ export const Header = () => {
     }
   }, [])
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen)
+  }
+
+  const closeMenu = () => {
+    setMenuOpen(false)
+  }
+
   return (
     <div className="container-header">
       <div className={`header ${scroll ? 'header-scroll' : ''}`}>
@@ -45,14 +54,15 @@ export const Header = () => {
             <b>TRIAFANA</b>
           </Link>
 
-          <nav className="nav">
-            <Link href="/" className={`nav-link ${pathname === '/' ? 'active' : ''}`}>
+          <nav className={`nav ${menuOpen ? 'open' : ''}`}>
+            <Link href="/" className={`nav-link ${pathname === '/' ? 'active' : ''}`} onClick={closeMenu}>
               Inicio
             </Link>
 
             <Link
               href="/tecnology"
               className={`nav-link ${pathname === '/tecnology' ? 'active' : ''}`}
+              onClick={closeMenu}
             >
               Tecnologia
             </Link>
@@ -60,17 +70,19 @@ export const Header = () => {
             <Link
               href="/cosmeticsShop"
               className={`nav-link ${pathname === '/cosmeticsShop' ? 'active' : ''}`}
+              onClick={closeMenu}
             >
               Cosmetiqueria
             </Link>
 
-            <Link href="/clothes" className={`nav-link ${pathname === '/clothes' ? 'active' : ''}`}>
+            <Link href="/clothes" className={`nav-link ${pathname === '/clothes' ? 'active' : ''}`} onClick={closeMenu}>
               Ropa
             </Link>
 
             <Link
               href="/services"
-              className={`nav-link ${pathname === '/Services' ? 'active' : ''}`}
+              className={`nav-link ${pathname === '/services' ? 'active' : ''}`}
+              onClick={closeMenu}
             >
               Servicios
             </Link>
@@ -97,8 +109,13 @@ export const Header = () => {
 
             <AvatarLink />
           </div>
+
+          <button className="nav-toggle" onClick={toggleMenu} aria-label="Toggle menu">
+            <FontAwesomeIcon icon={menuOpen ? faXmark : faBars} />
+          </button>
         </div>
       </div>
+      {menuOpen && <div className="scrim show" onClick={closeMenu}></div>}
     </div>
   )
 }

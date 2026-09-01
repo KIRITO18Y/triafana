@@ -102,14 +102,22 @@ body::after {
   font-family: var(--font-display);
   font-weight: 700;
   border-radius: 16px !important;
-  width: 420px !important;
-  min-width: 420px !important;
+  width: clamp(80vw, 420px, 100%) !important;
+  max-width: calc(100vw - 32px) !important;
   padding: 18px 24px !important;
 }
 
 
 .Toastify__toast-icon svg {
   fill: var(--teal) !important;
+}
+
+@media (max-width: 480px) {
+  .trifana-toast {
+    width: calc(100vw - 32px) !important;
+    min-width: auto !important;
+    padding: 16px 20px !important;
+  }
 }
 
 @media (max-width: 1080px) {

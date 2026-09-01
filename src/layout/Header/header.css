@@ -208,5 +208,69 @@
 
 .nav-toggle {
     display: none;
+    background: none;
+    border: none;
+    color: var(--ink);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 6px;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    transition: all .15s ease;
 }
+
+.nav-toggle:hover {
+    background-color: #e4e4e4fa;
+    color: var(--teal);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+@media (max-width: 880px) {
+    .nav-shell {
+        flex-wrap: wrap;
+        border-radius: 16px;
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .nav {
+        order: 5;
+        flex-basis: 100%;
+        flex-direction: column;
+        gap: 0;
+        display: none;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        padding: 12px 0;
+        margin-top: 8px;
+    }
+
+    .nav.open {
+        display: flex;
+    }
+
+    .nav-link {
+        width: 100%;
+        padding: 12px 20px;
+        border-radius: 0;
+    }
+
+    .nav-toggle {
+        display: flex;
+        order: 4;
+    }
+
+    .title-link b {
+        font-size: 0.9rem;
+    }
+}
+
 
