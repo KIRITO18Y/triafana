@@ -160,4 +160,120 @@ input, select, textarea {
   .form-grid {
     grid-template-columns: 1fr;
   }
+
+  .auth-form {
+    padding: clamp(24px, 4vw, 40px);
+  }
+
+  .login-head {
+    padding-top: clamp(20px, 3vw, 32px);
+    margin-bottom: 28px;
+  }
+
+  .breadcrumb {
+    font-size: 0.8rem;
+    gap: 6px;
+  }
+
+  .auth-tabs button {
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+
+  .filter-opt {
+    gap: 8px;
+    font-size: 0.85rem;
+    margin: 8px;
+  }
+
+  .filter-check a {
+    font-size: 0.8rem;
+  }
+
+  .auth-aside .benefits li {
+    font-size: 0.85rem;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-form {
+    padding: clamp(16px, 3vw, 24px);
+  }
+
+  .login-head {
+    padding-top: 16px;
+    margin-bottom: 20px;
+  }
+
+  .breadcrumb {
+    font-size: 0.7rem;
+    gap: 4px;
+  }
+
+  .breadcrumb-link {
+    font-weight: 600;
+  }
+
+  .auth-tabs {
+    margin-bottom: 18px;
+    padding: 4px;
+  }
+
+  .auth-tabs button {
+    padding: 6px;
+    font-size: 0.75rem;
+  }
+
+  .auth-form .field {
+    margin-bottom: 12px;
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    padding: 9px 10px;
+    font-size: 0.9rem;
+    border-radius: 10px;
+  }
+
+  .filter-check {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .filter-opt {
+    gap: 6px;
+    font-size: 0.8rem;
+    margin: 6px 0;
+  }
+
+  .filter-opt input {
+    width: 16px;
+    height: 16px;
+  }
+
+  .filter-check a {
+    font-size: 0.75rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .p-conexion {
+    font-size: 0.8rem;
+    margin-top: 8px;
+  }
+
+  .auth-aside .benefits li {
+    font-size: 0.75rem;
+    gap: 8px;
+  }
 }

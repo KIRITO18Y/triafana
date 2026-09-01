@@ -96,3 +96,92 @@
 .qtybutton:hover{
   background: var(--light);
 }
+
+@media (max-width: 768px) {
+  .cart-items {
+    padding: 12px 16px;
+  }
+
+  .cart-row {
+    gap: 12px;
+    padding: 16px 0;
+  }
+
+  .cart-row .thumb {
+    width: 80px;
+    height: 80px;
+    font-size: 1.8rem;
+  }
+
+  .thumb img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .cart-row h4 {
+    font-size: 0.95rem;
+  }
+
+  .qty {
+    transform: scale(0.85);
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-items {
+    padding: 12px;
+    border-radius: 16px;
+  }
+
+  .cart-row {
+    grid-template-columns: 64px 1fr;
+    gap: 10px;
+    padding: 12px 0;
+  }
+
+  .cart-row .thumb {
+    width: 64px;
+    height: 64px;
+    font-size: 1.5rem;
+    border-radius: 12px;
+  }
+
+  .thumb img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .cart-row h4 {
+    font-size: 0.85rem;
+  }
+
+  .cart-row .cat {
+    font-size: 0.65rem;
+  }
+
+  .cart-row .line-price {
+    grid-column: 2;
+    text-align: left;
+    font-size: 0.9rem;
+  }
+
+  .cart-row .remove {
+    font-size: 0.7rem;
+  }
+
+  .qty {
+    transform: scale(0.75);
+    transform-origin: left;
+  }
+
+  .qty input {
+    width: 40px;
+    height: 36px;
+  }
+
+  .qtybutton {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+}

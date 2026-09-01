@@ -225,4 +225,58 @@
     .product-card {
         width: 100%;
     }
+
+    .product-image {
+        height: 150px;
+    }
+
+    .product-info {
+        padding: 8px;
+    }
+
+    .product-info h3 {
+        font-size: 0.9rem;
+        min-height: 36px;
+    }
+
+    .span-price, .span-oldPrice {
+        font-size: 0.9rem;
+        margin-left: 6px;
+    }
+
+    .price-btn {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product-card {
+        margin-top: 12px;
+    }
+
+    .product-image {
+        height: 140px;
+    }
+
+    .product-info h3 {
+        font-size: 0.85rem;
+        line-height: 1.2;
+    }
+
+    .rating-estre {
+        font-size: 16px;
+    }
+
+    .rating span {
+        font-size: 13px;
+    }
+
+    .price {
+        min-height: 50px;
+    }
 }

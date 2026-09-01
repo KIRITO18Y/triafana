@@ -106,3 +106,95 @@ button {
     background: none;
 }
 
+@media (max-width: 768px) {
+  .filters {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .filters h3 {
+    font-size: 1.05rem;
+    margin-bottom: 16px;
+  }
+
+  .filter-group {
+    gap: 10px;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+  }
+
+  .filter-group h4 {
+    font-size: 0.95rem;
+  }
+
+  .filter-opt {
+    gap: 8px;
+    font-size: 0.88rem;
+    padding: 5px 0;
+  }
+
+  .size-grid {
+    gap: 6px;
+  }
+
+  .size {
+    width: 38px;
+    height: 34px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .filters {
+    padding: 16px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,.08);
+  }
+
+  .filters h3 {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+  }
+
+  .filter-group {
+    gap: 8px;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+
+  .filter-group h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .sub-list {
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+
+  .filter-opt {
+    gap: 6px;
+    font-size: 0.8rem;
+    padding: 4px 0;
+  }
+
+  .size-grid {
+    gap: 5px;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+
+  .size {
+    width: 34px;
+    height: 30px;
+    font-size: 0.75rem;
+    border-radius: 8px;
+  }
+
+  .swatches {
+    gap: 8px;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+}
+

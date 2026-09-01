@@ -108,3 +108,138 @@
   width: 18px;
   height: 18px;
 }
+
+@media (max-width: 768px) {
+  .site-footer {
+    margin-top: clamp(32px, 5vw, 60px);
+  }
+
+  .footer-inner {
+    padding: clamp(28px, 4vw, 48px) var(--gutter) 20px;
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .footer-grid h4 {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+
+  .footer-grid a,
+  .footer-grid p {
+    font-size: 0.85rem;
+    padding: 3px 0;
+  }
+
+  .footer-brand p {
+    max-width: 30ch;
+    font-size: 0.85rem;
+  }
+
+  .newsletter {
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .footer-input {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+
+  .footer-bottom {
+    font-size: 0.78rem;
+    gap: 12px;
+    margin: 16px auto 0;
+    padding-top: 16px;
+  }
+
+  .socials {
+    gap: 8px;
+  }
+
+  .socials a {
+    width: 32px;
+    height: 32px;
+  }
+
+  .socials svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-footer {
+    margin-top: clamp(24px, 4vw, 40px);
+  }
+
+  .footer-inner {
+    padding: clamp(20px, 3vw, 32px) var(--gutter) 16px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .footer-grid h4 {
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .footer-grid a,
+  .footer-grid p {
+    font-size: 0.8rem;
+    padding: 2px 0;
+  }
+
+  .footer-logo {
+    margin-bottom: 8px;
+  }
+
+  .footer-brand p {
+    max-width: 25ch;
+    font-size: 0.8rem;
+  }
+
+  .newsletter {
+    gap: 5px;
+    margin-top: 10px;
+    flex-direction: column;
+  }
+
+  .footer-input {
+    flex: 1;
+    padding: 7px 12px;
+    font-size: 0.8rem;
+  }
+
+  .footer-bottom {
+    font-size: 0.7rem;
+    gap: 8px;
+    margin: 12px auto 0;
+    padding-top: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .socials {
+    gap: 6px;
+    width: 100%;
+  }
+
+  .socials a {
+    width: 28px;
+    height: 28px;
+  }
+
+  .socials svg {
+    width: 14px;
+    height: 14px;
+  }
+}

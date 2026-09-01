@@ -217,7 +217,181 @@
     grid-template-columns: repeat(3, 1fr);
 }
 
+@media (max-width: 900px) {
+    .container-detail {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
 
+    .name-category {
+        font-size: 18px;
+    }
+
+    .p-name {
+        font-size: 1.4rem;
+    }
+
+    .now {
+        font-size: 1.8rem;
+    }
+
+    .deateial-estre {
+        font-size: 18px;
+    }
+
+    .detaill-cali span {
+        font-size: 16px;
+    }
+
+    .description-text {
+        font-size: 16px;
+    }
+
+    .description-section h2 {
+        font-size: 20px;
+    }
+
+    .detail-shipping span {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 600px) {
+    .ProductDetaill {
+        padding-inline: var(--gutter);
+    }
+
+    .nav-breadcrumb {
+        padding: 20px 0;
+        margin-bottom: 16px;
+        font-size: 0.75rem;
+        gap: 4px;
+    }
+
+    .container-detail {
+        gap: 24px;
+    }
+
+    .container-img {
+        aspect-ratio: 1 / 1;
+    }
+
+    .name-category {
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+    }
+
+    .p-name {
+        font-size: 1.2rem;
+        margin: 8px 0;
+    }
+
+    .pdp-prince {
+        gap: 10px;
+        margin: 12px 0;
+    }
+
+    .now {
+        font-size: 1.5rem;
+    }
+
+    .old {
+        font-size: 0.85rem;
+    }
+
+    .detaill-cali {
+        gap: 8px;
+    }
+
+    .deateial-estre {
+        font-size: 16px;
+    }
+
+    .detaill-cali span {
+        font-size: 14px;
+    }
+
+    .detail-trifana {
+        font-size: 0.9rem;
+        margin: 10px 0 16px;
+    }
+
+    .btn-container {
+        margin: 16px 0;
+        gap: 8px;
+        padding-bottom: 12px;
+    }
+
+    .text-detail {
+        gap: 8px;
+        margin-top: 16px;
+    }
+
+    .text-detail span {
+        font-size: 0.85rem;
+    }
+
+    .detail-shipping {
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .detaill-descount,
+    .detaill-badge {
+        padding: 4px 8px;
+        font-size: 10px;
+        border-radius: 6px;
+    }
+
+    .detail-shipping span {
+        font-size: 12px;
+    }
+
+    .description-section {
+        margin-top: 28px;
+    }
+
+    .detail-description {
+        padding: 18px;
+        border-radius: 16px;
+    }
+
+    .description-section h2 {
+        font-size: 1.05rem;
+        margin-bottom: 12px;
+    }
+
+    .description-text {
+        font-size: 0.9rem;
+        margin-bottom: 14px;
+    }
+
+    .grid {
+        gap: 16px;
+    }
+
+    .cols-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 400px) {
+    .p-name {
+        font-size: 1.05rem;
+    }
+
+    .now {
+        font-size: 1.3rem;
+    }
+
+    .description-section h2 {
+        font-size: 0.95rem;
+    }
+
+    .cols-3 {
+        grid-template-columns: 1fr;
+    }
+}
 h3 {
     font-family: var(--font-display);
     color: var(--teal);

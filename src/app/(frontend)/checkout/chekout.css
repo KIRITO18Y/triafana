@@ -12,6 +12,142 @@
   align-items: start;
 }
 
+@media (max-width: 768px) {
+  .checkout-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .field.full {
+    grid-column: 1;
+  }
+
+  .form-card {
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+
+  .form-card h3 {
+    font-size: 1.05rem;
+  }
+
+  .pay-methods {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .steps {
+    gap: 4px;
+  }
+
+  .step {
+    font-size: 0.85rem;
+    gap: 6px;
+  }
+
+  .step .n {
+    width: 24px;
+    height: 24px;
+    font-size: 0.75rem;
+  }
+
+  .step::after {
+    width: 16px;
+  }
+
+  .summary {
+    top: auto;
+    position: relative;
+  }
+}
+
+@media (max-width: 480px) {
+  .checkout-layout {
+    gap: 16px;
+  }
+
+  .form-grid {
+    gap: 12px;
+  }
+
+  .field label {
+    font-size: 0.8rem;
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  .form-card {
+    padding: 16px;
+    margin-bottom: 12px;
+    border-radius: 16px;
+  }
+
+  .form-card h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .pay-methods {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .pay-opt {
+    padding: 12px;
+    font-size: 0.8rem;
+  }
+
+  .pay-opt .ic {
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+  }
+
+  .step .n {
+    width: 20px;
+    height: 20px;
+    font-size: 0.65rem;
+  }
+
+  .step {
+    font-size: 0.75rem;
+    gap: 4px;
+  }
+
+  .step::after {
+    width: 12px;
+    margin-left: 2px;
+  }
+
+  .summary h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+
+  .summary .line {
+    font-size: 0.9rem;
+    padding: 6px 0;
+  }
+
+  .summary .line.total {
+    font-size: 1.15rem;
+    padding-top: 12px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 0.85rem;
+  }
+}
+
 .breadcrumb a {
   text-decoration: none;
   color: var(--teal);
