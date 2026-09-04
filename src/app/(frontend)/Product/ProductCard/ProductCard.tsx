@@ -230,12 +230,7 @@ export default function ProductCard({ product }: Props) {
               onClick={(e) => {
                 e.stopPropagation()
 
-                addToCart({
-                  id: product.id,
-                  name: product.name,
-                  price: Number(product.price),
-                  image: product.image?.url || '',
-                })
+                addToCart(product)
               }}
               aria-label="Agregar al carrito"
             >

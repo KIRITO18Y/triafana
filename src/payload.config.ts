@@ -11,7 +11,6 @@ import { Products } from './collections/products'
 import { Customers } from './collections/Customers'
 import { Subcategories } from './collections/Subcategories'
 import { Favorites } from './collections/Favorites'
-import { migrations } from './migrations'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -35,12 +34,19 @@ export default buildConfig({
     },
     // Push is only for quick local iteration; once migrations exist we apply
     // schema changes explicitly via `payload migrate` to avoid drift bugs.
+    //
+    // NOTE: we deliberately do NOT set `prodMigrations` here. That option
+    // makes Payload attempt migrations as part of its own init whenever
+    // NODE_ENV=production — which `next build` sets internally too, so it
+    // ends up trying to migrate whatever DATABASE_URL is active (including
+    // a local dev DB) during the build's parallel static-generation
+    // workers. If that DB has any drift (e.g. from dev-mode push), Payload
+    // shows an interactive "data loss, proceed? (y/N)" prompt that the
+    // build workers can't answer, and the build hangs/times out.
+    // Migrations run once, explicitly, via `payload migrate` in
+    // docker-entrypoint.sh before the server starts — that's the only
+    // place they should run.
     push: false,
-    // In production (NODE_ENV=production), Payload runs any pending
-    // migrations from this list before finishing initialization — a
-    // config-level safety net alongside the `payload migrate` step that
-    // already runs in docker-entrypoint.sh before the server starts.
-    prodMigrations: migrations,
   }),
   sharp,
   plugins: [],

@@ -72,13 +72,17 @@ valor en `package.json` si el build falla por falta de memoria.
 
 ## Cambios hechos al repo para este despliegue
 
-- `src/payload.config.ts`: se le pasa `prodMigrations: migrations` al
-  `sqliteAdapter`. Con `NODE_ENV=production` (ya seteado en el Dockerfile),
-  Payload revisa y corre cualquier migración pendiente de `src/migrations`
-  como parte de su inicialización, antes de aceptar tráfico — es un
-  respaldo a nivel de config, además del `payload migrate` explícito que
-  ya corre en `docker-entrypoint.sh`. Ambos son idempotentes, así que no
-  hay problema en que coexistan.
+- `src/payload.config.ts`: se probó pasar `prodMigrations: migrations` al
+  `sqliteAdapter` (para que Payload migre solo al iniciar en producción),
+  pero se revirtió: esa opción hace que Payload intente migrar cada vez
+  que `NODE_ENV=production` está activo, y `next build` también lo activa
+  internamente — así que terminaba intentando migrar la base de datos
+  local de desarrollo durante `pnpm build`, y si esa DB tiene drift (típico
+  de haber usado modo dev con push), Payload muestra un prompt interactivo
+  ("data loss, proceed? y/N") que los workers paralelos del build no
+  pueden responder, colgando el build. Las migraciones corren **solo** en
+  `docker-entrypoint.sh` vía `payload migrate`, una vez, antes de levantar
+  el servidor — nunca durante el build.
 - `Dockerfile`: reescrito para copiar el árbol completo de `node_modules` de
   producción (en vez del build "standalone" de Next.js), porque el CLI de
   Payload (`payload migrate`) necesita el árbol de dependencias completo y
@@ -90,4 +94,27 @@ valor en `package.json` si el build falla por falta de memoria.
   (importante si el checkout local es Windows — esos binarios nativos no
   sirven en Linux), y evita filtrar `.env` u otros archivos sensibles al
   contexto de build.
-- `package.json`: se agregó el script `migrate` como atajo local.
+- `package.json`: se agregó el script `migrate` como atajo local, y se
+  fijó `packageManager: "pnpm@11.25.0"`. Sin esto, cada build resuelve
+  "pnpm latest" de forma independiente (local, Nixpacks, Docker...), y con
+  el tiempo eso puede quedar desincronizado con el `pnpm-lock.yaml` — es lo
+  que causó el error `ERR_PNPM_LOCKFILE_CONFIG_MISMATCH` en un build por
+  Nixpacks. Con la versión fijada, `corepack enable` siempre usa la misma
+  versión de pnpm con la que se generó el lockfile.
+- `pnpm-workspace.yaml`: se agregó el campo `packages: ['.']`. Sin él,
+  `pnpm install --frozen-lockfile` falla con
+  `ERROR packages field missing or empty` en cuanto el archivo existe sin
+  ese campo (pasa con archivos generados por `pnpm approve-builds`, como
+  este). Ver [pnpm#9361](https://github.com/pnpm/pnpm/issues/9361).
+- `src/app/(frontend)/Product/ProductCard/ProductCard.tsx`: el botón
+  "agregar al carrito" armaba a mano un objeto parcial
+  (`{id, name, price: Number(...), image}`) para pasarlo a `addToCart`,
+  que espera un `Product` completo (tipo generado por Payload, donde
+  `price` es `string`) — eso rompía el build de producción
+  (`next build` sí type-checkea; `next dev` es más laxo). Se cambió para
+  pasar el `product` completo, igual que en `ProductActions.tsx` y
+  `AddToCartButton.tsx`.
+
+Validé el pipeline completo (`pnpm install --frozen-lockfile` +
+`pnpm run build`, migraciones incluidas) en un entorno limpio con pnpm
+11.25.0 y terminó sin errores.
