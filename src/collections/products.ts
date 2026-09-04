@@ -46,8 +46,8 @@ export const Products: CollectionConfig = {
       name: 'subcategory',
       type: 'relationship',
       relationTo: 'subcategories',
-      required: true,
       label: 'Subcategoría',
+      required: true,
     },
 
     {

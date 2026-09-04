@@ -75,8 +75,12 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
             {product.oldPrice && (
               <span className="old">{formatPrice(Number(product.oldPrice))}</span>
             )}
+            {product.discount != null ? (
+              <span className="detaill-descount">{product.discount}%</span>
+            ) : product.featured ? (
+              <span className="detaill-badge">Destacado</span>
+            ) : null}
           </div>
-
           <div>
             <p className="detail-trifana">
               Producto de alta calidad seleccionado por TRIAFANA. Garantía oficial, envío rápido y

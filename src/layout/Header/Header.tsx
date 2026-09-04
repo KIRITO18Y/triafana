@@ -69,7 +69,7 @@ export const Header = () => {
             </Link>
 
             <Link
-              href="/Services"
+              href="/services"
               className={`nav-link ${pathname === '/Services' ? 'active' : ''}`}
             >
               Servicios
@@ -82,7 +82,7 @@ export const Header = () => {
           </form>
 
           <div className="nav-actions">
-            <Link href={''} className="icon-btn">
+            <Link href={'/account/favoritesPage'} className="icon-btn">
               <FontAwesomeIcon icon={faHeart} />
             </Link>
 

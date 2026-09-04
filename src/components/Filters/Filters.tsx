@@ -1,29 +1,38 @@
 'use client'
-
 import { useEffect, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import './filters.css'
 
 type Subcategory = {
   id: string
   name: string
+  slug: string
+  category: string
 }
 
 type FiltersProps = {
-  categoryId?: string
+  category?: string
 }
 
-export default function Filters({ categoryId }: FiltersProps) {
+export default function Filters({ category }: FiltersProps) {
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const [subcategories, setSubcategories] = useState<Subcategory[]>([])
+  const appliedSubcategories = searchParams.get('subcategory')?.split(',').filter(Boolean) || []
+  const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>(appliedSubcategories)
 
   useEffect(() => {
-    if (!categoryId) {
-      setSubcategories([])
-      return
-    }
-
     const loadSubcategories = async () => {
       try {
-        const res = await fetch(`/api/categories?where[parent][equals]=${categoryId}`)
+        let url = '/api/subcategories?limit=100'
+
+        if (category) {
+          url = `/api/subcategories?where[category][equals]=${category}&limit=100`
+        }
+
+        const res = await fetch(url, {
+          cache: 'no-store',
+        })
 
         if (!res.ok) {
           throw new Error('Error cargando subcategorías')
@@ -31,26 +40,63 @@ export default function Filters({ categoryId }: FiltersProps) {
 
         const data = await res.json()
 
+        console.log('SUBCATEGORÍAS:', data.docs)
+
         setSubcategories(data.docs)
       } catch (error) {
-        console.error(error)
+        console.error('Error:', error)
+        setSubcategories([])
       }
     }
 
     loadSubcategories()
-  }, [categoryId])
+  }, [category])
+
+  const handleSubcategoryChange = (subcategory: Subcategory) => {
+    setSelectedSubcategories((current) => {
+      let updated: string[]
+      if (current.includes(subcategory.slug)) {
+        updated = current.filter((slug) => slug !== subcategory.slug)
+      } else {
+        updated = [...current, subcategory.slug]
+      }
+
+      if (updated.length === 0) {
+        const params = new URLSearchParams(searchParams.toString())
+        params.delete('subcategory')
+        router.push(`?${params.toString()}`)
+      }
+
+      return updated
+    })
+  }
+
+  const handleApplyFilters = () => {
+    const params = new URLSearchParams(searchParams.toString())
+    if (selectedSubcategories.length > 0) {
+      params.set('subcategory', selectedSubcategories.join(','))
+    } else {
+      params.delete('subcategory')
+    }
+
+    router.push(`?${params.toString()}`)
+  }
 
   return (
     <aside className="filters">
       <h3>Filtros</h3>
-
       <h4>Subcategoría</h4>
 
       <div className="sub-list">
         {subcategories.length > 0 ? (
           subcategories.map((subcategory) => (
             <label key={subcategory.id} className="filter-opt">
-              <input type="checkbox" value={subcategory.id} />
+              <input
+                type="checkbox"
+                value={subcategory.slug}
+                checked={selectedSubcategories.includes(subcategory.slug)}
+                onChange={() => handleSubcategoryChange(subcategory)}
+              />
 
               {subcategory.name}
             </label>
@@ -84,24 +130,9 @@ export default function Filters({ categoryId }: FiltersProps) {
         </label>
       </div>
 
-      <h4>Talla</h4>
-
-      <div className="size-grid">
-        <span className="size">XS</span>
-        <span className="size">S</span>
-        <span className="size">M</span>
-        <span className="size">L</span>
-      </div>
-
-      <h4>Color</h4>
-
-      <div className="swatches">
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
-      <button className="btn btn-teal btn-block">Aplicar filtros</button>
+      <button type="button" className="btn btn-teal btn-block" onClick={handleApplyFilters}>
+        Aplicar filtros
+      </button>
     </aside>
   )
 }

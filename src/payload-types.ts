@@ -69,6 +69,7 @@ export interface Config {
   blocks: {};
   collections: {
     customers: Customer;
+    favorites: Favorite;
     users: User;
     banners: Banner;
     media: Media;
@@ -82,6 +83,7 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     customers: CustomersSelect<false> | CustomersSelect<true>;
+    favorites: FavoritesSelect<false> | FavoritesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     banners: BannersSelect<false> | BannersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -174,6 +176,65 @@ export interface Customer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "favorites".
+ */
+export interface Favorite {
+  id: number;
+  user: number | Customer;
+  product: number | Product;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: number;
+  name: string;
+  price: string;
+  category: 'tecnologia' | 'cosmetiqueria' | 'ropa';
+  subcategory: number | Subcategory;
+  image: number | Media;
+  discount?: number | null;
+  oldPrice?: string | null;
+  featured?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subcategories".
+ */
+export interface Subcategory {
+  id: number;
+  name: string;
+  slug: string;
+  category: 'tecnologia' | 'cosmetiqueria' | 'ropa';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -222,54 +283,6 @@ export interface Banner {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  alt: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "products".
- */
-export interface Product {
-  id: number;
-  name: string;
-  price: string;
-  category: 'tecnologia' | 'cosmetiqueria' | 'ropa';
-  subcategory: number | Subcategory;
-  image: number | Media;
-  discount?: number | null;
-  oldPrice?: string | null;
-  featured?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "subcategories".
- */
-export interface Subcategory {
-  id: number;
-  name: string;
-  slug: string;
-  category: 'tecnologia' | 'cosmetiqueria' | 'ropa';
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -295,6 +308,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'customers';
         value: number | Customer;
+      } | null)
+    | ({
+        relationTo: 'favorites';
+        value: number | Favorite;
       } | null)
     | ({
         relationTo: 'users';
@@ -392,6 +409,16 @@ export interface CustomersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "favorites_select".
+ */
+export interface FavoritesSelect<T extends boolean = true> {
+  user?: T;
+  product?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

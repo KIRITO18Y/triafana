@@ -163,13 +163,7 @@ body::after {
     grid-template-columns: 1fr;
   }
 
-  .account-nav {
-    position: static;
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-  }
-
+  
   
 
   .promo {
@@ -195,7 +189,6 @@ body::after {
 }
 
 @media (max-width: 620px) {
-
   .product-grid,
   .cols-3,
   .cols-4 {

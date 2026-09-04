@@ -6,6 +6,7 @@ import { ShopGrid } from '@/components/ShopGrid/ShopGrid'
 type Props = {
   searchParams: Promise<{
     sort?: string
+    subcategory?: string
   }>
 }
 
@@ -18,7 +19,6 @@ export default async function TecnologyPage({ searchParams }: Props) {
         <nav className="breadcrumb">
           <a href="/">Inicio</a>/<span>Tecnología</span>
         </nav>
-
         <h1 className="page-title">Tecnología</h1>
         <p className="lead">Explora computadores, celulares, audio y accesorios.</p>
       </section>
@@ -28,9 +28,9 @@ export default async function TecnologyPage({ searchParams }: Props) {
       </div>
 
       <section className="tecnology-shop">
-        <Filters />
+        <Filters category="tecnologia" />
         <div>
-          <ShopGrid category="tecnologia" sort={params.sort} />
+          <ShopGrid category="tecnologia" subcategory={params.subcategory} sort={params.sort} />
         </div>
       </section>
     </div>

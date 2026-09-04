@@ -25,7 +25,7 @@ export default async function Clothespage({ searchParams }: Props) {
         <CatalogMenu active={'ropa'} />
       </div>
       <section className="clothes-shop">
-        <Filters />
+        <Filters category="ropa" />
         <div>
           <ShopGrid category="ropa" sort={params.sort} />
         </div>
