@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import './filters.css'
+import { FiltersCut } from './FiltersCut/FiltersCut'
 
 type Subcategory = {
   id: string
@@ -128,6 +129,11 @@ export default function Filters({ category }: FiltersProps) {
           <input type="checkbox" />
           Más de $1.500.000
         </label>
+      </div>
+
+      <div className="filter-group">
+        <h4>Tallas</h4>
+        <FiltersCut />
       </div>
 
       <button type="button" className="btn btn-teal btn-block" onClick={handleApplyFilters}>

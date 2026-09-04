@@ -189,40 +189,235 @@
 }
 
 .container-btn {
+    position: relative;
+    z-index: 20;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
 }
 
 .price-btn {
+    position: relative;
+    z-index: 20;
     background: #0a666d;
     color: white;
     border: none;
     border-radius: 12px;
     width: 40px;
     height: 40px;
+    min-width: 40px;
+    min-height: 40px;
     cursor: pointer;
     display: grid;
     place-items: center;
     flex-shrink: 0;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .price-btn:hover {
     background: var(--coral);
 }
 
+.price-btn:active {
+    transform: scale(0.94);
+}
+
+
+
+.price-btn:hover {
+    background: var(--coral);
+}
+
 @media (max-width: 1080px) {
+
     .product-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 15px;
     }
+
 }
 
 @media (max-width: 768px) {
+
     .product-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        gap: 14px;
     }
 
     .product-card {
         width: 100%;
+        margin-top: 15px;
     }
+
+    .product-image {
+        height: 180px;
+    }
+
+    .product-info {
+        padding: 9px;
+    }
+
+    .product-info h3 {
+        font-size: .95rem;
+    }
+
+    .rating {
+        gap: 7px;
+    }
+
+    .rating-estre {
+        font-size: 18px;
+    }
+
+    .rating span {
+        font-size: 14px;
+    }
+
+    .span-price {
+        font-size: 18px;
+        margin-left: 6px;
+    }
+
+    .span-oldPrice {
+        font-size: 14px;
+        margin-left: 6px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .product-card {
+        margin-top: 10px;
+        border-radius: 14px;
+    }
+
+    .product-image {
+        height: 150px;
+    }
+
+    .product-info {
+        padding: 8px;
+    }
+
+    .category {
+        font-size: .7rem;
+    }
+
+    .product-info h3 {
+        font-size: .88rem;
+        line-height: 1.25;
+        min-height: 38px;
+        margin: 4px 0 7px;
+    }
+
+    .rating {
+        gap: 5px;
+    }
+
+    .rating-estre {
+        font-size: 16px;
+    }
+
+    .rating span {
+        font-size: 12px;
+    }
+
+    .price {
+        min-height: 52px;
+        padding-top: 7px;
+    }
+
+    .span-price {
+        font-size: 16px;
+        margin-left: 3px;
+    }
+
+    .span-oldPrice {
+        font-size: 12px;
+        margin-left: 3px;
+    }
+
+    .price-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+    }
+
+    .product-descount,
+    .badge {
+        left: 6px;
+        top: 8px;
+        padding: 5px 8px;
+        font-size: 10px;
+    }
+
+    .btn-fav {
+        top: 7px;
+        right: 6px;
+    }
+
+    .link-favor {
+        width: 29px;
+        height: 29px;
+    }
+
+    .icon-fav {
+        font-size: 13px;
+    }
+
+}
+
+
+@media (max-width: 380px) {
+
+    .product-grid {
+        gap: 8px;
+    }
+
+    .product-image {
+        height: 135px;
+    }
+
+    .product-info {
+        padding: 7px;
+    }
+
+    .product-info h3 {
+        font-size: .82rem;
+        min-height: 35px;
+    }
+
+    .category {
+        font-size: .65rem;
+    }
+
+    .rating-estre {
+        font-size: 14px;
+    }
+
+    .rating span {
+        font-size: 11px;
+    }
+
+    .span-price {
+        font-size: 14px;
+    }
+
+    .span-oldPrice {
+        font-size: 11px;
+    }
+
+    .price-btn {
+        width: 33px;
+        height: 33px;
+    }
+
 }

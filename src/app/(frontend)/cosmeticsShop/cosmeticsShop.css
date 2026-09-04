@@ -33,7 +33,6 @@ width: 100%;
   box-shadow: 0 10px 24px rgba(10, 102, 109, .28);
 }
 
-
 .btn-ghost:hover {
   color: var(--coral);
   transform: translateY(-2px);
@@ -85,3 +84,52 @@ width: 100%;
   align-items: start;
 }
 
+.CosmeticsContainer {
+    width: 100%;
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}
+.Cosmetics-shop {
+    display: grid;
+    grid-template-columns: 268px 1fr;
+    gap: 28px;
+    padding-top: clamp(10px, 4vw, 44px);
+    margin-bottom: 20px;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+
+    .CosmeticsContainer {
+        padding-inline: 20px;
+    }
+
+    .Cosmetics-shop {
+        display: block;
+        padding-top: 20px;
+    }
+
+    .desktop-filters {
+        display: none;
+    }
+
+    .Cosmetics-products {
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .CosmeticsContainer {
+        padding-inline: 14px;
+    }
+
+    .Cosmetics-shop {
+        padding-top: 15px;
+    }
+
+    .Cosmetics-products {
+        width: 100%;
+    }
+}

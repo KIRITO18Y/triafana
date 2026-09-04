@@ -1,0 +1,25 @@
+.filters-cut {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filter-size {
+    width: 42px;
+    height: 38px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    display: grid;
+    place-items: center;
+    font-size: .85rem;
+    font-weight: 600;
+    background: #fff;
+    cursor: pointer;
+}
+
+.filter-size.is-active,
+.filter-size:hover {
+    background: var(--teal);
+    color: #fff;
+    border-color: transparent;
+}

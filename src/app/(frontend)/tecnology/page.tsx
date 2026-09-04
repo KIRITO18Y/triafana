@@ -1,6 +1,7 @@
 import './tecnology.css'
 import CatalogMenu from '@/components/CategoryMenu/CatalogMenu'
 import Filters from '@/components/Filters/Filters'
+import MobileFilters from '@/components/Filters/MobileFilters/MobileFilters'
 import { ShopGrid } from '@/components/ShopGrid/ShopGrid'
 
 type Props = {
@@ -17,19 +18,24 @@ export default async function TecnologyPage({ searchParams }: Props) {
     <div className="tecnologyContainer">
       <section className="page-head">
         <nav className="breadcrumb">
-          <a href="/">Inicio</a>/<span>Tecnología</span>
+          <a href="/">Inicio</a> / <span>Tecnología</span>
         </nav>
+
         <h1 className="page-title">Tecnología</h1>
+
         <p className="lead">Explora computadores, celulares, audio y accesorios.</p>
       </section>
 
       <div className="chip-row">
         <CatalogMenu active="tecnologia" />
       </div>
+      <MobileFilters category="tecnologia" />
 
       <section className="tecnology-shop">
-        <Filters category="tecnologia" />
-        <div>
+        <div className="desktop-filters">
+          <Filters category="tecnologia" />
+        </div>
+        <div className="technology-products">
           <ShopGrid category="tecnologia" subcategory={params.subcategory} sort={params.sort} />
         </div>
       </section>

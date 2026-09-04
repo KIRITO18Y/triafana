@@ -1,6 +1,7 @@
 import CatalogMenu from '@/components/CategoryMenu/CatalogMenu'
 import './store.css'
 import Filters from '@/components/Filters/Filters'
+import MobileFilters from '@/components/Filters/MobileFilters/MobileFilters'
 import { ShopGrid } from '@/components/ShopGrid/ShopGrid'
 
 type Props = {
@@ -17,7 +18,7 @@ export default async function StorePage({ searchParams }: Props) {
     <div className="storeContainer">
       <section className="page-head">
         <nav className="breadcrumb">
-          <a href="/">Inicio</a>/<span>Tienda</span>
+          <a href="/">Inicio</a> / <span>Tienda</span>
         </nav>
 
         <h1 className="page-title">Tienda</h1>
@@ -29,10 +30,13 @@ export default async function StorePage({ searchParams }: Props) {
         <CatalogMenu active="todo" />
       </div>
 
-      <section className="store-shop">
-        <Filters />
+      <MobileFilters category={''} />
 
-        <div>
+      <section className="store-shop">
+        <div className="desktop-filters">
+          <Filters />
+        </div>
+        <div className="store-products">
           <ShopGrid subcategory={params.subcategory} sort={params.sort} />
         </div>
       </section>

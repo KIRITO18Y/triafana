@@ -171,3 +171,163 @@
   gap: 6px;
   align-items: center;
 }
+
+
+
+/* TABLET */
+@media (max-width: 900px) {
+
+  .shoppingCategories-container {
+    padding-inline: 24px;
+    margin-top: 30px;
+    margin-bottom: 70px;
+  }
+
+  .section-head {
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .shoppingCategories-title {
+    font-size: clamp(1.7rem, 5vw, 2.2rem);
+  }
+
+  .lead {
+    font-size: 1rem;
+  }
+
+  .cat-strip {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .cat-card {
+    min-height: 175px;
+    padding: 24px;
+  }
+
+  .cat-card h3 {
+    font-size: 1.35rem;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .shoppingCategories-container {
+    width: 100%;
+    padding-inline: 18px;
+    margin-top: 25px;
+    margin-bottom: 55px;
+  }
+
+  .section-head {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+
+  .eyebrow-category {
+    font-size: .68rem;
+    letter-spacing: .13em;
+  }
+
+  .eyebrow-category::before {
+    width: 18px;
+  }
+
+  .shoppingCategories-title {
+    font-size: 1.75rem;
+    line-height: 1.15;
+  }
+
+  .lead {
+    font-size: .95rem;
+    line-height: 1.55;
+    max-width: 100%;
+  }
+
+  .section-head .link {
+    font-size: .9rem;
+    margin-top: 2px;
+  }
+
+
+  .cat-strip {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .cat-card {
+    min-height: 155px;
+    padding: 22px;
+    border-radius: var(--r-lg);
+  }
+
+  .cat-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .cat-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .cat-card p {
+    font-size: .88rem;
+    line-height: 1.45;
+  }
+
+  .cat-card .arrow {
+    margin-top: 11px;
+    font-size: .86rem;
+  }
+
+  .cat-card .blob {
+    width: 145px;
+    height: 145px;
+    top: -45px;
+    right: -35px;
+  }
+
+}
+
+
+
+@media (max-width: 400px) {
+
+  .shoppingCategories-container {
+    padding-inline: 14px;
+  }
+
+  .shoppingCategories-title {
+    font-size: 1.55rem;
+  }
+
+  .lead {
+    font-size: .9rem;
+  }
+
+  .cat-card {
+    min-height: 145px;
+    padding: 19px;
+  }
+
+  .cat-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .cat-card p {
+    font-size: .84rem;
+  }
+
+  .cat-card .arrow {
+    font-size: .82rem;
+  }
+
+}
+

@@ -87,3 +87,150 @@
   color: var(--muted);
   font-size: .94rem;
 }
+
+/* TABLET */
+@media (max-width: 900px) {
+
+  .serviceProducto {
+    padding-inline: 24px;
+    margin-top: 30px;
+    margin-bottom: 70px;
+  }
+
+  .title-services {
+    font-size: clamp(1.7rem, 5vw, 2.2rem);
+  }
+
+  .service-card {
+    padding: 26px;
+  }
+
+  .service-card .ic {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 16px;
+  }
+
+  .service-card .ic svg {
+    width: 25px;
+    height: 25px;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .serviceProducto {
+    width: 100%;
+    padding-inline: 18px;
+    margin-top: 25px;
+    margin-bottom: 55px;
+  }
+
+  .eyebrow-service {
+    font-size: .68rem;
+    letter-spacing: .13em;
+    gap: 7px;
+  }
+
+  .eyebrow-service::before {
+    width: 18px;
+  }
+
+  .title-services {
+    font-size: 1.75rem;
+    line-height: 1.15;
+  }
+
+  .serviceLink {
+    font-size: .9rem;
+  }
+
+  .service-card {
+    padding: 22px;
+    border-radius: var(--r-lg);
+  }
+
+  .service-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .service-card .ic {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    margin-bottom: 15px;
+  }
+
+  .service-card .ic svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .service-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 7px;
+  }
+
+  .service-card p {
+    font-size: .88rem;
+    line-height: 1.5;
+  }
+
+}
+
+@media (max-width: 400px) {
+
+  .serviceProducto {
+    padding-inline: 14px;
+  }
+
+  .title-services {
+    font-size: 1.55rem;
+  }
+
+  .service-card {
+    padding: 19px;
+  }
+
+  .service-card .ic {
+    width: 46px;
+    height: 46px;
+    border-radius: 13px;
+  }
+
+  .service-card .ic svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .service-card h3 {
+    font-size: 1.12rem;
+  }
+
+  .service-card p {
+    font-size: .84rem;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .serviceProducto .cols-3 {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+
+  .serviceProducto .cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+}
+
+

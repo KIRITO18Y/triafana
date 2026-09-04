@@ -1,6 +1,7 @@
 import './clothes.css'
 import CatalogMenu from '@/components/CategoryMenu/CatalogMenu'
 import Filters from '@/components/Filters/Filters'
+import MobileFilters from '@/components/Filters/MobileFilters/MobileFilters'
 import { ShopGrid } from '@/components/ShopGrid/ShopGrid'
 
 type Props = {
@@ -24,8 +25,12 @@ export default async function Clothespage({ searchParams }: Props) {
       <div className="chip-row">
         <CatalogMenu active={'ropa'} />
       </div>
+      <MobileFilters category="ropa" />
       <section className="clothes-shop">
-        <Filters category="ropa" />
+        <div className="desktop-filters">
+          <Filters category="ropa" />
+        </div>
+
         <div>
           <ShopGrid category="ropa" sort={params.sort} />
         </div>

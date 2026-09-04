@@ -113,3 +113,55 @@
   margin-bottom: 20px;
   align-items: start;
 }
+
+@media (max-width: 900px) {
+    .storeContainer {
+        padding-inline: 20px;
+    }
+
+    .store-shop {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding-top: 25px;
+    }
+
+    .desktop-filters {
+        display: none;
+    }
+}
+
+@media (min-width: 501px) and (max-width: 768px) {
+    .storeContainer {
+        padding-inline: 18px;
+    }
+}
+
+
+@media (max-width: 500px) {
+    .storeContainer {
+        padding-inline: 24px;
+    }
+
+    .page-head {
+        padding-top: 24px;
+    }
+
+    .breadcrumb {
+        font-size: .78rem;
+    }
+
+    .page-title {
+        font-size: 1.8rem;
+        margin-top: 10px;
+    }
+
+    .lead {
+        font-size: .9rem;
+        line-height: 1.5;
+    }
+
+    .store-shop {
+        display: block;
+        padding-top: 15px;
+    }
+}
