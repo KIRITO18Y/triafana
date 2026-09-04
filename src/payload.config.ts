@@ -32,6 +32,9 @@ export default buildConfig({
     client: {
       url: process.env.DATABASE_URL || '',
     },
+    // Push is only for quick local iteration; once migrations exist we apply
+    // schema changes explicitly via `payload migrate` to avoid drift bugs.
+    push: false,
   }),
   sharp,
   plugins: [],
