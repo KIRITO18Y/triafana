@@ -44,7 +44,7 @@ const CartSummary = () => {
         Finalizar compra
       </Link>
 
-      <Link href="/store" className="btn btn-ghost btn-block">
+      <Link href="/store" className="btn-sm btn-ghost btn-block">
         Seguir comprando
       </Link>
 

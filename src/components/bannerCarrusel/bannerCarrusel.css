@@ -27,10 +27,8 @@
 
 .hero-slide::before {
     content: "";
-
     position: absolute;
     inset: 0;
-
     background: linear-gradient(90deg,
             rgba(7, 42, 46, .92),
             rgba(7, 42, 46, .55),
@@ -41,7 +39,7 @@
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 1400px;
+    max-width: var(--maxw);
     margin: auto;
     padding: 0 60px;
 }
@@ -52,37 +50,41 @@
 
 .slide-tag {
     display: inline-flex;
-    padding: 8px 18px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, .15);
-    backdrop-filter: blur(10px);
-    color: white;
-    font-size: .75rem;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    font-family: var(--font-display);
     font-weight: 700;
-    letter-spacing: 2px;
-    margin-bottom: 18px;
+    font-size: .72rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, .15);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, .3);
+    color: white;
 }
 
 .hero-slide h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    line-height: 1.05;
-    font-weight: 900;
-    color: white;
-    margin-bottom: 20px;
+    color: #fff;
+    font-size: clamp(2rem, 5vw, 3.6rem);
+    line-height: 1.08;
+    margin-bottom: 14px;
 }
 
 .accent {
     color: #63d9ff;
 }
 
-
 .hero-slide p {
-    color: white;
+    color: #fff;
     opacity: .9;
+    max-width: 45ch;
+    margin-bottom: 26px;
     font-size: 1.15rem;
     line-height: 1.6;
-    max-width: 45ch;
-    margin-bottom: 25px;
 }
 
 .price-flag {
@@ -116,20 +118,25 @@
 
 .slide-actions {
     display: flex;
-    gap: 15px;
     flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
 }
 
 .btn {
-    padding: 15px 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    padding: 0 28px;
+    box-sizing: border-box;
     border-radius: 999px;
     font-weight: 700;
+    line-height: 1;
     text-decoration: none;
-    transition:
-        .25s ease;
+    white-space: nowrap;
+    transition: .25s ease;
 }
-
-
 
 .btn-primary {
     background: #ff6f61;
@@ -256,10 +263,6 @@
     background: #63d9ff;
 }
 
-
-/* =========================================
-   TABLET
-========================================= */
 
 @media (max-width: 900px) {
 

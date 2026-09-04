@@ -32,7 +32,7 @@
   font-size: 1.3rem;
 }
 
-.btn {
+.btn-sm {
     display: inline-flex;
     align-items: center;
     justify-content: center;

@@ -46,7 +46,6 @@ export async function ShopGrid({ category, subcategory, sort }: Props) {
         </div>
         <div className="no-products">
           <h3>No hay productos</h3>
-          <p>No encontramos productos para esta subcategoría.</p>
         </div>
       </div>
     )
@@ -92,7 +91,7 @@ export async function ShopGrid({ category, subcategory, sort }: Props) {
       ) : (
         <div className="no-products">
           <h3>No hay productos</h3>
-          <p>No encontramos productos para esta subcategoría.</p>
+          <p>No encontramos productos.</p>
         </div>
       )}
     </>

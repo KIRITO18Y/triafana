@@ -107,7 +107,7 @@ export function DataCardForm({ customer }: Props) {
         </div>
       </div>
 
-      <button type="submit" className="btn btn-teal" disabled={loading}>
+      <button type="submit" className="btn-data btn-teal" disabled={loading}>
         {loading ? 'Guardando...' : 'Guardar cambios'}
       </button>
     </form>

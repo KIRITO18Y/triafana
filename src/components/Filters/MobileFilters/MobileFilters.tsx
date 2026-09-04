@@ -13,15 +13,14 @@ export default function MobileFilters({ category }: Props) {
 
   return (
     <div className="mobile-filters">
-      <button
-        type="button"
+      <div
         className={`mobile-filter-icon ${open ? 'is-open' : ''}`}
         onClick={() => setOpen((prev) => !prev)}
         aria-label={open ? 'Ocultar filtros' : 'Mostrar filtros'}
       >
         <FontAwesomeIcon icon={faGear} className="mobile-filter" />
         <span>Filtros</span>
-      </button>
+      </div>
 
       {open && (
         <div className="mobile-filter-content">
