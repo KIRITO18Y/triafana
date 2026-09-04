@@ -25,7 +25,31 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN corepack enable && pnpm run build
+
+# Build-time-only placeholders. Some server code (e.g. the Account section's
+# layout, which calls getPayload() to check the session before rendering)
+# runs during `next build`'s page-data collection, even for routes that end
+# up server-rendered on demand — so Payload's init needs SOME secret/DB URL
+# to not throw, even though no real request or session exists at build
+# time. These values are never used to sign or verify anything real.
+#
+# The ACTUAL secret is supplied only at container runtime via Dokploy's
+# Environment tab and is never baked into this image: ENV values set in
+# this stage do not carry over to the `runner` stage below, since it starts
+# fresh `FROM base`, not `FROM builder`.
+ENV PAYLOAD_SECRET=build-time-placeholder-overridden-at-runtime
+ENV DATABASE_URL=file:./build-placeholder.db
+
+# Some routes call getPayload() during next build's page-data collection
+# even though they end up server-rendered on demand (e.g. the Account
+# section checks the session via headers(), which only bails out of static
+# generation *after* getPayload() has already connected) — so the DB needs
+# a real schema at build time, even with no real content in it. This
+# placeholder file/schema never leaves the builder stage.
+RUN corepack enable \
+  && ./node_modules/.bin/payload migrate \
+  && pnpm run build \
+  && rm -f build-placeholder.db*
 
 # ---- Runtime ----
 FROM base AS runner

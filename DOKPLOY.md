@@ -115,6 +115,25 @@ valor en `package.json` si el build falla por falta de memoria.
   pasar el `product` completo, igual que en `ProductActions.tsx` y
   `AddToCartButton.tsx`.
 
-Validé el pipeline completo (`pnpm install --frozen-lockfile` +
-`pnpm run build`, migraciones incluidas) en un entorno limpio con pnpm
-11.25.0 y terminó sin errores.
+- `Dockerfile`: la etapa `builder` ahora corre `payload migrate` (con una
+  DB SQLite descartable, `build-placeholder.db`, borrada al final de la
+  misma capa) *antes* de `pnpm run build`, y define `PAYLOAD_SECRET`/
+  `DATABASE_URL` de relleno solo para esa etapa. Motivo: código como el
+  layout de `/Account` llama a `getPayload()` (necesita secreto + conexión
+  a DB) durante la recolección de datos de `next build`, incluso en rutas
+  que terminan siendo dinámicas — el secreto/DB reales de producción
+  jamás se hornean en la imagen (se pasan solo en runtime vía Dokploy).
+- `src/app/(frontend)/page.tsx`: se agregó `export const dynamic =
+  'force-dynamic'`. La home consulta `banners` directo desde Payload sin
+  ningún bailout de API dinámica (`headers()`/`cookies()`), así que Next
+  la congelaba como página **estática** en el build — con contenido vacío
+  (la DB del build es un placeholder sin datos reales) horneado en la
+  imagen. Con esto, la home siempre renderiza contra la base de datos real
+  en cada request, y los cambios que hagas en `/admin` (banners, etc.) se
+  reflejan sin necesidad de reconstruir la imagen.
+
+Validé el pipeline completo (`pnpm install --frozen-lockfile` → `payload
+migrate` con la DB placeholder → `pnpm run build`) en un entorno limpio,
+sin `.env` (igual que ve el build de Docker), y terminó sin errores — las
+19 rutas se generan correctamente y `/` quedó `ƒ` (dinámica) en vez de
+`○` (estática).
