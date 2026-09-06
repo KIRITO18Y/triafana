@@ -4,7 +4,7 @@ import './accountStat.css'
 import { useCallback, useEffect, useState } from 'react'
 export const AccountStat = () => {
   const [favoritesCount, setFavoritesCount] = useState(0)
-
+  
   const loadFavoritesCount = useCallback(async () => {
     try {
       const res = await fetch('/api/favorites?limit=1', {

@@ -11,6 +11,7 @@ import {
   faCreditCard,
   faGear,
 } from '@fortawesome/free-solid-svg-icons'
+import { toast } from 'react-toastify'
 
 export const AcccountNav = () => {
   const router = useRouter()
@@ -30,6 +31,10 @@ export const AcccountNav = () => {
 
         throw new Error('No se pudo cerrar la sesión')
       }
+
+      toast.success('Sesión cerrada correctamente', {
+        toastId: 'logout-success-toast',
+      })
 
       router.refresh()
       router.replace('/login')

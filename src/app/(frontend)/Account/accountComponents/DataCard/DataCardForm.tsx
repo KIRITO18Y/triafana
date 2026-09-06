@@ -70,7 +70,6 @@ export function DataCardForm({ customer }: Props) {
       <div className="form-grid">
         <div className="field">
           <label>Nombre</label>
-
           <input
             type="text"
             name="firstName"
@@ -82,7 +81,6 @@ export function DataCardForm({ customer }: Props) {
 
         <div className="field">
           <label>Apellidos</label>
-
           <input
             type="text"
             name="lastName"
@@ -95,21 +93,20 @@ export function DataCardForm({ customer }: Props) {
         <div className="full-width-fields">
           <div className="field">
             <label>Correo</label>
-
             <input type="email" name="email" value={form.email} onChange={handleChange} required />
           </div>
 
           <div className="field">
             <label>Teléfono</label>
-
             <input type="tel" name="phone" value={form.phone} onChange={handleChange} />
           </div>
         </div>
       </div>
-
-      <button type="submit" className="btn-data btn-teal" disabled={loading}>
-        {loading ? 'Guardando...' : 'Guardar cambios'}
-      </button>
+      <div className='btn-container'>
+        <button type="submit" className="btn-data btn-teal" disabled={loading}>
+          {loading ? 'Guardando...' : 'Guardar cambios'}
+        </button>
+      </div>
     </form>
   )
 }

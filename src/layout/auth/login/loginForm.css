@@ -156,6 +156,15 @@ input, select, textarea {
   gap: 16px;
 }
 
+
+.auth-error {
+  margin-top: 12px;
+  padding: 10px 14px;
+  color: #d32f2f;
+  font-size: 14px;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .form-grid {
     grid-template-columns: 1fr;

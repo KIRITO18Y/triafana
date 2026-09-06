@@ -22,7 +22,6 @@ export default async function StorePage({ searchParams }: Props) {
         </nav>
 
         <h1 className="page-title">Tienda</h1>
-
         <p className="lead">Explora todo el catálogo de TRIAFANA.</p>
       </section>
 

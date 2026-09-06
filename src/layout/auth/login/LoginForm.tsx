@@ -3,7 +3,7 @@
 import './loginForm.css'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-
+import { toast } from 'react-toastify'
 export const LoginForm = () => {
   const router = useRouter()
 
@@ -27,7 +27,43 @@ export const LoginForm = () => {
 
     setError('')
   }
+  const translateError = (message: string) => {
+    const msg = message.toLowerCase()
 
+    if (
+      msg.includes('invalid credentials') ||
+      msg.includes('invalid email or password') ||
+      msg.includes('email or password')
+    ) {
+      return 'El correo electrónico o la contraseña son incorrectos.'
+    }
+
+    if (msg.includes('user not found')) {
+      return 'No existe una cuenta con este correo electrónico.'
+    }
+
+    if (
+      msg.includes('email already exists') ||
+      msg.includes('email is already registered') ||
+      msg.includes('unique')
+    ) {
+      return 'Este correo electrónico ya está registrado.'
+    }
+
+    if (msg.includes('password')) {
+      return 'La contraseña no es válida. Debe tener al menos 8 caracteres.'
+    }
+
+    if (msg.includes('required')) {
+      return 'Por favor, completa todos los campos obligatorios.'
+    }
+
+    if (msg.includes('email')) {
+      return 'Por favor, introduce un correo electrónico válido.'
+    }
+
+    return message
+  }
   const register = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -55,7 +91,12 @@ export const LoginForm = () => {
       console.log('RESPUESTA REGISTRO:', data)
 
       if (!res.ok) {
-        throw new Error(data?.errors?.[0]?.message || data?.message || 'No se pudo crear la cuenta')
+        const message =
+          data?.errors?.[0]?.message ||
+          data?.message ||
+          'No se pudo crear la cuenta.'
+
+        throw new Error(translateError(message))
       }
 
       window.dispatchEvent(new Event('auth-change'))
@@ -65,12 +106,15 @@ export const LoginForm = () => {
     } catch (error) {
       console.error('ERROR REGISTRO:', error)
 
-      setError(error instanceof Error ? error.message : 'Ocurrió un error al crear la cuenta')
+      setError(
+        error instanceof Error
+          ? error.message
+          : 'Ocurrió un error al crear la cuenta.',
+      )
     } finally {
       setLoading(false)
     }
   }
-
   const login = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -92,11 +136,20 @@ export const LoginForm = () => {
 
       const data = await res.json()
 
+      console.log('RESPUESTA LOGIN:', data)
+
       if (!res.ok) {
-        throw new Error(
-          data?.errors?.[0]?.message || data?.message || 'Correo o contraseña incorrectos',
-        )
+        const message =
+          data?.errors?.[0]?.message ||
+          data?.message ||
+          'Correo o contraseña incorrectos.'
+
+        throw new Error(translateError(message))
       }
+
+      toast.success('Sesión iniciada correctamente', {
+        toastId: 'login-success-toast',
+      })
 
       setForm({
         firstName: '',
@@ -105,13 +158,17 @@ export const LoginForm = () => {
         phone: '',
         password: '',
       })
-
       window.dispatchEvent(new Event('auth-change'))
-
       router.push('/account')
       router.refresh()
     } catch (error) {
-      setError(error instanceof Error ? error.message : 'Ocurrió un error al iniciar sesión')
+      console.error('ERROR LOGIN:', error)
+
+      setError(
+        error instanceof Error
+          ? error.message
+          : 'Ocurrió un error al iniciar sesión.',
+      )
     } finally {
       setLoading(false)
     }
@@ -154,7 +211,7 @@ export const LoginForm = () => {
               <input
                 name="email"
                 type="email"
-                placeholder="Correo"
+                placeholder="Correo electrónico"
                 value={form.email}
                 onChange={handleChange}
                 required
@@ -183,7 +240,11 @@ export const LoginForm = () => {
               <a href="#">¿Olvidaste tu contraseña?</a>
             </div>
 
-            <button type="submit" className="btn btn-primary btn-block btn-lg" disabled={loading}>
+            <button
+              type="submit"
+              className="btn btn-primary btn-block btn-lg"
+              disabled={loading}
+            >
               {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
             </button>
           </form>
@@ -219,10 +280,11 @@ export const LoginForm = () => {
 
             <div className="field">
               <label>Correo electrónico</label>
+
               <input
                 name="email"
                 type="email"
-                placeholder="Correo"
+                placeholder="Correo electrónico"
                 value={form.email}
                 onChange={handleChange}
                 required
@@ -260,7 +322,11 @@ export const LoginForm = () => {
               Acepto los términos y la política de privacidad
             </label>
 
-            <button type="submit" className="btn btn-primary btn-block btn-lg" disabled={loading}>
+            <button
+              type="submit"
+              className="btn btn-primary btn-block btn-lg"
+              disabled={loading}
+            >
               {loading ? 'Creando cuenta...' : 'Crear cuenta'}
             </button>
           </form>
@@ -271,3 +337,4 @@ export const LoginForm = () => {
     </section>
   )
 }
+

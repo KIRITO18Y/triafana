@@ -10,7 +10,7 @@ export default function Contact() {
           <a href="/">Inicio</a>/<span>Contacto</span>
         </nav>
         <h1 className="contact-title">Hablemos</h1>
-        <p>¿Tienes una pregunta sobre un producto o quieres cotizar un servicio? Escríbenos.</p>
+        <p className="contact-p">¿Tienes una pregunta sobre un producto o quieres cotizar un servicio? Escríbenos.</p>
       </section>
       <section className="contact-section">
         <div className="contact-split">
@@ -38,7 +38,7 @@ export default function Contact() {
                 <textarea rows={5} placeholder="Cuéntanos en qué podemos ayudarte…"></textarea>
               </div>
             </div>
-            <div>
+            <div className='btn-enviar'>
               <button className="btn contact-btn btn-lg">Enviar mensaje</button>
             </div>
           </div>

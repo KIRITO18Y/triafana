@@ -68,6 +68,11 @@
   box-sizing: border-box;
 }
 
+.btn-container{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
 
 .btn-data{
     display: inline-flex;
