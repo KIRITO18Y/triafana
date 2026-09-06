@@ -1,4 +1,15 @@
+# Not a real monorepo — this repo is a single package. `packages` is
+# declared explicitly because some pnpm versions error with
+# "packages field missing or empty" during `pnpm install` when
+# pnpm-workspace.yaml exists (e.g. auto-created by build-script approval)
+# without it. See https://github.com/pnpm/pnpm/issues/9361
+packages:
+  - '.'
+
 allowBuilds:
   esbuild: true
   sharp: true
   unrs-resolver: true
+
+overrides:
+  tsx: 4.21.0

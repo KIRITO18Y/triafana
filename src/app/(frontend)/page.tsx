@@ -10,6 +10,13 @@ import { TopSale } from './Product/TopSale/topSale'
 import { Promo } from '@/slices/Home/PromoProducts/promo'
 import { Offers } from '@/slices/Home/Offers/offers'
 
+// This page queries live CMS content (banners) with no dynamic-API bailout
+// (like headers()/cookies()), so Next.js would otherwise try to prerender
+// it once at build time and freeze that result into the image — meaning
+// new banners added later via /admin would never show up without a full
+// rebuild. Forcing dynamic rendering makes it always reflect the live DB.
+export const dynamic = 'force-dynamic'
+
 export default async function Home() {
   const payload = await getPayload({
     config,

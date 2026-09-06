@@ -1,71 +1,75 @@
-# To use this Dockerfile, you have to set `output: 'standalone'` in your next.config.mjs file.
-# From https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile
+# syntax=docker/dockerfile:1
+#
+# Production image for Dokploy. Ships full production node_modules (not the
+# Next.js "standalone" trace) so that `payload migrate` can run at container
+# startup alongside `next start` — Payload's CLI needs the full dependency
+# tree and the `src/` sources, which a pruned standalone build would not
+# reliably include.
+#
+# The pnpm version is pinned via the `packageManager` field in package.json
+# (read automatically by `corepack enable`), so this build always uses the
+# exact same pnpm version the lockfile was generated with.
 
 FROM node:22.17.0-alpine AS base
-
-# Install dependencies only when needed
-FROM base AS deps
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+# ---- Install dependencies ----
+FROM base AS deps
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN corepack enable && pnpm install --frozen-lockfile
 
-
-# Rebuild the source code only when needed
+# ---- Build ----
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+ENV NEXT_TELEMETRY_DISABLED=1
 
-# Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry during the build.
-# ENV NEXT_TELEMETRY_DISABLED 1
+# Build-time-only placeholders. Some server code (e.g. the Account section's
+# layout, which calls getPayload() to check the session before rendering)
+# runs during `next build`'s page-data collection, even for routes that end
+# up server-rendered on demand — so Payload's init needs SOME secret/DB URL
+# to not throw, even though no real request or session exists at build
+# time. These values are never used to sign or verify anything real.
+#
+# The ACTUAL secret is supplied only at container runtime via Dokploy's
+# Environment tab and is never baked into this image: ENV values set in
+# this stage do not carry over to the `runner` stage below, since it starts
+# fresh `FROM base`, not `FROM builder`.
+ENV PAYLOAD_SECRET=build-time-placeholder-overridden-at-runtime
+ENV DATABASE_URL=file:./build-placeholder.db
 
-RUN \
-  if [ -f yarn.lock ]; then yarn run build; \
-  elif [ -f package-lock.json ]; then npm run build; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+# Some routes call getPayload() during next build's page-data collection
+# even though they end up server-rendered on demand (e.g. the Account
+# section checks the session via headers(), which only bails out of static
+# generation *after* getPayload() has already connected) — so the DB needs
+# a real schema at build time, even with no real content in it. This
+# placeholder file/schema never leaves the builder stage.
+RUN corepack enable \
+  && ./node_modules/.bin/payload migrate \
+  && pnpm run build \
+  && rm -f build-placeholder.db*
 
-# Production image, copy all the files and run next
+# ---- Runtime ----
 FROM base AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
-# Uncomment the following line in case you want to disable telemetry during runtime.
-# ENV NEXT_TELEMETRY_DISABLED 1
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV PORT=3000
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+RUN addgroup --system --gid 1001 nodejs \
+  && adduser --system --uid 1001 nextjs \
+  # Persistent data lives here. Mount Dokploy volumes onto these two
+  # directories so the SQLite database and uploaded media survive redeploys.
+  && mkdir -p /app/data /app/media \
+  && chown -R nextjs:nodejs /app/data /app/media
 
-# Remove this line if you do not have this folder
-COPY --from=builder /app/public ./public
-
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app ./
+RUN chmod +x /app/docker-entrypoint.sh
 
 USER nextjs
-
 EXPOSE 3000
 
-ENV PORT 3000
-
-# server.js is created by next build from the standalone output
-# https://nextjs.org/docs/pages/api-reference/next-config-js/output
-CMD HOSTNAME="0.0.0.0" node server.js
+ENTRYPOINT ["/app/docker-entrypoint.sh"]

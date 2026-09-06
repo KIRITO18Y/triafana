@@ -32,6 +32,21 @@ export default buildConfig({
     client: {
       url: process.env.DATABASE_URL || '',
     },
+    // Push is only for quick local iteration; once migrations exist we apply
+    // schema changes explicitly via `payload migrate` to avoid drift bugs.
+    //
+    // NOTE: we deliberately do NOT set `prodMigrations` here. That option
+    // makes Payload attempt migrations as part of its own init whenever
+    // NODE_ENV=production — which `next build` sets internally too, so it
+    // ends up trying to migrate whatever DATABASE_URL is active (including
+    // a local dev DB) during the build's parallel static-generation
+    // workers. If that DB has any drift (e.g. from dev-mode push), Payload
+    // shows an interactive "data loss, proceed? (y/N)" prompt that the
+    // build workers can't answer, and the build hangs/times out.
+    // Migrations run once, explicitly, via `payload migrate` in
+    // docker-entrypoint.sh before the server starts — that's the only
+    // place they should run.
+    push: false,
   }),
   sharp,
   plugins: [],

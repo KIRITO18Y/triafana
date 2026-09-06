@@ -49,3 +49,6 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 trifana-store.db
+
+#Temporales
+_tmp_*
