@@ -59,6 +59,13 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 
+# su-exec lets the entrypoint start as root (needed to fix ownership of
+# whatever Dokploy mounts onto /app/data and /app/media — a bind mount to a
+# host directory keeps the HOST's ownership, ignoring anything baked into
+# the image, which otherwise causes "unable to open database file" errors)
+# and then drop to the unprivileged `nextjs` user before running the app.
+RUN apk add --no-cache su-exec
+
 RUN addgroup --system --gid 1001 nodejs \
   && adduser --system --uid 1001 nextjs \
   # Persistent data lives here. Mount Dokploy volumes onto these two
@@ -69,7 +76,8 @@ RUN addgroup --system --gid 1001 nodejs \
 COPY --from=builder --chown=nextjs:nodejs /app ./
 RUN chmod +x /app/docker-entrypoint.sh
 
-USER nextjs
+# Deliberately NOT switching to USER nextjs here — the entrypoint does that
+# itself (via su-exec) after fixing volume ownership as root.
 EXPOSE 3000
 
 ENTRYPOINT ["/app/docker-entrypoint.sh"]

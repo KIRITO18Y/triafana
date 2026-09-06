@@ -64,6 +64,20 @@ En **Domains**, agrega tu dominio (o usa el subdominio gratuito
 `*.traefik.me` de Dokploy) apuntando al puerto `3000`, con HTTPS/Let's
 Encrypt activado.
 
+## 5.1. Si ves "unable to open database file" / "ConnectionFailed" al arrancar
+
+Esto pasa cuando el volumen que Dokploy monta en `/app/data` (o `/app/media`)
+queda con un dueño distinto al usuario `nextjs` (uid 1001) con el que corre
+la app dentro del contenedor — típico de un **Bind** a una carpeta del VPS
+recién creada, que por defecto queda `root:root`. El contenedor no puede
+entonces abrir/crear el archivo SQLite ahí.
+
+Ya no deberías ver esto: el `docker-entrypoint.sh` arranca como root,
+corrige el dueño de `/app/data` y `/app/media` en cada boot
+(`chown -R nextjs:nodejs`), y recién ahí baja privilegios (`su-exec`) para
+correr las migraciones y el servidor. Si de todas formas persiste, revisá
+que el volumen esté realmente montado en esas rutas exactas y no en otra.
+
 ## 6. Memoria durante el build
 
 El script `build` usa `--max-old-space-size=8000` (8 GB). Si el VPS tiene
