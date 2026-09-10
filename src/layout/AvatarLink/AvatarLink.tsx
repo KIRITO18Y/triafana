@@ -62,7 +62,7 @@ export default function AvatarLink() {
   if (loading) {
     return (
       <Link href="/login" className="avatar">
-        FT
+        TF
       </Link>
     )
   }
@@ -79,7 +79,7 @@ export default function AvatarLink() {
 
   return (
     <Link href="/login" className="avatar">
-      FT
+      TF
     </Link>
   )
 }

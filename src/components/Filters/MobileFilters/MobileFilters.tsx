@@ -1,4 +1,5 @@
 'use client'
+import './MobileFilters.css'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGear } from '@fortawesome/free-solid-svg-icons'
@@ -13,14 +14,14 @@ export default function MobileFilters({ category }: Props) {
 
   return (
     <div className="mobile-filters">
-      <div
+      <button
         className={`mobile-filter-icon ${open ? 'is-open' : ''}`}
         onClick={() => setOpen((prev) => !prev)}
         aria-label={open ? 'Ocultar filtros' : 'Mostrar filtros'}
       >
         <FontAwesomeIcon icon={faGear} className="mobile-filter" />
         <span>Filtros</span>
-      </div>
+      </button>
 
       {open && (
         <div className="mobile-filter-content">

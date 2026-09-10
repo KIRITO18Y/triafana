@@ -1,5 +1,4 @@
 'use client'
-
 import '../Header/header.css'
 import Link from 'next/link'
 import Logo from '../Logo/Logo'
@@ -21,7 +20,6 @@ export const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const pathname = usePathname()
-
   const { cart } = useCart()
 
   const totalItems = cart.reduce((total, item) => total + item.quantity, 0)
@@ -37,26 +35,18 @@ export const Header = () => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
-
-  // Cerrar menú cuando cambia la página
   useEffect(() => {
     setMenuOpen(false)
   }, [pathname])
 
   return (
-    <div className="container-header">
+    <div className="header-container">
       <div className={`header ${scroll ? 'header-scroll' : ''}`}>
         <div className="nav-shell">
-          {/* LOGO */}
           <Logo className="logo" width={40} height={40} />
-
           <Link href="/" className="title-link">
             <b>TRIAFANA</b>
           </Link>
-
-          {/* =========================
-              MENÚ DESKTOP
-          ========================= */}
 
           <nav className="nav">
             <Link href="/" className={`nav-link ${pathname === '/' ? 'active' : ''}`}>
@@ -89,20 +79,11 @@ export const Header = () => {
             </Link>
           </nav>
 
-          {/* =========================
-              BUSCADOR
-              Se oculta en móvil
-          ========================= */}
-
           <form className="nav-search">
             <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
 
             <input type="text" placeholder="Buscar productos, marcas" />
           </form>
-
-          {/* =========================
-              ACCIONES
-          ========================= */}
 
           <div className="nav-actions">
             <Link href="/account/favoritesPage" className="icon-btn" aria-label="Favoritos">
@@ -120,8 +101,6 @@ export const Header = () => {
             </Link>
 
             <AvatarLink />
-
-            {/* HAMBURGUESA */}
             <button
               type="button"
               className={`menu-toggle ${menuOpen ? 'is-open' : ''}`}
@@ -134,20 +113,10 @@ export const Header = () => {
           </div>
         </div>
 
-        {/* =========================
-            OVERLAY
-        ========================= */}
-
         {menuOpen && <div className="mobile-overlay" onClick={() => setMenuOpen(false)} />}
-
-        {/* =========================
-            MENÚ MOBILE
-        ========================= */}
 
         <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
           <div className="mobile-menu-content">
-            {/* BOTÓN X */}
-
             <button
               type="button"
               className="mobile-close"
@@ -157,13 +126,9 @@ export const Header = () => {
               <FontAwesomeIcon icon={faXmark} />
             </button>
 
-            {/* LOGO */}
-
             <Link href="/" className="mobile-logo">
               <b>TRIAFANA</b>
             </Link>
-
-            {/* NAVEGACIÓN */}
 
             <nav className="mobile-nav">
               <Link href="/" className={pathname === '/' ? 'active' : ''}>
@@ -186,9 +151,6 @@ export const Header = () => {
                 Servicios
               </Link>
             </nav>
-
-            {/* CUENTA */}
-
             <Link href="/account" className="mobile-account">
               Mi cuenta
             </Link>

@@ -17,12 +17,19 @@ type Props = {
 export default function ProductCard({ product }: Props) {
   const { addToCart } = useCart()
   const router = useRouter()
+
   const [isFavorite, setIsFavorite] = useState(false)
   const [loadingFavorite, setLoadingFavorite] = useState(false)
-  const shortName = product.name.length > 20 ? `${product.name.slice(0, 20)}...` : product.name
+
+  const shortName =
+    product.name.length > 20
+      ? `${product.name.slice(0, 20)}...`
+      : product.name
 
   const formatPrice = (price: number) => {
-    return `$${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+    return `$${price
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
   }
 
   useEffect(() => {
@@ -43,10 +50,15 @@ export default function ProductCard({ product }: Props) {
           return
         }
 
-        const favoritesRes = await fetch(`/api/favorites?where[product][equals]=${product.id}`, {
-          credentials: 'include',
-          cache: 'no-store',
-        })
+        const userId = userData.user.id
+
+        const favoritesRes = await fetch(
+          `/api/favorites?where[product][equals]=${product.id}&where[user][equals]=${userId}`,
+          {
+            credentials: 'include',
+            cache: 'no-store',
+          },
+        )
 
         if (!favoritesRes.ok) {
           return
@@ -63,7 +75,9 @@ export default function ProductCard({ product }: Props) {
     checkFavorite()
   }, [product.id])
 
-  const toggleFavorite = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const toggleFavorite = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+  ) => {
     e.stopPropagation()
 
     if (loadingFavorite) {
@@ -102,23 +116,32 @@ export default function ProductCard({ product }: Props) {
 
         return
       }
-      const favoriteRes = await fetch(`/api/favorites?where[product][equals]=${product.id}`, {
-        credentials: 'include',
-        cache: 'no-store',
-      })
+
+      const userId = userData.user.id
+      const favoriteRes = await fetch(
+        `/api/favorites?where[product][equals]=${product.id}&where[user][equals]=${userId}`,
+        {
+          credentials: 'include',
+          cache: 'no-store',
+        },
+      )
 
       if (!favoriteRes.ok) {
         throw new Error('No se pudieron consultar los favoritos')
       }
 
       const favoriteData = await favoriteRes.json()
+
       if (favoriteData.totalDocs > 0) {
         const favoriteId = favoriteData.docs[0].id
 
-        const deleteRes = await fetch(`/api/favorites/${favoriteId}`, {
-          method: 'DELETE',
-          credentials: 'include',
-        })
+        const deleteRes = await fetch(
+          `/api/favorites/${favoriteId}`,
+          {
+            method: 'DELETE',
+            credentials: 'include',
+          },
+        )
 
         if (!deleteRes.ok) {
           throw new Error('No se pudo quitar de favoritos')
@@ -129,7 +152,9 @@ export default function ProductCard({ product }: Props) {
         toast.info(`"${shortName}" eliminado de favoritos`, {
           toastId: 'favorite-toast',
         })
-      } else {
+      }
+
+      else {
         const createRes = await fetch('/api/favorites', {
           method: 'POST',
           headers: {
@@ -138,14 +163,16 @@ export default function ProductCard({ product }: Props) {
           credentials: 'include',
           body: JSON.stringify({
             product: product.id,
-            user: userData.user.id,
+            user: userId,
           }),
         })
 
         if (!createRes.ok) {
           const errorData = await createRes.json()
 
-          throw new Error(errorData?.message || 'No se pudo agregar a favoritos')
+          throw new Error(
+            errorData?.message || 'No se pudo agregar a favoritos',
+          )
         }
 
         setIsFavorite(true)
@@ -165,8 +192,21 @@ export default function ProductCard({ product }: Props) {
     }
   }
 
+  const handleAddToCart = (
+    e: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    // MUY IMPORTANTE:
+    // evita que el click abra el detalle del producto
+    e.stopPropagation()
+
+    addToCart(product)
+  }
+
   return (
-    <div className="product-card" onClick={() => router.push(`/Product/${product.id}`)}>
+    <div
+      className="product-card"
+      onClick={() => router.push(`/Product/${product.id}`)}
+    >
       <div className="product-image">
         <img
           src={product.image?.url || '/placeholder.png'}
@@ -176,22 +216,37 @@ export default function ProductCard({ product }: Props) {
 
         <div>
           {product.discount ? (
-            <span className="product-descount">{product.discount}%</span>
+            <span className="product-descount">
+              {product.discount}%
+            </span>
           ) : product.featured ? (
-            <span className="badge">Destacado</span>
+            <span className="badge">
+              Destacado
+            </span>
           ) : null}
         </div>
+
+        {/* FAVORITO */}
 
         <div className="btn-fav">
           <button
             type="button"
-            className={`link-favor ${isFavorite ? 'is-favorite' : ''}`}
+            className={`link-favor ${isFavorite ? 'is-favorite' : ''
+              }`}
             onClick={toggleFavorite}
             disabled={loadingFavorite}
-            aria-label={isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'}
+            aria-label={
+              isFavorite
+                ? 'Quitar de favoritos'
+                : 'Agregar a favoritos'
+            }
           >
             <FontAwesomeIcon
-              icon={isFavorite ? faHeartSolid : faHeartRegular}
+              icon={
+                isFavorite
+                  ? faHeartSolid
+                  : faHeartRegular
+              }
               className="icon-fav"
             />
           </button>
@@ -206,32 +261,44 @@ export default function ProductCard({ product }: Props) {
               ? 'COSMETIQUERÍA'
               : product.category === 'ropa'
                 ? 'ROPA'
-                : product.category?.toUpperCase() || 'GENERAL'}
+                : product.category?.toUpperCase() ||
+                'GENERAL'}
         </span>
 
-        <h3 className="card-name">{product.name}</h3>
+        <h3 className="card-name">
+          {product.name}
+        </h3>
+
         <div className="rating">
-          <div className="rating-estre">★★★★★</div>
+          <div className="rating-estre">
+            ★★★★★
+          </div>
+
           <span>4.8</span>
         </div>
 
         <div className="price">
           <div className="price-oldPrice">
-            <span className="span-price">{formatPrice(Number(product.price) || 0)}</span>
+            <span className="span-price">
+              {formatPrice(
+                Number(product.price) || 0,
+              )}
+            </span>
 
             {product.oldPrice && (
-              <span className="span-oldPrice">{formatPrice(Number(product.oldPrice))}</span>
+              <span className="span-oldPrice">
+                {formatPrice(
+                  Number(product.oldPrice),
+                )}
+              </span>
             )}
           </div>
 
           <div className="container-btn">
             <button
+              type="button"
               className="price-btn"
-              onClick={(e) => {
-                e.stopPropagation()
-
-                addToCart(product)
-              }}
+              onClick={handleAddToCart}
               aria-label="Agregar al carrito"
             >
               <FontAwesomeIcon icon={faPlus} />
@@ -242,3 +309,4 @@ export default function ProductCard({ product }: Props) {
     </div>
   )
 }
+

@@ -3,15 +3,9 @@ import { DataCardForm } from './DataCardForm'
 import { getPayload } from 'payload'
 import { headers } from 'next/headers'
 import config from '@payload-config'
-
 export const DataCard = async () => {
-  const payload = await getPayload({
-    config,
-  })
-
-  const { user } = await payload.auth({
-    headers: await headers(),
-  })
+  const payload = await getPayload({ config })
+  const { user } = await payload.auth({ headers: await headers() })
 
   if (!user) {
     return (
@@ -26,12 +20,13 @@ export const DataCard = async () => {
     firstName?: string
     lastName?: string
     phone?: string
+    avatar?: { url?: string } | string | null
   }
+
 
   return (
     <div className="dataCard">
       <h3 className="data-title">Mis datos</h3>
-
       <DataCardForm
         customer={{
           id: customer.id,

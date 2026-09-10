@@ -6,7 +6,7 @@
   padding-inline: var(--gutter);
 }
 
-.container-header {
+.header-container {
     position: sticky;
     top: 6px;
     z-index: 100;
@@ -204,10 +204,6 @@
     cursor: pointer;
     text-decoration: none;
 }
-
-/* =========================================
-   BOTÓN MENÚ
-========================================= */
 
 .menu-toggle {
     display: none;
