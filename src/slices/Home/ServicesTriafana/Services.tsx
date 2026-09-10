@@ -13,13 +13,13 @@ export const ServicesTriafana = () => {
           <h1 className="title-services">Más que una tienda</h1>
         </div>
 
-        <Link className="serviceLink" href="/Services">
+        <Link className="serviceLink" href="/services">
           Conocer servicios →
         </Link>
       </div>
 
       <div className="grid cols-3">
-        <Link href="/Services" className="service-card">
+        <Link href="/services" className="service-card">
           <div className="ic">
             <FontAwesomeIcon icon={faLaptopCode} />
           </div>
@@ -29,7 +29,7 @@ export const ServicesTriafana = () => {
           <p>Sitios y tiendas a medida, rápidos y centrados en conversión.</p>
         </Link>
 
-        <Link href="/Services" className="service-card">
+        <Link href="/services" className="service-card">
           <div className="ic">
             <FontAwesomeIcon icon={faBullhorn} />
           </div>
@@ -38,7 +38,7 @@ export const ServicesTriafana = () => {
 
           <p>Gestión de redes y contenido que conecta con tu audiencia.</p>
         </Link>
-        <Link href="/Services" className="service-card">
+        <Link href="/services" className="service-card">
           <div className="ic">
             <FontAwesomeIcon icon={faChartLine} />
           </div>
