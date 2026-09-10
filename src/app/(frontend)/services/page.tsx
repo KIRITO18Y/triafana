@@ -1,4 +1,4 @@
-import './ServicesPage.css'
+import './services-page.css'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBullhorn, faChartLine, faLaptopCode } from '@fortawesome/free-solid-svg-icons'
