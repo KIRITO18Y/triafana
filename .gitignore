@@ -52,3 +52,6 @@ trifana-store.db
 
 #Temporales
 _tmp_*
+
+# Base de datos local de Payload
+payload.db
