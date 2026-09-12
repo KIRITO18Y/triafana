@@ -27,6 +27,7 @@ const Cart = () => {
             </>
           )}
         </div>
+
       </section>
     </div>
   )
