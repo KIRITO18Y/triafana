@@ -16,7 +16,6 @@ const Cart = () => {
         </nav>
         <h1 className="page-title">Tu carrito</h1>
       </section>
-
       <section style={{ padding: '24px 0 60px' }}>
         <div className="cart-layout">
           {cart.length === 0 ? (
