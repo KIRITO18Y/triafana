@@ -139,7 +139,7 @@
 
 @media (max-width: 500px) {
     .storeContainer {
-        padding-inline: 24px;
+        padding-inline: 16px;
     }
 
     .page-head {

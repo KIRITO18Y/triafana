@@ -95,7 +95,7 @@ export const Header = () => {
 
               {totalItems > 0 && (
                 <div className="count">
-                  <span className="countToltal">{totalItems}</span>
+                  <span className="countTotal">{totalItems}</span>
                 </div>
               )}
             </Link>

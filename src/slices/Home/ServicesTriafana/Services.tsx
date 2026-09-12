@@ -9,10 +9,8 @@ export const ServicesTriafana = () => {
       <div className="section-head">
         <div>
           <span className="eyebrow-service">Servicios TRIAFANA</span>
-
           <h1 className="title-services">Más que una tienda</h1>
         </div>
-
         <Link className="serviceLink" href="/services">
           Conocer servicios →
         </Link>
@@ -23,9 +21,7 @@ export const ServicesTriafana = () => {
           <div className="ic">
             <FontAwesomeIcon icon={faLaptopCode} />
           </div>
-
           <h3>Diseño Web</h3>
-
           <p>Sitios y tiendas a medida, rápidos y centrados en conversión.</p>
         </Link>
 
@@ -33,9 +29,7 @@ export const ServicesTriafana = () => {
           <div className="ic">
             <FontAwesomeIcon icon={faBullhorn} />
           </div>
-
           <h3>Social Media</h3>
-
           <p>Gestión de redes y contenido que conecta con tu audiencia.</p>
         </Link>
         <Link href="/services" className="service-card">

@@ -35,3 +35,21 @@
   gap: 28px;
   align-items: start;
 }
+
+@media (max-width: 980px) {
+  .cart-layout {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .summary {
+    position: static;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .cart-container {
+    padding-inline: 18px;
+  }
+}

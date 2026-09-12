@@ -7,6 +7,20 @@ export type CartItem = {
   price: number
   image: string | { url?: string | null }
   quantity: number
+  category?: string
+}
+
+const categoryLabel = (category?: string) => {
+  switch (category) {
+    case 'tecnologia':
+      return 'TECNOLOGÍA'
+    case 'cosmetiqueria':
+      return 'COSMETIQUERÍA'
+    case 'ropa':
+      return 'ROPA'
+    default:
+      return category?.toUpperCase() || 'GENERAL'
+  }
 }
 
 export const CartItems = () => {
@@ -24,7 +38,7 @@ export const CartItems = () => {
           </div>
 
           <div>
-            <span className="cat">tecnologia</span>
+            <span className="cat">{categoryLabel(item.category)}</span>
             <h4>{item.name}</h4>
             <div className="qty">
               <button className="qtybutton" type="button" onClick={() => decreaseQuantity(item.id)}>
@@ -42,7 +56,9 @@ export const CartItems = () => {
           </div>
           <div className="line-price">
             <span className="price">{formatPrice(Number(item.price) || 0)}</span>
-            <span className="span-oldPrice">{formatPrice(Number(item.oldPrice))}</span>
+            {item.oldPrice ? (
+              <span className="span-oldPrice">{formatPrice(Number(item.oldPrice))}</span>
+            ) : null}
           </div>
         </div>
       ))}

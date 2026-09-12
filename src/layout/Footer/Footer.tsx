@@ -38,11 +38,11 @@ export const Footer = () => {
         <div>
           <h4>Categorías</h4>
 
-          <Link href="/store?cat=tecnologia">Tecnología</Link>
+          <Link href="/tecnology">Tecnología</Link>
 
-          <Link href="/store?cat=cosmetiqueria">Cosmetiquería</Link>
+          <Link href="/cosmeticsShop">Cosmetiquería</Link>
 
-          <Link href="/store?cat=ropa">Ropa</Link>
+          <Link href="/clothes">Ropa</Link>
 
           <Link href="/store">Promociones</Link>
         </div>

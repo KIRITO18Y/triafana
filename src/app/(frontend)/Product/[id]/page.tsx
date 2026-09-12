@@ -2,6 +2,7 @@ import './ProductDetail.css'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import ProductCard from '../ProductCard/ProductCard'
+import { notFound } from 'next/navigation'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBox, faShieldHalved, faTruck } from '@fortawesome/free-solid-svg-icons'
 import ProductActions from '@/app/(frontend)/Product/ProductActions/ProductActions'
@@ -13,11 +14,17 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
     config,
   })
 
-  const product = await payload.findByID({
-    collection: 'products',
-    id,
-    depth: 1,
-  })
+  let product
+
+  try {
+    product = await payload.findByID({
+      collection: 'products',
+      id,
+      depth: 1,
+    })
+  } catch {
+    notFound()
+  }
 
   const relatedProducts = await payload.find({
     collection: 'products',
@@ -39,14 +46,21 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
     },
   })
 
-  const formatPrice = (prince: number) => {
-    return `$${prince.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+  const formatPrice = (price: number) => {
+    return `$${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
   }
 
+  const categoryHref =
+    product.category === 'ropa'
+      ? '/clothes'
+      : product.category === 'cosmetiqueria'
+        ? '/cosmeticsShop'
+        : '/tecnology'
+
   return (
-    <div className="ProductDetaill">
+    <div className="ProductDetail">
       <nav className="nav-breadcrumb">
-        <a href="/">Inicio</a>/<a href="/tecnology">{product.category}</a>/
+        <a href="/">Inicio</a>/<a href={categoryHref}>{product.category}</a>/
         <span>{product.name}</span>
       </nav>
       <div className="container-detail">
@@ -70,7 +84,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
             <span> 4.8 · 128 reseñas</span>
           </div>
 
-          <div className="pdp-prince">
+          <div className="pdp-price">
             <span className="now">{formatPrice(Number(product.price) || 0)}</span>
             {product.oldPrice && (
               <span className="old">{formatPrice(Number(product.oldPrice))}</span>
@@ -130,7 +144,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
               </div>
               <div className="specs-title">
                 <h3>Pagos</h3>
-                <span className="grid-span">1Tarjeta, PSE, contraentrega</span>
+                <span className="grid-span">Tarjeta, PSE, contraentrega</span>
               </div>
             </div>
           </div>

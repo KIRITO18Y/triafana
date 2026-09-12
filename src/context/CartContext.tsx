@@ -14,6 +14,7 @@ export type CartItem = {
         url?: string | null
       }
   quantity: number
+  category?: string
 }
 
 type CartContextType = {
@@ -30,7 +31,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([])
 
   const addToCart = (product: Product, quantity: number = 1) => {
-    const shortName = product.name.length > 20 ? `${product.name.slice(0, 20)}` : product.name
+    const shortName =
+      product.name.length > 20 ? `${product.name.slice(0, 20)}...` : product.name
     const normalizedImage: string =
       typeof product.image === 'object' && product.image !== null
         ? product.image?.url ?? ''
@@ -42,7 +44,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const existing = prev.find((p) => p.id === product.id)
 
       if (existing) {
-        toast.success(`"${shortName}"agregado al carrito`, {
+        toast.success(`"${shortName}" agregado al carrito`, {
           toastId: 'cart-toast',
         })
 
@@ -69,6 +71,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
           oldPrice: Number(product.oldPrice) || 0,
           image: normalizedImage,
           quantity,
+          category: product.category,
         },
       ]
     })

@@ -9,7 +9,6 @@ import {
   faArrowRightFromBracket,
   faArrowsToCircle,
   faCreditCard,
-  faGear,
 } from '@fortawesome/free-solid-svg-icons'
 import { toast } from 'react-toastify'
 
@@ -72,14 +71,6 @@ export const AcccountNav = () => {
       >
         <FontAwesomeIcon icon={faUser} />
         Mis datos
-      </Link>
-
-      <Link
-        href="/account/preferences"
-        className={`account-nv ${pathname === '/account/preferences' ? 'active' : ''}`}
-      >
-        <FontAwesomeIcon icon={faGear} />
-        Preferencias
       </Link>
 
       <button className="account-btn" style={{ color: 'red' }} onClick={handleLogout}>

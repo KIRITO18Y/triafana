@@ -18,7 +18,7 @@ export default function LoginPage() {
       </section>
       <div className="auth-wrap">
         <AuthAside isLogin={isLogin} />
-        <LoginForm {...({ isLogin, setIsLogin } as any)} />
+        <LoginForm />
       </div>
     </div>
   )

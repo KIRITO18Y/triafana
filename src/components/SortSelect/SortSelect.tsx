@@ -27,7 +27,7 @@ export default function SortSelect() {
       <option value="rel">Relevancia</option>
       <option value="asc">Precio: menor a mayor </option>
       <option value="desc">Precio: mayor a menor</option>
-      <option value="desc">Mejor valorado</option>
+      <option value="rating">Mejor valorado</option>
     </select>
   )
 }

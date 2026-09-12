@@ -68,4 +68,39 @@
     box-shadow: var(--shadow-sm);
 }
 
+@media (max-width: 900px) {
+  .account-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .account-nav {
+    padding: 12px;
+  }
+
+  .account-nav aside {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .account-nv,
+  .account-btn {
+    flex: 1 1 auto;
+    justify-content: center;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .account-container {
+    padding-inline: 18px;
+  }
+
+  .stat-tiles {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+}
+
 

@@ -29,9 +29,6 @@ export async function ShopGrid({ category, subcategory, sort }: Props) {
 
     const found = result.docs[0]
 
-    console.log('SUBCATEGORY SLUG:', subcategory)
-    console.log('SUBCATEGORY FOUND:', found)
-
     if (found) {
       subcategoryId = found.id
     }
@@ -64,14 +61,13 @@ export async function ShopGrid({ category, subcategory, sort }: Props) {
     }
   }
 
-  console.log('WHERE FINAL:', where)
   const products = await payload.find({
     collection: 'products',
     where,
+    limit: 30,
     sort: sort === 'asc' ? 'price' : sort === 'desc' ? '-price' : undefined,
   })
 
-  console.log('TOTAL PRODUCTS:', products.totalDocs)
   return (
     <>
       <div className="shop-toolbar">

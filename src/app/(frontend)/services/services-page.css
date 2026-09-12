@@ -334,3 +334,55 @@ hero {
   text-align: center;
   font-size: clamp(4rem, 12vw, 8rem);
 }
+
+@media (max-width: 900px) {
+  .service-cols-3,
+  .service-contianer .grid.cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-card {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .service-contianer {
+    padding-inline: 18px;
+  }
+
+  .service-cols-3,
+  .service-contianer .grid.cols-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-card {
+    padding: 28px 20px;
+  }
+
+  .promo {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 28px 20px;
+  }
+
+  .icon-promo {
+    display: none;
+  }
+
+  .hero-actions,
+  .promo .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .btn,
+  .promo .actions .btn {
+    width: 100%;
+  }
+
+  .service-card {
+    padding: 22px;
+  }
+}

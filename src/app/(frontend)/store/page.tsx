@@ -29,7 +29,7 @@ export default async function StorePage({ searchParams }: Props) {
         <CatalogMenu active="todo" />
       </div>
 
-      <MobileFilters category={'category'} />
+      <MobileFilters category="" />
 
       <section className="store-shop">
         <div className="desktop-filters">

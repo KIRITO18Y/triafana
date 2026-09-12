@@ -1,4 +1,4 @@
-.ProductDetaill {
+.ProductDetail {
     width: 100%;
     max-width: var(--maxw);
     margin-inline: auto;
@@ -77,12 +77,13 @@
 .p-name {
     font-family: var(--font-display);
     color: var(--ink);
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
     line-height: 1.12;
     font-weight: 700;
     letter-spacing: -0.01em;
 }
 
-.pdp-prince {
+.pdp-price {
     display: flex;
     align-items: baseline;
     gap: 12px;
@@ -282,6 +283,12 @@ h3 {
     color: #888;
 }
 
+@media (max-width: 1080px) {
+    .detaill-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 @media (max-width: 900px) {
 
     .container-detail {
@@ -303,8 +310,8 @@ h3 {
         grid-column: auto;
     }
 
-    .cols-3 {
-        grid-template-columns: 1fr;
+    .detaill-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 

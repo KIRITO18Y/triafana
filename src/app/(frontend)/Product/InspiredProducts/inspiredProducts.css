@@ -1,4 +1,4 @@
-.inspiredProducts{
+.inspiredProducts {
   width: 100%;
   max-width: var(--maxw);
   margin-inline: auto;
@@ -6,55 +6,164 @@
   margin-bottom: 8%;
 }
 
-.products-head {
-  display: flex;
+.inspired-head {
   align-items: flex-end;
-  justify-content: space-between;
   gap: 24px;
   margin-bottom: 32px;
   padding-inline: var(--gutter);
   flex-wrap: wrap;
 }
 
+.inpired-infor {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
+
 .eyebro-inpir {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: .74rem;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: var(--teal);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal);
 }
 
 .eyebro-inpir::before {
-    content: "";
-    width: 22px;
-    height: 2px;
-    background: var(--coral);
-    border-radius: 2px;
+  content: "";
+  width: 22px;
+  height: 2px;
+  background: var(--coral);
+  border-radius: 2px;
 }
 
-.inpireP-title  {
+.inspireP-title {
   font-size: clamp(1.6rem, 3.4vw, 2.5rem);
+  margin: 8px 0 0;
+  line-height: 1.15;
 }
 
-.products-head .link {
+.inpired-infor .link {
   color: var(--teal);
   font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease;
 }
 
-.products-head .link:hover {
+.inpired-infor .link:hover {
   color: var(--coral);
 }
 
-
-.product-grid {
+.inpired-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 22px;
+}
+
+
+@media (max-width: 1080px) {
+  .inspiredProducts {
+    margin-top: 18px;
+  }
+
+  .inpired-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .inspiredProducts {
+    margin-top: 16px;
+    margin-bottom: 60px;
+  }
+
+  .inspired-head {
+    margin-bottom: 24px;
+    padding-inline: 20px;
+  }
+
+  .inpired-infor {
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  .inspireP-title {
+    font-size: clamp(1.45rem, 6vw, 2rem);
+  }
+
+  .inpired-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    padding-inline: 20px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .inspiredProducts {
+    margin-top: 12px;
+    margin-bottom: 50px;
+  }
+
+  .inspired-head {
+    padding-inline: 16px;
+    margin-bottom: 20px;
+  }
+
+  .inpired-infor {
+    align-items: flex-start;
+  }
+
+  .eyebro-inpir {
+    font-size: 0.68rem;
+    letter-spacing: 0.13em;
+  }
+
+  .eyebro-inpir::before {
+    width: 18px;
+  }
+
+  .inspireP-title {
+    font-size: 1.45rem;
+    line-height: 1.2;
+  }
+
+  .inpired-infor .link {
+    font-size: 0.85rem;
+  }
+
+  .inpired-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding-inline: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .inpired-grid {
+    gap: 10px;
+    padding-inline: 12px;
+  }
+
+  .inspired-head {
+    padding-inline: 12px;
+  }
+
+  .inspireP-title {
+    font-size: 1.3rem;
+  }
+
+  .inpired-infor .link {
+    font-size: 0.78rem;
+  }
 }

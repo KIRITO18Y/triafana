@@ -1,5 +1,4 @@
 'use client'
-
 import './ProductCard.css'
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons'
 import { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons'
@@ -15,11 +14,10 @@ type Props = {
 }
 
 export default function ProductCard({ product }: Props) {
-  const { addToCart } = useCart()
-  const router = useRouter()
-
   const [isFavorite, setIsFavorite] = useState(false)
   const [loadingFavorite, setLoadingFavorite] = useState(false)
+  const { addToCart } = useCart()
+  const router = useRouter()
 
   const shortName =
     product.name.length > 20
@@ -148,10 +146,10 @@ export default function ProductCard({ product }: Props) {
         }
 
         setIsFavorite(false)
-
         toast.info(`"${shortName}" eliminado de favoritos`, {
           toastId: 'favorite-toast',
         })
+        window.dispatchEvent(new Event('favorite-change'))
       }
 
       else {
@@ -176,10 +174,10 @@ export default function ProductCard({ product }: Props) {
         }
 
         setIsFavorite(true)
-
         toast.success(`"${shortName}" agregado a favoritos`, {
           toastId: 'favorite-toast',
         })
+        window.dispatchEvent(new Event('favorite-change'))
       }
     } catch (error) {
       console.error('Error con favoritos:', error)
@@ -195,10 +193,7 @@ export default function ProductCard({ product }: Props) {
   const handleAddToCart = (
     e: React.MouseEvent<HTMLButtonElement>,
   ) => {
-    // MUY IMPORTANTE:
-    // evita que el click abra el detalle del producto
     e.stopPropagation()
-
     addToCart(product)
   }
 
@@ -225,8 +220,6 @@ export default function ProductCard({ product }: Props) {
             </span>
           ) : null}
         </div>
-
-        {/* FAVORITO */}
 
         <div className="btn-fav">
           <button

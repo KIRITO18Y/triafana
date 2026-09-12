@@ -323,7 +323,7 @@ const CheckoutPage = () => {
                     <div className="summycart-perdidos">
                       <h4>
                         {summyCart.name.length > 17
-                          ? `${summyCart.name.slice(0, 25)}...`
+                          ? `${summyCart.name.slice(0, 17)}...`
                           : summyCart.name}
                       </h4>
 

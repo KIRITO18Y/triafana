@@ -27,7 +27,7 @@
 }
 .nv-login span{
     font-weight: 600;
-    color: var(--shadow-lg);
+    color: var(--ink);
 }
 
 .login-link {
@@ -38,4 +38,25 @@
 
 .login-link:hover {
     color: var(--teal);
+}
+
+@media (max-width: 800px) {
+  .auth-wrap {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .auth-aside {
+    padding: 32px 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .login-container {
+    padding-inline: 18px;
+  }
+
+  .login-head {
+    margin-bottom: 24px;
+  }
 }
