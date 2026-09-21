@@ -11,6 +11,8 @@ import { Products } from './collections/products'
 import { Customers } from './collections/Customers'
 import { Subcategories } from './collections/Subcategories'
 import { Favorites } from './collections/Favorites'
+import { Orders } from './collections/Orders'
+import { Coupons } from './collections/Coupons'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -22,7 +24,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Customers, Favorites, Users, Banners, Media, Products, Subcategories],
+  collections: [Customers, Favorites, Orders, Coupons, Users, Banners, Media, Products, Subcategories],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

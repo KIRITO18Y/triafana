@@ -1,13 +1,34 @@
 'use client'
 
-import './chekout.css'
+import './checkout.css'
 import { useCart } from '@/context/CartContext'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
+import { calcDiscount, minPurchaseWarning } from '@/lib/coupons'
+import CheckoutSteps from './CheckoutSteps/CheckoutSteps'
+import ContactForm from './ContactForm/ContactForm'
+import ShippingForm from './ShippingForm/ShippingForm'
+import PaymentMethod from './PaymentMethod/PaymentMethod'
+import OrderSummary from './OrderSummary/OrderSummary'
+import CheckoutConfirmation from './CheckoutConfirmation/CheckoutConfirmation'
+
+type PayMethod = 'card' | 'pse' | 'cod'
+
+type SessionUser = {
+  id: number | string
+  firstName?: string
+  lastName?: string
+  email?: string
+  phone?: string
+}
 
 const CheckoutPage = () => {
-  const { cart } = useCart()
+  const { cart, coupon, clearCart } = useCart()
 
   const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0)
+  const discount =
+    coupon && !minPurchaseWarning(subtotal, coupon) ? calcDiscount(subtotal, coupon) : 0
+  const total = subtotal - discount
 
   const [form, setForm] = useState({
     nombre: '',
@@ -25,19 +46,147 @@ const CheckoutPage = () => {
     cvv: '',
   })
 
+  const [payMethod, setPayMethod] = useState<PayMethod>('card')
+  const [error, setError] = useState('')
+  const [paying, setPaying] = useState(false)
+  const [order, setOrder] = useState<{ number: string; total: number; items: number } | null>(null)
+  const [sessionUser, setSessionUser] = useState<SessionUser | null>(null)
+  const [checkingSession, setCheckingSession] = useState(true)
+
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const res = await fetch('/api/customers/me', {
+          credentials: 'include',
+          cache: 'no-store',
+        })
+        if (!res.ok) return
+        const data = await res.json()
+        if (data?.user) {
+          setSessionUser(data.user)
+          setForm((prev) => ({
+            ...prev,
+            nombre: prev.nombre || data.user.firstName || '',
+            apellido: prev.apellido || data.user.lastName || '',
+            correo: prev.correo || data.user.email || '',
+            telefono: prev.telefono || data.user.phone || '',
+          }))
+        }
+      } catch {
+        // Sin sesión: el pago pedirá iniciar sesión
+      } finally {
+        setCheckingSession(false)
+      }
+    }
+    checkSession()
+  }, [])
+
   const datosCompletos =
     form.nombre.trim() && form.apellido.trim() && form.correo.trim() && form.telefono.trim()
 
   const envioCompleto = form.direccion.trim() && form.ciudad.trim() && form.departamento.trim()
 
   const pagoCompleto =
-    form.tarjeta.trim() && form.nombreTarjeta.trim() && form.vencimiento.trim() && form.cvv.trim()
+    payMethod !== 'card' ||
+    (form.tarjeta.trim() && form.nombreTarjeta.trim() && form.vencimiento.trim() && form.cvv.trim())
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     })
+  }
+
+  const handlePay = async () => {
+    if (cart.length === 0) {
+      setError('Tu carrito está vacío. Agrega productos antes de pagar.')
+      return
+    }
+
+    if (checkingSession) return
+
+    if (!datosCompletos) {
+      setError('Completa tu nombre, apellido, correo y teléfono.')
+      toast.error('Faltan tus datos de contacto', { toastId: 'checkout-error' })
+      return
+    }
+
+    if (!envioCompleto) {
+      setError('Completa la dirección, ciudad y departamento de envío.')
+      toast.error('Falta la dirección de envío', { toastId: 'checkout-error' })
+      return
+    }
+
+    if (!pagoCompleto) {
+      setError('Completa los datos de tu tarjeta.')
+      toast.error('Faltan los datos de la tarjeta', { toastId: 'checkout-error' })
+      return
+    }
+
+    setError('')
+    setPaying(true)
+
+    try {
+      const res = await fetch('/api/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          ...(sessionUser ? { customer: sessionUser.id } : {}),
+          items: cart.map((item) => ({
+            product: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+            image:
+              typeof item.image === 'string' ? item.image : (item.image?.url ?? ''),
+          })),
+          subtotal,
+          shipping: 0,
+          total,
+          couponCode: discount > 0 && coupon ? coupon.code : '',
+          discount,
+          payMethod,
+          contactName: form.nombre.trim(),
+          contactLastName: form.apellido.trim(),
+          contactEmail: form.correo.trim(),
+          contactPhone: form.telefono.trim(),
+          address: form.direccion.trim(),
+          city: form.ciudad.trim(),
+          department: form.departamento.trim(),
+          postalCode: form.codigoPostal.trim(),
+          notes: form.indicaciones.trim(),
+        }),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        throw new Error(
+          data?.errors?.[0]?.message || data?.message || 'No se pudo registrar el pedido.',
+        )
+      }
+
+      const itemCount = cart.length
+      setOrder({ number: data.doc.orderNumber, total: data.doc.total, items: itemCount })
+      clearCart()
+      setPaying(false)
+      window.dispatchEvent(new Event('order-change'))
+      toast.success('¡Pago aprobado! Pedido registrado', { toastId: 'checkout-success' })
+    } catch (error) {
+      console.error('Error creando pedido:', error)
+      setError(
+        error instanceof Error ? error.message : 'Ocurrió un error al procesar el pago.',
+      )
+      toast.error('No se pudo completar el pago', { toastId: 'checkout-error' })
+      setPaying(false)
+    }
+  }
+
+  if (order) {
+    return <CheckoutConfirmation order={order} />
   }
 
   return (
@@ -50,319 +199,55 @@ const CheckoutPage = () => {
         <h1 className="page-title">Finalizar compra</h1>
       </section>
 
-      <div className="steps">
-        <div className={`step ${datosCompletos ? 'is-complete' : ''}`}>
-          <span className="n">1</span> Datos
+      {!checkingSession && sessionUser && (
+        <div className="checkout-layout" style={{ marginBottom: 12 }}>
+          <div
+            style={{
+              padding: '10px 14px',
+              borderRadius: 12,
+              background: 'rgba(10, 102, 109, .08)',
+              fontSize: 14,
+            }}
+          >
+            Comprando como <strong>{sessionUser.email}</strong>. El pedido quedará guardado en
+            tus compras.
+          </div>
         </div>
+      )}
 
-        <div className={`step ${envioCompleto ? 'is-complete' : ''}`}>
-          <span className="n">2</span> Envío
-        </div>
-
-        <div className={`step ${pagoCompleto ? 'is-complete' : ''}`}>
-          <span className="n">3</span> Pago
-        </div>
-      </div>
+      <CheckoutSteps
+        datosCompletos={Boolean(datosCompletos)}
+        envioCompleto={Boolean(envioCompleto)}
+        pagoCompleto={Boolean(pagoCompleto)}
+      />
 
       <section>
         <div className="checkout-layout">
           <form onSubmit={(e) => e.preventDefault()}>
-            <div className="form-card">
-              <h3>
-                <span className="checkoutBadge badge-cyan">1</span>
-                Información de contacto
-              </h3>
+            <ContactForm form={form} onChange={handleChange} />
 
-              <div className="form-grid">
-                <div className="field">
-                  <label>Nombre</label>
+            <ShippingForm form={form} onChange={handleChange} />
 
-                  <input
-                    type="text"
-                    name="nombre"
-                    value={form.nombre}
-                    onChange={handleChange}
-                    placeholder="Nombre"
-                    required
-                  />
-                </div>
+            <PaymentMethod
+              payMethod={payMethod}
+              setPayMethod={setPayMethod}
+              form={form}
+              onChange={handleChange}
+            />
 
-                <div className="field">
-                  <label>Apellido</label>
-
-                  <input
-                    type="text"
-                    name="apellido"
-                    value={form.apellido}
-                    onChange={handleChange}
-                    placeholder="Apellido"
-                    required
-                  />
-                </div>
-
-                <div className="field full">
-                  <label>Correo electrónico</label>
-
-                  <input
-                    type="email"
-                    name="correo"
-                    value={form.correo}
-                    onChange={handleChange}
-                    placeholder="Gmail"
-                    required
-                  />
-                </div>
-
-                <div className="field full">
-                  <label>Teléfono</label>
-
-                  <input
-                    type="tel"
-                    name="telefono"
-                    value={form.telefono}
-                    onChange={handleChange}
-                    placeholder="Teléfono"
-                    required
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* DIRECCIÓN DE ENVÍO */}
-            <div className="form-card">
-              <h3>
-                <span className="checkoutBadge badge-cyan">2</span>
-                Dirección de envío
-              </h3>
-
-              <div className="form-grid">
-                <div className="field full">
-                  <label>Dirección</label>
-
-                  <input
-                    type="text"
-                    name="direccion"
-                    value={form.direccion}
-                    onChange={handleChange}
-                    placeholder="Cra 00 # 00-00"
-                    required
-                  />
-                </div>
-
-                <div className="field">
-                  <label>Ciudad</label>
-
-                  <input
-                    type="text"
-                    name="ciudad"
-                    value={form.ciudad}
-                    onChange={handleChange}
-                    placeholder="Bogotá"
-                    required
-                  />
-                </div>
-
-                <div className="field">
-                  <label>Departamento</label>
-
-                  <select
-                    name="departamento"
-                    value={form.departamento}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">Seleccione...</option>
-                    <option value="Cundinamarca">Cundinamarca</option>
-                    <option value="Antioquia">Antioquia</option>
-                    <option value="Valle del Cauca">Valle del Cauca</option>
-                    <option value="Atlántico">Atlántico</option>
-                    <option value="Santander">Santander</option>
-                  </select>
-                </div>
-
-                <div className="field">
-                  <label>Código postal</label>
-
-                  <input
-                    type="text"
-                    name="codigoPostal"
-                    value={form.codigoPostal}
-                    onChange={handleChange}
-                    placeholder="110111"
-                  />
-                </div>
-
-                <div className="field">
-                  <label>Indicaciones (opcional)</label>
-
-                  <input
-                    type="text"
-                    name="indicaciones"
-                    value={form.indicaciones}
-                    onChange={handleChange}
-                    placeholder="Apto, torre…"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* MÉTODO DE PAGO */}
-            <div className="form-card">
-              <h3>
-                <span className="checkoutBadge badge-cyan">3</span>
-                Método de pago
-              </h3>
-
-              <div className="pay-methods">
-                <div className="pay-opt is-active" data-pay="card">
-                  <span className="ic">💳</span>
-                  Tarjeta
-                </div>
-
-                <div className="pay-opt" data-pay="pse">
-                  <span className="ic">🏦</span>
-                  PSE
-                </div>
-
-                <div className="pay-opt" data-pay="cod">
-                  <span className="ic">📦</span>
-                  Contraentrega
-                </div>
-              </div>
-
-              <div id="card-fields">
-                <div className="form-grid">
-                  <div className="field full">
-                    <label>Número de tarjeta</label>
-
-                    <input
-                      type="text"
-                      name="tarjeta"
-                      value={form.tarjeta}
-                      onChange={handleChange}
-                      placeholder="0000 0000 0000 0000"
-                      inputMode="numeric"
-                    />
-                  </div>
-
-                  <div className="field full">
-                    <label>Nombre en la tarjeta</label>
-
-                    <input
-                      type="text"
-                      name="nombreTarjeta"
-                      value={form.nombreTarjeta}
-                      onChange={handleChange}
-                      placeholder="Nombre"
-                    />
-                  </div>
-
-                  <div className="field">
-                    <label>Vencimiento</label>
-
-                    <input
-                      type="text"
-                      name="vencimiento"
-                      value={form.vencimiento}
-                      onChange={handleChange}
-                      placeholder="MM/AA"
-                    />
-                  </div>
-
-                  <div className="field">
-                    <label>CVV</label>
-
-                    <input
-                      type="text"
-                      name="cvv"
-                      value={form.cvv}
-                      onChange={handleChange}
-                      placeholder="123"
-                      inputMode="numeric"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <p className="datas">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="var(--teal)"
-                  strokeWidth="2"
-                >
-                  <rect x="3" y="11" width="18" height="11" rx="2" />
-
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                </svg>
-                Tus datos están protegidos con cifrado SSL. Pasarela de pagos integrada.
-              </p>
-            </div>
+            {error && <div className="auth-error">{error}</div>}
           </form>
 
-          <aside className="summary">
-            <h3>Tu pedido</h3>
-
-            <div>
-              {cart.map((summyCart) => (
-                <div key={summyCart.id} className="summycart-infor">
-                  <div className="summy-img">
-                    <div className="img-summy">
-                      <img
-                        src={
-                          typeof summyCart.image === 'string'
-                            ? summyCart.image
-                            : (summyCart.image?.url ?? '')
-                        }
-                        alt={summyCart.name}
-                      />
-                    </div>
-
-                    <div className="summycart-perdidos">
-                      <h4>
-                        {summyCart.name.length > 17
-                          ? `${summyCart.name.slice(0, 17)}...`
-                          : summyCart.name}
-                      </h4>
-
-                      <div className="price-container">
-                        <span>x{summyCart.quantity}</span>$
-                        {(summyCart.price * summyCart.quantity).toLocaleString('es-CO')}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-
-              <div className="line">
-                <span>Subtotal</span>
-
-                <span>${subtotal.toLocaleString('es-CO')}</span>
-              </div>
-
-              <div className="line">
-                <span>Envío</span>
-
-                <span id="c-ship">Gratis</span>
-              </div>
-
-              <div className="line total">
-                <span>Total</span>
-
-                <span id="c-total">${subtotal.toLocaleString('es-CO')}</span>
-              </div>
-
-              <button type="button" className="btn btn-primary btn-block btn-lg" id="pay-btn">
-                Pagar ahora
-              </button>
-
-              <a className="btn btn-ghost btn-block" href="/cart">
-                Volver al carrito
-              </a>
-            </div>
-          </aside>
+          <OrderSummary
+            cart={cart}
+            subtotal={subtotal}
+            discount={discount}
+            total={total}
+            coupon={coupon ? { code: coupon.code } : null}
+            paying={paying}
+            checkingSession={checkingSession}
+            onPay={handlePay}
+          />
         </div>
       </section>
     </div>

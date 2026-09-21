@@ -36,27 +36,29 @@
     color: var(--muted);
 } 
 
-.status {
+.buysCard .status {
     padding: 5px 12px;
     border-radius: 999px;
     font-size: .76rem;
     font-weight: 700;
+    white-space: nowrap;
 }
 
-.status.ok {
+.buysCard .status.ok {
     background: rgba(72, 169, 179, .18);
     color: var(--teal);
 }
 
-.status.pend {
+.buysCard .status.pend {
     background: var(--cream);
     color: #8a6a2f;
 }
 
 
-.price {
+.buysCard .price {
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 1.15rem;
     color: var(--ink);
+    white-space: nowrap;
 }

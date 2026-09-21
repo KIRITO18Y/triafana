@@ -326,6 +326,17 @@ img {
   border-color: transparent;
 }
 
+.chip-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.chip-row .chip {
+  margin-top: 0;
+}
+
 input,
 select,
 textarea {

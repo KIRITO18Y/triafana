@@ -1,0 +1,107 @@
+.order-summary {
+  position: sticky;
+  top: 92px;
+  border-radius: var(--r-lg);
+  padding: 28px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: blur(var(--blur));
+  box-shadow: var(--shadow);
+}
+
+.order-summary h3 {
+  font-size: 1.25rem;
+  margin-bottom: 18px;
+  color: black;
+}
+
+.order-summary .summycart-infor {
+  border-bottom: 1px solid var(--line);
+}
+
+.order-summary .summy-img {
+  display: flex;
+  padding: 10px 0;
+  gap: 10px;
+  align-items: center;
+}
+
+.order-summary .img-summy {
+  width: 70px;
+  height: 70px;
+  border-radius: 16px;
+  background: linear-gradient(160deg, #fff, var(--light));
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.order-summary .img-summy img {
+  width: 50px;
+  height: 46px;
+  object-fit: contain;
+  display: block;
+}
+
+.order-summary .summycart-perdidos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.order-summary .summycart-perdidos h4 {
+  font-size: .9rem;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.order-summary .price-container {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.order-summary .order-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  color: var(--muted);
+}
+
+.order-summary .order-line.total {
+  border-top: 1px solid var(--line);
+  margin-top: 10px;
+  padding-top: 16px;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.order-summary .lead {
+  margin-bottom: 12px;
+}
+
+.order-summary .btn-ghost {
+  margin-top: 10px;
+}
+
+.order-summary #pay-btn:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 980px) {
+  .order-summary {
+    position: static;
+    width: 100%;
+  }
+}

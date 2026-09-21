@@ -23,9 +23,7 @@ export default async function Clothespage({ searchParams }: Props) {
         <h1 className="page-title">Ropa</h1>
         <p className="lead">Explora ropa para caballeros, niños y damas para cada ocasión.</p>
       </section>
-      <div className="chip-row">
-        <CatalogMenu active={'ropa'} />
-      </div>
+      <CatalogMenu active={'ropa'} />
       <MobileFilters category="ropa" />
       <section className="clothes-shop">
         <div className="desktop-filters">

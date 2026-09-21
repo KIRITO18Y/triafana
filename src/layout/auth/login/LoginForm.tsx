@@ -4,7 +4,7 @@ import './loginForm.css'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
-export const LoginForm = () => {
+export const LoginForm = ({ redirectTo = '/account' }: { redirectTo?: string }) => {
   const router = useRouter()
 
   const [isLogin, setIsLogin] = useState(true)
@@ -101,7 +101,7 @@ export const LoginForm = () => {
 
       window.dispatchEvent(new Event('auth-change'))
 
-      router.push('/account')
+      router.push(redirectTo)
       router.refresh()
     } catch (error) {
       console.error('ERROR REGISTRO:', error)
@@ -159,7 +159,7 @@ export const LoginForm = () => {
         password: '',
       })
       window.dispatchEvent(new Event('auth-change'))
-      router.push('/account')
+      router.push(redirectTo)
       router.refresh()
     } catch (error) {
       console.error('ERROR LOGIN:', error)

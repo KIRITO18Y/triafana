@@ -48,9 +48,13 @@
   flex: 1;
   padding: 10px;
   border-radius: 999px;
+  border: none;
+  outline: none;
+  background: transparent;
   font-family: var(--font-display);
   font-weight: 600;
   color: var(--muted);
+  cursor: pointer;
 }
 
 .auth-tabs button.is-active {

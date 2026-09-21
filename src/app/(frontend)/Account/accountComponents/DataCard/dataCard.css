@@ -74,19 +74,21 @@
   box-sizing: border-box;
 }
 
-.btn-container {
+.dataCard .btn-container {
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
 }
 
-.btn-data {
+.dataCard .btn-data {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   padding: 13px 24px;
   border-radius: 999px;
+  border: none;
+  outline: none;
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.95rem;
@@ -99,13 +101,21 @@
   cursor: pointer;
 }
 
-.btn-teal {
+.dataCard .btn-data.btn-teal {
   background: #11959e;
   color: #fff;
+  box-shadow: 0 10px 24px rgba(8, 116, 125, .28);
 }
 
-.btn-teal:hover {
+.dataCard .btn-data.btn-teal:hover:not(:disabled) {
   background-color: var(--teal);
+  transform: translateY(-2px);
+}
+
+.dataCard .btn-data:disabled {
+  opacity: .7;
+  cursor: wait;
+  transform: none;
 }
 
 @media (max-width: 768px) {
@@ -149,12 +159,12 @@
     font-size: 0.9rem;
   }
 
-  .btn-container {
+  .dataCard .btn-container {
     justify-content: stretch;
     margin-top: 18px;
   }
 
-  .btn-data {
+  .dataCard .btn-data {
     width: 100%;
     padding: 12px 20px;
   }
@@ -183,7 +193,7 @@
     border-radius: 10px;
   }
 
-  .btn-data {
+  .dataCard .btn-data {
     font-size: 0.88rem;
     min-height: 42px;
   }
@@ -207,7 +217,7 @@
     padding: 10px;
   }
 
-  .btn-data {
+  .dataCard .btn-data {
     font-size: 0.84rem;
     padding: 11px 16px;
   }

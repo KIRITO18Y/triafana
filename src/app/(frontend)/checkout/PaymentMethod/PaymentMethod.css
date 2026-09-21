@@ -1,0 +1,44 @@
+.pay-methods {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.pay-opt {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+  text-align: center;
+  cursor: pointer;
+  background: #fff;
+  font-family: inherit;
+  font-size: .88rem;
+  color: var(--ink);
+  font-weight: 600;
+  width: 100%;
+  transition: all .15s ease;
+}
+
+.pay-opt:hover {
+  border-color: var(--teal-aqua);
+}
+
+.pay-opt.is-active {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 2px rgba(10, 102, 109, .2);
+  background: var(--light);
+}
+
+.pay-opt .ic {
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .pay-methods {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}

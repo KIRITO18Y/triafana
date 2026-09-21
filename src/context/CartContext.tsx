@@ -2,6 +2,7 @@
 import { Product } from '@/payload-types'
 import { createContext, useContext, useState, ReactNode } from 'react'
 import { toast } from 'react-toastify'
+import type { CouponDef } from '@/lib/coupons'
 export type { Product }
 export type CartItem = {
   id: number
@@ -19,16 +20,21 @@ export type CartItem = {
 
 type CartContextType = {
   cart: CartItem[]
+  coupon: CouponDef | null
   addToCart: (product: Product, quantity?: number) => void
   increaseQuantity: (id: number) => void
   decreaseQuantity: (id: number) => void
   removeFromCart: (id: number) => void
+  clearCart: () => void
+  applyCoupon: (coupon: CouponDef) => void
+  removeCoupon: () => void
 }
 
 const CartContext = createContext<CartContextType | null>(null)
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([])
+  const [coupon, setCoupon] = useState<CouponDef | null>(null)
 
   const addToCart = (product: Product, quantity: number = 1) => {
     const shortName =
@@ -116,14 +122,31 @@ export function CartProvider({ children }: { children: ReactNode }) {
       })
     }
   }
+
+  const clearCart = () => {
+    setCart([])
+    setCoupon(null)
+  }
+
+  const applyCoupon = (next: CouponDef) => {
+    setCoupon(next)
+  }
+
+  const removeCoupon = () => {
+    setCoupon(null)
+  }
   return (
     <CartContext.Provider
       value={{
         cart,
+        coupon,
         addToCart,
         increaseQuantity,
         decreaseQuantity,
         removeFromCart,
+        clearCart,
+        applyCoupon,
+        removeCoupon,
       }}
     >
       {children}

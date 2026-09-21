@@ -70,6 +70,8 @@ export interface Config {
   collections: {
     customers: Customer;
     favorites: Favorite;
+    orders: Order;
+    coupons: Coupon;
     users: User;
     banners: Banner;
     media: Media;
@@ -84,6 +86,8 @@ export interface Config {
   collectionsSelect: {
     customers: CustomersSelect<false> | CustomersSelect<true>;
     favorites: FavoritesSelect<false> | FavoritesSelect<true>;
+    orders: OrdersSelect<false> | OrdersSelect<true>;
+    coupons: CouponsSelect<false> | CouponsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     banners: BannersSelect<false> | BannersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -235,6 +239,58 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders".
+ */
+export interface Order {
+  id: number;
+  orderNumber: string;
+  customer?: (number | null) | Customer;
+  items: {
+    product?: (number | null) | Product;
+    name: string;
+    price: number;
+    quantity: number;
+    image?: string | null;
+    id?: string | null;
+  }[];
+  subtotal: number;
+  shipping: number;
+  total: number;
+  couponCode?: string | null;
+  discount: number;
+  status: 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  payMethod: 'card' | 'pse' | 'cod';
+  contactName: string;
+  contactLastName: string;
+  contactEmail: string;
+  contactPhone: string;
+  address: string;
+  city: string;
+  department: string;
+  postalCode?: string | null;
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "coupons".
+ */
+export interface Coupon {
+  id: number;
+  code: string;
+  discountType: 'percent' | 'fixed';
+  value: number;
+  minPurchase: number;
+  maxUses?: number | null;
+  usedCount: number;
+  active: boolean;
+  expiresAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -312,6 +368,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'favorites';
         value: number | Favorite;
+      } | null)
+    | ({
+        relationTo: 'orders';
+        value: number | Order;
+      } | null)
+    | ({
+        relationTo: 'coupons';
+        value: number | Coupon;
       } | null)
     | ({
         relationTo: 'users';
@@ -417,6 +481,58 @@ export interface CustomersSelect<T extends boolean = true> {
 export interface FavoritesSelect<T extends boolean = true> {
   user?: T;
   product?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders_select".
+ */
+export interface OrdersSelect<T extends boolean = true> {
+  orderNumber?: T;
+  customer?: T;
+  items?:
+    | T
+    | {
+        product?: T;
+        name?: T;
+        price?: T;
+        quantity?: T;
+        image?: T;
+        id?: T;
+      };
+  subtotal?: T;
+  shipping?: T;
+  total?: T;
+  couponCode?: T;
+  discount?: T;
+  status?: T;
+  payMethod?: T;
+  contactName?: T;
+  contactLastName?: T;
+  contactEmail?: T;
+  contactPhone?: T;
+  address?: T;
+  city?: T;
+  department?: T;
+  postalCode?: T;
+  notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "coupons_select".
+ */
+export interface CouponsSelect<T extends boolean = true> {
+  code?: T;
+  discountType?: T;
+  value?: T;
+  minPurchase?: T;
+  maxUses?: T;
+  usedCount?: T;
+  active?: T;
+  expiresAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }

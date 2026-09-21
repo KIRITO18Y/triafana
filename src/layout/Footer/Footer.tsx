@@ -54,7 +54,7 @@ export const Footer = () => {
           <p>Suscríbete y entérate de promociones y lanzamientos.</p>
           <form className="newsletter">
             <input type="email" placeholder="tu@correo.com" aria-label="Correo" className='footer-input' />
-            <button className="footer btn-secondary" type="submit">Unirme</button>
+            <button className="footer-btn btn-secondary" type="submit">Unirme</button>
           </form>
         </div>
       </div>
