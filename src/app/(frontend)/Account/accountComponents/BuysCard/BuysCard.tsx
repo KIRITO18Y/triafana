@@ -78,10 +78,12 @@ export const BuysCard = () => {
                   {formatDate(order.createdAt)} · {qty} {qty === 1 ? 'producto' : 'productos'}
                 </div>
               </div>
-              <span className={`status ${order.status === 'delivered' ? 'ok' : 'pend'}`}>
-                {statusLabel[order.status] || order.status}
-              </span>
-              <span className="price">{formatPrice(order.total)}</span>
+              <div className="status-price">
+                <span className={`status ${order.status === 'delivered' ? 'ok' : 'pend'}`}>
+                  {statusLabel[order.status] || order.status}
+                </span>
+                <span className="price">{formatPrice(order.total)}</span>
+              </div>
             </div>
           )
         })

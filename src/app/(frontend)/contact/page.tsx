@@ -68,7 +68,7 @@ export default function Contact() {
               <div className="contact-ic">
                 <FontAwesomeIcon icon={faLocationDot} className="contact-icon" />
               </div>
-              <h3 className="card-h3">Correo</h3>
+              <h3 className="card-h3">Ubicación</h3>
               <p>
                 Bogotá, Colombia <br /> Envíos a todo el país
               </p>

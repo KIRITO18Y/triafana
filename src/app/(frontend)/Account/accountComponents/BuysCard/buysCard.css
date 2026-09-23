@@ -8,6 +8,7 @@
     box-shadow: var(--shadow-sm);
     margin-bottom:22px
 }
+
 .order-row {
     display: grid;
     grid-template-columns: 1fr auto auto;
@@ -36,6 +37,13 @@
     color: var(--muted);
 } 
 
+.status-price{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+   
+}
+
 .buysCard .status {
     padding: 5px 12px;
     border-radius: 999px;
@@ -54,8 +62,9 @@
     color: #8a6a2f;
 }
 
-
 .buysCard .price {
+    display: flex;
+    align-items: baseline;
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 1.15rem;
