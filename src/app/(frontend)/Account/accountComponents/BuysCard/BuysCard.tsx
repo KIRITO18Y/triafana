@@ -64,7 +64,7 @@ export const BuysCard = () => {
         <p className="lead">Cargando tus compras…</p>
       ) : orders.length === 0 ? (
         <p className="lead">
-          Aún no tienes compras. <a href="/store">Explora la tienda →</a>
+          Aún no tienes compras.
         </p>
       ) : (
         orders.map((order) => {

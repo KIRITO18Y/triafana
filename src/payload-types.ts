@@ -102,8 +102,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'promo-banner': PromoBanner;
+  };
+  globalsSelect: {
+    'promo-banner': PromoBannerSelect<false> | PromoBannerSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -159,6 +163,10 @@ export interface Customer {
   firstName: string;
   lastName: string;
   phone?: string | null;
+  /**
+   * ID de la cuenta de Google vinculada (si inició sesión con Google).
+   */
+  googleId?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -243,32 +251,15 @@ export interface Media {
  */
 export interface Order {
   id: number;
-  orderNumber: string;
-  customer?: (number | null) | Customer;
+  customer: number | Customer;
   items: {
-    product?: (number | null) | Product;
-    name: string;
-    price: number;
+    product: number | Product;
     quantity: number;
-    image?: string | null;
+    price: number;
     id?: string | null;
   }[];
-  subtotal: number;
-  shipping: number;
   total: number;
-  couponCode?: string | null;
-  discount: number;
-  status: 'processing' | 'shipped' | 'delivered' | 'cancelled';
-  payMethod: 'card' | 'pse' | 'cod';
-  contactName: string;
-  contactLastName: string;
-  contactEmail: string;
-  contactPhone: string;
-  address: string;
-  city: string;
-  department: string;
-  postalCode?: string | null;
-  notes?: string | null;
+  status?: ('pending' | 'confirmed' | 'shipped' | 'delivered' | 'cancelled') | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -457,6 +448,7 @@ export interface CustomersSelect<T extends boolean = true> {
   firstName?: T;
   lastName?: T;
   phone?: T;
+  googleId?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -489,34 +481,17 @@ export interface FavoritesSelect<T extends boolean = true> {
  * via the `definition` "orders_select".
  */
 export interface OrdersSelect<T extends boolean = true> {
-  orderNumber?: T;
   customer?: T;
   items?:
     | T
     | {
         product?: T;
-        name?: T;
-        price?: T;
         quantity?: T;
-        image?: T;
+        price?: T;
         id?: T;
       };
-  subtotal?: T;
-  shipping?: T;
   total?: T;
-  couponCode?: T;
-  discount?: T;
   status?: T;
-  payMethod?: T;
-  contactName?: T;
-  contactLastName?: T;
-  contactEmail?: T;
-  contactPhone?: T;
-  address?: T;
-  city?: T;
-  department?: T;
-  postalCode?: T;
-  notes?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -664,6 +639,47 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * Sección de promociones que aparece en la página de inicio.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "promo-banner".
+ */
+export interface PromoBanner {
+  id: number;
+  enabled?: boolean | null;
+  eyebrow?: string | null;
+  title: string;
+  description?: string | null;
+  /**
+   * Emoji que se muestra junto al texto.
+   */
+  icon?: string | null;
+  buttonText?: string | null;
+  buttonLink?: string | null;
+  secondButtonText?: string | null;
+  secondButtonLink?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "promo-banner_select".
+ */
+export interface PromoBannerSelect<T extends boolean = true> {
+  enabled?: T;
+  eyebrow?: T;
+  title?: T;
+  description?: T;
+  icon?: T;
+  buttonText?: T;
+  buttonLink?: T;
+  secondButtonText?: T;
+  secondButtonLink?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

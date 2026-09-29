@@ -21,6 +21,10 @@ export default async function Home() {
     depth: 1,
   })
 
+  const promoBanner = await payload.findGlobal({
+    slug: 'promo-banner',
+  })
+
   return (
     <div className="container">
       <BannerCarrusel banners={banners.docs} />
@@ -29,7 +33,18 @@ export default async function Home() {
       <InspiredProducts />
       <ServicesTriafana />
       <TopSale />
-      <Promo />
+      {promoBanner.enabled && (
+        <Promo
+          eyebrow={promoBanner.eyebrow}
+          title={promoBanner.title}
+          description={promoBanner.description}
+          icon={promoBanner.icon}
+          buttonText={promoBanner.buttonText}
+          buttonLink={promoBanner.buttonLink}
+          secondButtonText={promoBanner.secondButtonText}
+          secondButtonLink={promoBanner.secondButtonLink}
+        />
+      )}
       <Offers />
     </div>
   )

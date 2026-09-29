@@ -169,6 +169,38 @@ input, select, textarea {
   text-align: center;
 }
 
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  margin-bottom: 20px;
+}
+
+.btn-google:hover {
+  background: var(--light);
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  color: var(--muted);
+  font-size: .85rem;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
 @media (max-width: 768px) {
   .form-grid {
     grid-template-columns: 1fr;

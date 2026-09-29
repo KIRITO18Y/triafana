@@ -1,28 +1,49 @@
 import './promo.css'
 
-export const Promo = () => {
+type PromoProps = {
+  eyebrow?: string | null
+  title: string
+  description?: string | null
+  icon?: string | null
+  buttonText?: string | null
+  buttonLink?: string | null
+  secondButtonText?: string | null
+  secondButtonLink?: string | null
+}
+
+export const Promo = ({
+  eyebrow,
+  title,
+  description,
+  icon,
+  buttonText,
+  buttonLink,
+  secondButtonText,
+  secondButtonLink,
+}: PromoProps) => {
   return (
     <section className="promo-section" style={{ paddingTop: 0 }}>
       <div className="promo-container">
         <div>
           <span className="eyebro-promo" style={{ color: '#cdeef2' }}>
-            Promociones
+            {eyebrow}
           </span>
-          <h2 className="promo-title">Hasta 30% en tecnología seleccionada</h2>
-          <p className="promo-p">
-            Renueva tus equipos esta temporada. Ofertas por tiempo limitado en computadores, audio y
-            accesorios.
-          </p>
+          <h2 className="promo-title">{title}</h2>
+          {description && <p className="promo-p">{description}</p>}
           <div className="promo-btn">
-            <a href="/tecnology" className="btn promo-primary">
-              Ver ofertas
-            </a>
-            <a href="" className="btn promo-ghost btn-a">
-              Todas las promos
-            </a>
+            {buttonText && (
+              <a href={buttonLink || '#'} className="btn promo-primary">
+                {buttonText}
+              </a>
+            )}
+            {secondButtonText && (
+              <a href={secondButtonLink || '#'} className="btn promo-ghost btn-a">
+                {secondButtonText}
+              </a>
+            )}
           </div>
         </div>
-        <div className="promo-icon">🔥</div>
+        {icon && <div className="promo-icon">{icon}</div>}
       </div>
     </section>
   )

@@ -1,6 +1,6 @@
 'use client'
 import './login.css'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import AuthAside from '@/layout/auth/AuthAside/AuthAside'
 import { LoginForm } from '@/layout/auth/login/LoginForm'
 export default function LoginPage() {
@@ -26,7 +26,9 @@ export default function LoginPage() {
       </section>
       <div className="auth-wrap">
         <AuthAside isLogin={isLogin} />
-        <LoginForm redirectTo={redirectTo} />
+        <Suspense fallback={null}>
+          <LoginForm />
+        </Suspense>
       </div>
     </div>
   )

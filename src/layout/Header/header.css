@@ -58,10 +58,11 @@
     font-size: 1.02rem;
 }
 
-.main-nav {
+.main-nav,
+.nav {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 10px;
 }
 
 
