@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { welcomeEmail } from '../utilities/emailTemplates'
 
 export const Customers: CollectionConfig = {
   slug: 'customers',
@@ -10,6 +11,24 @@ export const Customers: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'email',
+  },
+
+  hooks: {
+    afterChange: [
+      async ({ doc, operation, req }) => {
+        if (operation !== 'create') {
+          return
+        }
+
+        const { subject, html } = welcomeEmail({ firstName: doc.firstName })
+
+        await req.payload.sendEmail({
+          to: doc.email,
+          subject,
+          html,
+        })
+      },
+    ],
   },
 
   fields: [
@@ -33,6 +52,17 @@ export const Customers: CollectionConfig = {
     {
       name: 'phone',
       type: 'text',
+    },
+
+    {
+      name: 'googleId',
+      type: 'text',
+      unique: true,
+      index: true,
+      admin: {
+        readOnly: true,
+        description: 'ID de la cuenta de Google vinculada (si inició sesión con Google).',
+      },
     },
   ],
 }

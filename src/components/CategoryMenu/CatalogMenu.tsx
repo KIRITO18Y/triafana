@@ -17,16 +17,6 @@ export default function CatalogMenu({ active }: Props) {
       href: '/tecnology',
       key: 'tecnologia',
     },
-    {
-      name: 'Cosmetiquería',
-      href: '/cosmeticsShop',
-      key: 'cosmetiqueria',
-    },
-    {
-      name: 'Ropa',
-      href: '/clothes',
-      key: 'ropa',
-    },
   ]
 
   return (

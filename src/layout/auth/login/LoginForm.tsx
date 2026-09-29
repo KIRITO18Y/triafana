@@ -1,15 +1,46 @@
 'use client'
 
 import './loginForm.css'
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { toast } from 'react-toastify'
+import { FaGoogle } from 'react-icons/fa'
+
+const translateOAuthError = (code: string) => {
+  switch (code) {
+    case 'google_denied':
+      return 'Cancelaste el inicio de sesión con Google.'
+    case 'invalid_state':
+      return 'La solicitud de Google expiró o no es válida. Inténtalo de nuevo.'
+    case 'google_email_unverified':
+      return 'Tu cuenta de Google no tiene el correo verificado.'
+    case 'google_not_configured':
+      return 'El inicio de sesión con Google no está disponible en este momento.'
+    default:
+      return 'No se pudo iniciar sesión con Google. Inténtalo de nuevo.'
+  }
+}
+
 export const LoginForm = () => {
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   const [isLogin, setIsLogin] = useState(true)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  useEffect(() => {
+    const oauthError = searchParams.get('error')
+
+    if (oauthError) {
+      setError(translateOAuthError(oauthError))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const continueWithGoogle = () => {
+    window.location.href = '/api/auth/google'
+  }
 
   const [form, setForm] = useState({
     firstName: '',
@@ -202,6 +233,18 @@ export const LoginForm = () => {
         </div>
 
         {error && <div className="auth-error">{error}</div>}
+
+        <button
+          type="button"
+          className="btn btn-google btn-block btn-lg"
+          onClick={continueWithGoogle}
+        >
+          <FaGoogle /> Continuar con Google
+        </button>
+
+        <div className="auth-divider">
+          <span>o</span>
+        </div>
 
         {isLogin ? (
           <form onSubmit={login}>

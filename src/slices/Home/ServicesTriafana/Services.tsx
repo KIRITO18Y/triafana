@@ -1,7 +1,7 @@
 import './servicesTriafana.css'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLaptopCode, faBullhorn, faChartLine } from '@fortawesome/free-solid-svg-icons'
+import { faLaptopCode, faCode, faRobot } from '@fortawesome/free-solid-svg-icons'
 
 export const ServicesTriafana = () => {
   return (
@@ -22,22 +22,22 @@ export const ServicesTriafana = () => {
             <FontAwesomeIcon icon={faLaptopCode} />
           </div>
           <h3>Diseño Web</h3>
-          <p>Sitios y tiendas a medida, rápidos y centrados en conversión.</p>
+          <p>Landing pages rápidas y persuasivas, diseñadas para convertir visitas en clientes.</p>
         </Link>
 
         <Link href="/services" className="service-card">
           <div className="ic">
-            <FontAwesomeIcon icon={faBullhorn} />
+            <FontAwesomeIcon icon={faCode} />
           </div>
-          <h3>Social Media</h3>
-          <p>Gestión de redes y contenido que conecta con tu audiencia.</p>
+          <h3>Plataformas a Medida</h3>
+          <p>Desarrollo de plataformas web personalizadas, escalables y a la medida de tu negocio.</p>
         </Link>
         <Link href="/services" className="service-card">
           <div className="ic">
-            <FontAwesomeIcon icon={faChartLine} />
+            <FontAwesomeIcon icon={faRobot} />
           </div>
-          <h3>Marketing</h3>
-          <p>Estrategias de crecimiento medibles con Google Analytics.</p>
+          <h3>Automatización con IA</h3>
+          <p>Flujos y asistentes inteligentes que optimizan procesos y ahorran tiempo.</p>
         </Link>
       </div>
     </section>

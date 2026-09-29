@@ -20,20 +20,6 @@ export const ShoppingCategories = () => {
           <p>Computadores, celulares, diademas, teclados e impresoras.</p>
           <span className="arrow">Explorar →</span>
         </Link>
-
-        <Link className="cat-card c-cos" href={'/cosmeticsShop'}>
-          <span className="blob"></span>
-          <h3>Cosmetiquería</h3>
-          <p>Cabello, perfumes, piel, salud y vitaminas.</p>
-          <span className="arrow">Explorar →</span>
-        </Link>
-
-        <Link className="cat-card c-ropa" href={'/clothes'}>
-          <span className="blob"></span>
-          <h3>Ropa</h3>
-          <p>Caballeros, niños y damas para cada ocasión.</p>
-          <span className="arrow">Explorar →</span>
-        </Link>
       </div>
     </div>
   )

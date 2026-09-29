@@ -1,7 +1,7 @@
 import './services-page.css'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBullhorn, faChartLine, faLaptopCode } from '@fortawesome/free-solid-svg-icons'
+import { faCode, faRobot, faLaptopCode } from '@fortawesome/free-solid-svg-icons'
 
 const ServicesPage = () => {
   return (
@@ -21,8 +21,8 @@ const ServicesPage = () => {
               <span className="eyebrowService">Servicios TRIAFANA</span>
               <h1>Impulsamos tu marca, no solo vendemos productos</h1>
               <p className="lead">
-                Combinamos diseño, contenido y datos para hacer crecer tu negocio digital. Medimos
-                resultados con Google Analytics.
+                Diseñamos landing pages que convierten, construimos plataformas web a tu medida y
+                automatizamos procesos con inteligencia artificial.
               </p>
               <div className="hero-actions">
                 <Link href="/contact" className="btn btn-primary btn-lg">
@@ -44,45 +44,46 @@ const ServicesPage = () => {
               </div>
               <h3>Diseño Web</h3>
               <p>
-                Sitios y e-commerce a medida con PayloadCMS, optimizados para velocidad, SEO y
+                Landing pages rápidas y persuasivas, optimizadas para velocidad, SEO y
                 conversión.
               </p>
               <ul>
                 <li>✓ Diseño responsive y accesible</li>
-                <li>✓ Integración de pagos</li>
-                <li>✓ Panel de administración</li>
+                <li>✓ Copy orientado a conversión</li>
+                <li>✓ Integración de formularios y pagos</li>
               </ul>
             </div>
 
             <div className="service-card">
               <div className="service-ic">
-                <FontAwesomeIcon icon={faBullhorn} />
+                <FontAwesomeIcon icon={faCode} />
               </div>
-              <h3>Social Media</h3>
+              <h3>Plataformas a Medida</h3>
               <p>
-                Gestión de redes, calendario de contenido y comunidad para conectar con tu
-                audiencia.
+                Desarrollo de plataformas y sistemas web personalizados, escalables y adaptados a
+                tu operación.
               </p>
 
               <ul className="services-list">
-                <li>✓ Estrategia de contenido</li>
-                <li>✓ Diseño de piezas</li>
-                <li>✓ Reportes mensuales</li>
+                <li>✓ Arquitectura a medida</li>
+                <li>✓ Paneles de administración</li>
+                <li>✓ Integraciones con tus sistemas</li>
               </ul>
             </div>
 
             <div className="service-card">
               <div className="service-ic">
-                <FontAwesomeIcon icon={faChartLine} />
+                <FontAwesomeIcon icon={faRobot} />
               </div>
-              <h3>Marketing</h3>
+              <h3>Automatización con IA</h3>
               <p>
-                Campañas de pauta y growth con foco en retorno. Medición y optimización continua.
+                Flujos y asistentes inteligentes que optimizan procesos y ahorran tiempo en tu
+                negocio.
               </p>
               <ul className="services-list">
-                <li>✓ Google & Meta Ads</li>
-                <li>✓ Analítica y embudos</li>
-                <li>✓ Email marketing</li>
+                <li>✓ Chatbots y asistentes IA</li>
+                <li>✓ Automatización de procesos</li>
+                <li>✓ Integración con tus herramientas</li>
               </ul>
             </div>
           </div>

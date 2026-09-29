@@ -23,10 +23,21 @@ En la pestaña **Environment**, agrega:
 ```
 PAYLOAD_SECRET=<cadena aleatoria larga, p. ej. `openssl rand -base64 32`>
 DATABASE_URL=file:./data/trifana-store.db
+GOOGLE_CLIENT_ID=<Client ID de Google Cloud Console>
+GOOGLE_CLIENT_SECRET=<Client Secret de Google Cloud Console>
 ```
 
 ⚠️ `PAYLOAD_SECRET` debe mantenerse **igual** en todos los despliegues (se usa
 para firmar sesiones/tokens). Genéralo una vez y no lo cambies.
+
+`GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET` habilitan "Continuar con Google" en
+`/login` (ver `src/app/(frontend)/api/auth/google/`). En el **Client ID de
+OAuth** de Google Cloud Console, agrega como URI de redirección autorizado
+`https://<tu-dominio-de-produccion>/api/auth/google/callback` — debe
+coincidir exactamente (mismo esquema, dominio y ruta) o Google responde
+`redirect_uri_mismatch`. Si el dominio público no coincide con el origin que
+ve el contenedor (por ejemplo detrás de un proxy que reescribe headers),
+define también `GOOGLE_REDIRECT_URI` con esa misma URL completa.
 
 ## 3. Volúmenes persistentes
 

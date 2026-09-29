@@ -40,10 +40,6 @@ export const Footer = () => {
 
           <Link href="/tecnology">Tecnología</Link>
 
-          <Link href="/cosmeticsShop">Cosmetiquería</Link>
-
-          <Link href="/clothes">Ropa</Link>
-
           <Link href="/store">Promociones</Link>
         </div>
 

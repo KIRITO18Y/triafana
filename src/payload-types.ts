@@ -70,6 +70,7 @@ export interface Config {
   collections: {
     customers: Customer;
     favorites: Favorite;
+    orders: Order;
     users: User;
     banners: Banner;
     media: Media;
@@ -84,6 +85,7 @@ export interface Config {
   collectionsSelect: {
     customers: CustomersSelect<false> | CustomersSelect<true>;
     favorites: FavoritesSelect<false> | FavoritesSelect<true>;
+    orders: OrdersSelect<false> | OrdersSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     banners: BannersSelect<false> | BannersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -98,8 +100,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'promo-banner': PromoBanner;
+  };
+  globalsSelect: {
+    'promo-banner': PromoBannerSelect<false> | PromoBannerSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -155,6 +161,10 @@ export interface Customer {
   firstName: string;
   lastName: string;
   phone?: string | null;
+  /**
+   * ID de la cuenta de Google vinculada (si inició sesión con Google).
+   */
+  googleId?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -232,6 +242,24 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders".
+ */
+export interface Order {
+  id: number;
+  customer: number | Customer;
+  items: {
+    product: number | Product;
+    quantity: number;
+    price: number;
+    id?: string | null;
+  }[];
+  total: number;
+  status?: ('pending' | 'confirmed' | 'shipped' | 'delivered' | 'cancelled') | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -314,6 +342,10 @@ export interface PayloadLockedDocument {
         value: number | Favorite;
       } | null)
     | ({
+        relationTo: 'orders';
+        value: number | Order;
+      } | null)
+    | ({
         relationTo: 'users';
         value: number | User;
       } | null)
@@ -393,6 +425,7 @@ export interface CustomersSelect<T extends boolean = true> {
   firstName?: T;
   lastName?: T;
   phone?: T;
+  googleId?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -417,6 +450,25 @@ export interface CustomersSelect<T extends boolean = true> {
 export interface FavoritesSelect<T extends boolean = true> {
   user?: T;
   product?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders_select".
+ */
+export interface OrdersSelect<T extends boolean = true> {
+  customer?: T;
+  items?:
+    | T
+    | {
+        product?: T;
+        quantity?: T;
+        price?: T;
+        id?: T;
+      };
+  total?: T;
+  status?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -548,6 +600,47 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * Sección de promociones que aparece en la página de inicio.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "promo-banner".
+ */
+export interface PromoBanner {
+  id: number;
+  enabled?: boolean | null;
+  eyebrow?: string | null;
+  title: string;
+  description?: string | null;
+  /**
+   * Emoji que se muestra junto al texto.
+   */
+  icon?: string | null;
+  buttonText?: string | null;
+  buttonLink?: string | null;
+  secondButtonText?: string | null;
+  secondButtonLink?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "promo-banner_select".
+ */
+export interface PromoBannerSelect<T extends boolean = true> {
+  enabled?: T;
+  eyebrow?: T;
+  title?: T;
+  description?: T;
+  icon?: T;
+  buttonText?: T;
+  buttonLink?: T;
+  secondButtonText?: T;
+  secondButtonLink?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
