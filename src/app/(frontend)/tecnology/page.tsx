@@ -26,9 +26,7 @@ export default async function TecnologyPage({ searchParams }: Props) {
         <p className="lead">Explora computadores, celulares, audio y accesorios.</p>
       </section>
 
-      <div className="chip-row">
-        <CatalogMenu active="tecnologia" />
-      </div>
+      <CatalogMenu active="tecnologia" />
       <MobileFilters category="tecnologia" />
 
       <section className="tecnology-shop">

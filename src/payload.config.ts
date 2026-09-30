@@ -1,6 +1,6 @@
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
-import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -13,6 +13,7 @@ import { Customers } from './collections/Customers'
 import { Subcategories } from './collections/Subcategories'
 import { Favorites } from './collections/Favorites'
 import { Orders } from './collections/Orders'
+import { Coupons } from './collections/Coupons'
 import { PromoBanner } from './globals/PromoBanner'
 
 const filename = fileURLToPath(import.meta.url)
@@ -25,23 +26,30 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Customers, Favorites, Orders, Users, Banners, Media, Products, Subcategories],
+  collections: [Customers, Favorites, Orders, Coupons, Users, Banners, Media, Products, Subcategories],
   globals: [PromoBanner],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
-  email: nodemailerAdapter({
-    defaultFromAddress: process.env.SMTP_FROM_ADDRESS || 'no-reply@triafana.com',
-    defaultFromName: process.env.SMTP_FROM_NAME || 'Triafana',
-    transportOptions: {
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT) || 587,
-      secure: process.env.SMTP_SECURE === 'true',
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    },
-  }),
+  // Solo se configura SMTP si hay host; si no, Payload usa el fallback de
+  // consola y no intenta verificar ninguna conexión (evita "Error verifying
+  // Nodemailer transport" al arrancar sin credenciales).
+  ...(process.env.SMTP_HOST
+    ? {
+        email: nodemailerAdapter({
+          defaultFromAddress: process.env.SMTP_FROM_ADDRESS || 'no-reply@triafana.com',
+          defaultFromName: process.env.SMTP_FROM_NAME || 'Triafana',
+          transportOptions: {
+            host: process.env.SMTP_HOST,
+            port: Number(process.env.SMTP_PORT) || 587,
+            secure: process.env.SMTP_SECURE === 'true',
+            auth: {
+              user: process.env.SMTP_USER,
+              pass: process.env.SMTP_PASS,
+            },
+          },
+        }),
+      }
+    : {}),
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },

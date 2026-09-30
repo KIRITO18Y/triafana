@@ -28,7 +28,6 @@
     color: black;
 }
 
-
 .account-btn {
     display: flex;
     align-items: center;
@@ -42,12 +41,9 @@
     font-family: inherit;
     font-weight: 600;
     font-size: .92rem;
-
     text-decoration: none;
     text-align: left;
-
     cursor: pointer;
-
     transition:
         background .15s ease,
         color .15s ease;

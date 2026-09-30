@@ -71,6 +71,7 @@ export interface Config {
     customers: Customer;
     favorites: Favorite;
     orders: Order;
+    coupons: Coupon;
     users: User;
     banners: Banner;
     media: Media;
@@ -86,6 +87,7 @@ export interface Config {
     customers: CustomersSelect<false> | CustomersSelect<true>;
     favorites: FavoritesSelect<false> | FavoritesSelect<true>;
     orders: OrdersSelect<false> | OrdersSelect<true>;
+    coupons: CouponsSelect<false> | CouponsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     banners: BannersSelect<false> | BannersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -278,6 +280,23 @@ export interface Order {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "coupons".
+ */
+export interface Coupon {
+  id: number;
+  code: string;
+  discountType: 'percent' | 'fixed';
+  value: number;
+  minPurchase: number;
+  maxUses?: number | null;
+  usedCount: number;
+  active: boolean;
+  expiresAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -359,6 +378,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'orders';
         value: number | Order;
+      } | null)
+    | ({
+        relationTo: 'coupons';
+        value: number | Coupon;
       } | null)
     | ({
         relationTo: 'users';
@@ -498,6 +521,22 @@ export interface OrdersSelect<T extends boolean = true> {
   paymentStatus?: T;
   wompiTransactionId?: T;
   paymentMethodType?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "coupons_select".
+ */
+export interface CouponsSelect<T extends boolean = true> {
+  code?: T;
+  discountType?: T;
+  value?: T;
+  minPurchase?: T;
+  maxUses?: T;
+  usedCount?: T;
+  active?: T;
+  expiresAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }

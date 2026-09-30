@@ -61,6 +61,17 @@ export const Header = () => {
             </Link>
 
             <Link
+              href="/cosmeticsShop"
+              className={`nav-link ${pathname === '/cosmeticsShop' ? 'active' : ''}`}
+            >
+              Cosmetiquería
+            </Link>
+
+            <Link href="/clothes" className={`nav-link ${pathname === '/clothes' ? 'active' : ''}`}>
+              Ropa
+            </Link>
+
+            <Link
               href="/services"
               className={`nav-link ${pathname === '/services' ? 'active' : ''}`}
             >
@@ -126,6 +137,14 @@ export const Header = () => {
 
               <Link href="/tecnology" className={pathname === '/tecnology' ? 'active' : ''}>
                 Tecnología
+              </Link>
+
+              <Link href="/cosmeticsShop" className={pathname === '/cosmeticsShop' ? 'active' : ''}>
+                Cosmetiquería
+              </Link>
+
+              <Link href="/clothes" className={pathname === '/clothes' ? 'active' : ''}>
+                Ropa
               </Link>
 
               <Link href="/services" className={pathname === '/services' ? 'active' : ''}>

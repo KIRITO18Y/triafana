@@ -84,6 +84,16 @@
   font-size: .94rem;
 }
 
+.service-card ul {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
 .eyebrowService {
   display: inline-flex;
   align-items: center;
@@ -267,16 +277,6 @@ hero {
   grid-template-columns: 1.4fr 1fr;
   gap: 30px;
   align-items: center;
-}
-
-.promo::after {
-  content: "";
-  position: absolute;
-  width: 360px;
-  height: 360px;
-  right: -60px;
-  bottom: -120px;
-  background: radial-gradient(circle, rgba(255, 111, 97, .5), transparent 70%);
 }
 
 .promo-eyebrow {

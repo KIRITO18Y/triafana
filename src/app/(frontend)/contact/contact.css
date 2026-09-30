@@ -150,7 +150,7 @@ input, select, textarea {
 }
 
 .contact-btn:hover{
-    background: #c5554b;
+    background:#f34636;
     transform: translateY(-3px);
 }
 

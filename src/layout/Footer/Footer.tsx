@@ -24,11 +24,9 @@ export const Footer = () => {
             <a href="#" aria-label="Instagram">
               <FaInstagram />
             </a>
-
-            <a href="#" aria-label="Facebook">
+            <a href="https://www.facebook.com/triafanastore" aria-label="Facebook">
               <FaFacebookF />
             </a>
-
             <a href="#" aria-label="TikTok">
               <FaTiktok />
             </a>
@@ -37,21 +35,15 @@ export const Footer = () => {
 
         <div>
           <h4>Categorías</h4>
-
           <Link href="/tecnology">Tecnología</Link>
-
           <Link href="/store">Promociones</Link>
         </div>
 
         <div>
           <h4>Ayuda</h4>
-
           <Link href="/contact">Contacto</Link>
-
           <Link href="#">Envíos y entregas</Link>
-
           <Link href="#">Devoluciones</Link>
-
           <Link href="#">Preguntas frecuentes</Link>
         </div>
 
@@ -60,7 +52,7 @@ export const Footer = () => {
           <p>Suscríbete y entérate de promociones y lanzamientos.</p>
           <form className="newsletter">
             <input type="email" placeholder="tu@correo.com" aria-label="Correo" className='footer-input' />
-            <button className="footer btn-secondary" type="submit">Unirme</button>
+            <button className="footer-btn btn-secondary" type="submit">Unirme</button>
           </form>
         </div>
       </div>
