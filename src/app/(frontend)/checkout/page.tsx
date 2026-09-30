@@ -2,10 +2,35 @@
 
 import './chekout.css'
 import { useCart } from '@/context/CartContext'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
+
+const WOMPI_WIDGET_SRC = 'https://checkout.wompi.co/widget.js'
+
+type WompiTransactionResult = {
+  transaction?: { id?: string; status?: string }
+}
+
+declare global {
+  interface Window {
+    WidgetCheckout?: new (config: {
+      currency: string
+      amountInCents: number
+      reference: string
+      publicKey: string
+      signature: { integrity: string }
+      redirectUrl?: string
+      customerData?: { email?: string; fullName?: string; phoneNumber?: string }
+    }) => {
+      open: (callback: (result: WompiTransactionResult) => void) => void
+    }
+  }
+}
 
 const CheckoutPage = () => {
-  const { cart } = useCart()
+  const { cart, clearCart } = useCart()
+  const router = useRouter()
 
   const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0)
 
@@ -19,25 +44,116 @@ const CheckoutPage = () => {
     departamento: '',
     codigoPostal: '',
     indicaciones: '',
-    tarjeta: '',
-    nombreTarjeta: '',
-    vencimiento: '',
-    cvv: '',
   })
 
-  const datosCompletos =
-    form.nombre.trim() && form.apellido.trim() && form.correo.trim() && form.telefono.trim()
+  const [paying, setPaying] = useState(false)
+  const [widgetReady, setWidgetReady] = useState(false)
 
-  const envioCompleto = form.direccion.trim() && form.ciudad.trim() && form.departamento.trim()
+  useEffect(() => {
+    if (document.querySelector(`script[src="${WOMPI_WIDGET_SRC}"]`)) {
+      setWidgetReady(true)
+      return
+    }
 
-  const pagoCompleto =
-    form.tarjeta.trim() && form.nombreTarjeta.trim() && form.vencimiento.trim() && form.cvv.trim()
+    const script = document.createElement('script')
+    script.src = WOMPI_WIDGET_SRC
+    script.async = true
+    script.onload = () => setWidgetReady(true)
+    document.body.appendChild(script)
+  }, [])
+
+  const datosCompletos = Boolean(
+    form.nombre.trim() && form.apellido.trim() && form.correo.trim() && form.telefono.trim(),
+  )
+
+  const envioCompleto = Boolean(
+    form.direccion.trim() && form.ciudad.trim() && form.departamento.trim(),
+  )
+
+  const listoParaPagar = datosCompletos && envioCompleto
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     })
+  }
+
+  const handlePay = async () => {
+    if (!listoParaPagar) {
+      toast.error('Completa tus datos de contacto y de envío antes de pagar')
+      return
+    }
+
+    if (cart.length === 0) {
+      toast.error('Tu carrito está vacío')
+      return
+    }
+
+    if (!widgetReady || !window.WidgetCheckout) {
+      toast.error('La pasarela de pagos aún está cargando, intenta de nuevo en unos segundos')
+      return
+    }
+
+    setPaying(true)
+
+    try {
+      const res = await fetch('/api/checkout/wompi/session', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: cart.map((item) => ({ productId: item.id, quantity: item.quantity })),
+          shipping: {
+            address: form.direccion,
+            city: form.ciudad,
+            department: form.departamento,
+            postalCode: form.codigoPostal || undefined,
+            notes: form.indicaciones || undefined,
+            phone: form.telefono,
+          },
+        }),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        throw new Error(data?.message || 'No se pudo iniciar el pago')
+      }
+
+      const checkout = new window.WidgetCheckout({
+        currency: data.currency,
+        amountInCents: data.amountInCents,
+        reference: data.reference,
+        publicKey: data.publicKey,
+        signature: { integrity: data.signature },
+        redirectUrl: `${window.location.origin}/checkout/resultado`,
+        customerData: {
+          email: data.customerData?.email,
+          fullName: data.customerData?.fullName,
+          phoneNumber: data.customerData?.phoneNumber,
+        },
+      })
+
+      checkout.open((result) => {
+        const status = result?.transaction?.status
+
+        if (status === 'APPROVED') {
+          clearCart()
+          toast.success('¡Pago aprobado!')
+        } else if (status === 'DECLINED' || status === 'ERROR') {
+          toast.error('El pago no pudo procesarse')
+        } else {
+          toast.info('Tu pago está siendo procesado')
+        }
+
+        router.push(`/checkout/resultado?ref=${data.reference}`)
+      })
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Ocurrió un error al iniciar el pago')
+    } finally {
+      setPaying(false)
+    }
   }
 
   return (
@@ -59,7 +175,7 @@ const CheckoutPage = () => {
           <span className="n">2</span> Envío
         </div>
 
-        <div className={`step ${pagoCompleto ? 'is-complete' : ''}`}>
+        <div className={`step ${listoParaPagar ? 'is-complete' : ''}`}>
           <span className="n">3</span> Pago
         </div>
       </div>
@@ -214,75 +330,32 @@ const CheckoutPage = () => {
               </h3>
 
               <div className="pay-methods">
-                <div className="pay-opt is-active" data-pay="card">
+                <div className="pay-opt is-active">
                   <span className="ic">💳</span>
                   Tarjeta
                 </div>
 
-                <div className="pay-opt" data-pay="pse">
+                <div className="pay-opt">
                   <span className="ic">🏦</span>
                   PSE
                 </div>
 
-                <div className="pay-opt" data-pay="cod">
-                  <span className="ic">📦</span>
-                  Contraentrega
+                <div className="pay-opt">
+                  <span className="ic">📱</span>
+                  Nequi
+                </div>
+
+                <div className="pay-opt">
+                  <span className="ic">🏛️</span>
+                  Bancolombia
                 </div>
               </div>
 
-              <div id="card-fields">
-                <div className="form-grid">
-                  <div className="field full">
-                    <label>Número de tarjeta</label>
-
-                    <input
-                      type="text"
-                      name="tarjeta"
-                      value={form.tarjeta}
-                      onChange={handleChange}
-                      placeholder="0000 0000 0000 0000"
-                      inputMode="numeric"
-                    />
-                  </div>
-
-                  <div className="field full">
-                    <label>Nombre en la tarjeta</label>
-
-                    <input
-                      type="text"
-                      name="nombreTarjeta"
-                      value={form.nombreTarjeta}
-                      onChange={handleChange}
-                      placeholder="Nombre"
-                    />
-                  </div>
-
-                  <div className="field">
-                    <label>Vencimiento</label>
-
-                    <input
-                      type="text"
-                      name="vencimiento"
-                      value={form.vencimiento}
-                      onChange={handleChange}
-                      placeholder="MM/AA"
-                    />
-                  </div>
-
-                  <div className="field">
-                    <label>CVV</label>
-
-                    <input
-                      type="text"
-                      name="cvv"
-                      value={form.cvv}
-                      onChange={handleChange}
-                      placeholder="123"
-                      inputMode="numeric"
-                    />
-                  </div>
-                </div>
-              </div>
+              <p className="datas">
+                Al hacer clic en &quot;Pagar ahora&quot; serás redirigido a la pasarela segura de
+                Wompi, donde eliges tu método de pago e ingresas tus datos directamente. Nunca
+                almacenamos ni vemos tu información de tarjeta.
+              </p>
 
               <p className="datas">
                 <svg
@@ -354,8 +427,14 @@ const CheckoutPage = () => {
                 <span id="c-total">${subtotal.toLocaleString('es-CO')}</span>
               </div>
 
-              <button type="button" className="btn btn-primary btn-block btn-lg" id="pay-btn">
-                Pagar ahora
+              <button
+                type="button"
+                className="btn btn-primary btn-block btn-lg"
+                id="pay-btn"
+                onClick={handlePay}
+                disabled={paying || cart.length === 0}
+              >
+                {paying ? 'Procesando...' : 'Pagar ahora'}
               </button>
 
               <a className="btn btn-ghost btn-block" href="/cart">

@@ -257,7 +257,22 @@ export interface Order {
     id?: string | null;
   }[];
   total: number;
+  shipping: {
+    address: string;
+    city: string;
+    department: string;
+    postalCode?: string | null;
+    notes?: string | null;
+    phone: string;
+  };
   status?: ('pending' | 'confirmed' | 'shipped' | 'delivered' | 'cancelled') | null;
+  /**
+   * Referencia única enviada a Wompi para esta orden.
+   */
+  reference: string;
+  paymentStatus?: ('PENDING' | 'APPROVED' | 'DECLINED' | 'VOIDED' | 'ERROR') | null;
+  wompiTransactionId?: string | null;
+  paymentMethodType?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -468,7 +483,21 @@ export interface OrdersSelect<T extends boolean = true> {
         id?: T;
       };
   total?: T;
+  shipping?:
+    | T
+    | {
+        address?: T;
+        city?: T;
+        department?: T;
+        postalCode?: T;
+        notes?: T;
+        phone?: T;
+      };
   status?: T;
+  reference?: T;
+  paymentStatus?: T;
+  wompiTransactionId?: T;
+  paymentMethodType?: T;
   updatedAt?: T;
   createdAt?: T;
 }
