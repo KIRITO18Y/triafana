@@ -7,6 +7,8 @@ const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
 const nextConfig: NextConfig = {
+  // Permite abrir el servidor de desarrollo a través de Cloudflare Tunnel (URLs *.trycloudflare.com)
+  allowedDevOrigins: ['*.trycloudflare.com'],
   images: {
     localPatterns: [
       {
