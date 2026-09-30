@@ -33,31 +33,52 @@ export const CartItems = () => {
     <div className="cart-items">
       {cart.map((item) => (
         <div key={item.id} className="cart-row">
-          <div className="thumb">
-            <img src={typeof item.image === 'string' ? item.image : (item.image?.url ?? '')} />
+          <div className="cart-thumb">
+            <img
+              src={typeof item.image === 'string' ? item.image : (item.image?.url ?? '')}
+              alt={item.name}
+            />
           </div>
 
-          <div>
-            <span className="cat">{categoryLabel(item.category)}</span>
-            <h4>{item.name}</h4>
-            <div className="qty">
-              <button className="qtybutton" type="button" onClick={() => decreaseQuantity(item.id)}>
-                −
-              </button>
+          <div className="cart-info">
+            <span className="cart-cat">{categoryLabel(item.category)}</span>
+            <h4 className="cart-name" title={item.name}>
+              {item.name}
+            </h4>
+            <div className="cart-actions">
+              <div className="cart-qty">
+                <button
+                  className="cart-qtybutton"
+                  type="button"
+                  onClick={() => decreaseQuantity(item.id)}
+                >
+                  −
+                </button>
 
-              <input type="text" value={item.quantity} aria-label="Cantidad" readOnly />
-              <button className="qtybutton" type="button" onClick={() => increaseQuantity(item.id)}>
-                +
+                <input
+                  className="cart-qty-input"
+                  type="text"
+                  value={item.quantity}
+                  aria-label="Cantidad"
+                  readOnly
+                />
+                <button
+                  className="cart-qtybutton"
+                  type="button"
+                  onClick={() => increaseQuantity(item.id)}
+                >
+                  +
+                </button>
+              </div>
+              <button className="cart-remove" onClick={() => removeFromCart(item.id)}>
+                Eliminar
               </button>
             </div>
-            <button className="remove" onClick={() => removeFromCart(item.id)}>
-              Eliminar
-            </button>
           </div>
-          <div className="line-price">
-            <span className="price">{formatPrice(Number(item.price) || 0)}</span>
+          <div className="cart-line-price">
+            <span className="cart-price">{formatPrice(Number(item.price) || 0)}</span>
             {item.oldPrice ? (
-              <span className="span-oldPrice">{formatPrice(Number(item.oldPrice))}</span>
+              <span className="cart-old-price">{formatPrice(Number(item.oldPrice))}</span>
             ) : null}
           </div>
         </div>

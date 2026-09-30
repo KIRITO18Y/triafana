@@ -21,7 +21,12 @@ declare global {
       publicKey: string
       signature: { integrity: string }
       redirectUrl?: string
-      customerData?: { email?: string; fullName?: string; phoneNumber?: string }
+      customerData?: {
+        email?: string
+        fullName?: string
+        phoneNumber?: string
+        phoneNumberPrefix?: string
+      }
     }) => {
       open: (callback: (result: WompiTransactionResult) => void) => void
     }
@@ -50,8 +55,18 @@ const CheckoutPage = () => {
   const [widgetReady, setWidgetReady] = useState(false)
 
   useEffect(() => {
-    if (document.querySelector(`script[src="${WOMPI_WIDGET_SRC}"]`)) {
+    if (window.WidgetCheckout) {
       setWidgetReady(true)
+      return
+    }
+
+    const existing = document.querySelector<HTMLScriptElement>(`script[src="${WOMPI_WIDGET_SRC}"]`)
+
+    if (existing) {
+      existing.addEventListener('load', () => setWidgetReady(true))
+      existing.addEventListener('error', () =>
+        console.error('WOMPI_WIDGET_SCRIPT_LOAD_FAILED'),
+      )
       return
     }
 
@@ -59,6 +74,7 @@ const CheckoutPage = () => {
     script.src = WOMPI_WIDGET_SRC
     script.async = true
     script.onload = () => setWidgetReady(true)
+    script.onerror = () => console.error('WOMPI_WIDGET_SCRIPT_LOAD_FAILED')
     document.body.appendChild(script)
   }, [])
 
@@ -132,6 +148,7 @@ const CheckoutPage = () => {
           email: data.customerData?.email,
           fullName: data.customerData?.fullName,
           phoneNumber: data.customerData?.phoneNumber,
+          phoneNumberPrefix: '+57',
         },
       })
 
@@ -150,6 +167,7 @@ const CheckoutPage = () => {
         router.push(`/checkout/resultado?ref=${data.reference}`)
       })
     } catch (error) {
+      console.error('WOMPI_CHECKOUT_ERROR', error)
       toast.error(error instanceof Error ? error.message : 'Ocurrió un error al iniciar el pago')
     } finally {
       setPaying(false)

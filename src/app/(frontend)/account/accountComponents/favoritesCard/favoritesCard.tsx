@@ -54,7 +54,6 @@ export const FavoritesCard = () => {
       ) : favorites.length === 0 ? (
         <div className="favorites-empty">
           <p>No tienes productos favoritos.</p>
-
           <span>Agrega productos usando el ❤️</span>
         </div>
       ) : (

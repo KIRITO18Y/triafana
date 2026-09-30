@@ -25,13 +25,16 @@ export const Slide = ({ data }: Props) => {
             <b>{data.offerValue}</b>
           </div>
           <div className="slide-actions">
-            <a href={data.buttonLink || '#'} className={`btn ${data.buttonStyle || 'btn-teal'}`}>
+            <a
+              href={data.buttonLink || '#'}
+              className={`btn hero-btn ${data.buttonStyle || 'btn-teal'}`}
+            >
               {data.buttonText}
             </a>
             {data.secondButtonText && (
               <a
                 href={data.secondButtonLink || '#'}
-                className={`btn ${data.secondButtonStyle || 'btn-glass-strong'}`}
+                className={`btn hero-btn ${data.secondButtonStyle || 'btn-glass-strong'}`}
               >
                 {data.secondButtonText}
               </a>

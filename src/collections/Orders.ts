@@ -15,7 +15,6 @@ export const Orders: CollectionConfig = {
       if (!req.user) {
         return false
       }
-
       return {
         customer: {
           equals: req.user.id,
@@ -150,18 +149,24 @@ export const Orders: CollectionConfig = {
         })
 
         const items = await Promise.all(
-          doc.items.map(async (item: { product: number | string | { id: number | string; name: string }; quantity: number; price: number }) => {
-            const product =
-              typeof item.product === 'object'
-                ? item.product
-                : await req.payload.findByID({ collection: 'products', id: item.product })
+          doc.items.map(
+            async (item: {
+              product: number | string | { id: number | string; name: string }
+              quantity: number
+              price: number
+            }) => {
+              const product =
+                typeof item.product === 'object'
+                  ? item.product
+                  : await req.payload.findByID({ collection: 'products', id: item.product })
 
-            return {
-              name: product.name,
-              quantity: item.quantity,
-              price: item.price,
-            }
-          }),
+              return {
+                name: product.name,
+                quantity: item.quantity,
+                price: item.price,
+              }
+            },
+          ),
         )
 
         const { subject, html } = orderConfirmationEmail(

@@ -42,6 +42,12 @@ export const LoginForm = () => {
     window.location.href = '/api/auth/google'
   }
 
+  const nextParam = searchParams.get('next')
+  const redirectTo =
+    nextParam && nextParam.startsWith('/') && !nextParam.startsWith('//')
+      ? nextParam
+      : '/account'
+
   const [form, setForm] = useState({
     firstName: '',
     lastName: '',
@@ -132,7 +138,7 @@ export const LoginForm = () => {
 
       window.dispatchEvent(new Event('auth-change'))
 
-      router.push('/account')
+      router.push(redirectTo)
       router.refresh()
     } catch (error) {
       console.error('ERROR REGISTRO:', error)
@@ -190,7 +196,7 @@ export const LoginForm = () => {
         password: '',
       })
       window.dispatchEvent(new Event('auth-change'))
-      router.push('/account')
+      router.push(redirectTo)
       router.refresh()
     } catch (error) {
       console.error('ERROR LOGIN:', error)

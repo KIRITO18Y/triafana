@@ -119,7 +119,6 @@ body::after {
   fill: var(--teal) !important;
 }
 
-/* ===== Tipografía base ===== */
 img {
   max-width: 100%;
 }
@@ -171,7 +170,6 @@ img {
   margin: 12px 0 6px;
 }
 
-/* ===== Botones globales ===== */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -274,7 +272,6 @@ img {
   font-size: .85rem;
 }
 
-/* ===== Badges globales ===== */
 .badge {
   display: inline-block;
   padding: 4px 10px;
@@ -299,7 +296,6 @@ img {
   color: #7a5b2a;
 }
 
-/* ===== Chips globales ===== */
 .chip {
   display: inline-flex;
   align-items: center;
@@ -330,7 +326,17 @@ img {
   border-color: transparent;
 }
 
-/* ===== Formularios globales ===== */
+.chip-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.chip-row .chip {
+  margin-top: 0;
+}
+
 input,
 select,
 textarea {
@@ -338,7 +344,6 @@ textarea {
   font-size: 1rem;
 }
 
-/* ===== Toast responsive ===== */
 @media (max-width: 520px) {
   .trifana-toast {
     width: 92vw !important;

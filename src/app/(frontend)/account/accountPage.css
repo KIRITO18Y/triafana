@@ -88,6 +88,7 @@
   .account-btn {
     flex: 1 1 auto;
     justify-content: center;
+    
     min-width: 0;
   }
 }

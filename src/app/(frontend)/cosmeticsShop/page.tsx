@@ -26,9 +26,7 @@ export default async function CosmeticsShoppage({ searchParams }: Props) {
         <p className="lead">Explora cosmetiquería: cabello, perfumes, piel, salud, vitaminas.</p>
       </section>
 
-      <div className="chip-row">
-        <CatalogMenu active="cosmetiqueria" />
-      </div>
+      <CatalogMenu active="cosmetiqueria" />
       <MobileFilters category="cosmetiqueria" />
 
       <section className="Cosmetics-shop">

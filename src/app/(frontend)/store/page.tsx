@@ -25,9 +25,7 @@ export default async function StorePage({ searchParams }: Props) {
         <p className="lead">Explora todo el catálogo de TRIAFANA.</p>
       </section>
 
-      <div className="chip-row">
-        <CatalogMenu active="todo" />
-      </div>
+      <CatalogMenu active="todo" />
 
       <MobileFilters category="" />
 
